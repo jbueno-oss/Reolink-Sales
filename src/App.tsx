@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react';
 import './index.css';
 import ProductDetail from './ProductDetail';
 import type { Product } from './ProductDetail';
+import ProductFinder from './ProductFinder';
 import logo from './assets/Logo Reolink.svg';
 
 /* ─── Data ─── */
@@ -55,7 +56,7 @@ function Header() {
   );
 }
 
-function ProductFinderCard() {
+function ProductFinderCard({ onStart }: { onStart: () => void }) {
   return (
     <section className="product-finder-card">
       <div className="product-finder-card__image-wrapper">
@@ -73,7 +74,7 @@ function ProductFinderCard() {
         </p>
       </div>
 
-      <button type="button" className="product-finder-card__btn">
+      <button type="button" className="product-finder-card__btn" onClick={onStart}>
         Find Your Product
         <span className="product-finder-card__btn-arrow">›</span>
       </button>
@@ -168,7 +169,7 @@ function CatalogSection({ onSelectProduct }: { onSelectProduct: (p: Product) => 
 
 /* ─── App with Client-Side Routing ─── */
 
-type View = { page: 'home' } | { page: 'detail'; product: Product };
+type View = { page: 'home' } | { page: 'detail'; product: Product } | { page: 'finder' };
 
 function App() {
   const [view, setView] = useState<View>({ page: 'home' });
@@ -183,15 +184,24 @@ function App() {
     window.scrollTo({ top: 0 });
   }, []);
 
+  const goFinder = useCallback(() => {
+    setView({ page: 'finder' });
+    window.scrollTo({ top: 0 });
+  }, []);
+
   if (view.page === 'detail') {
     return <ProductDetail product={view.product} onBack={goHome} />;
+  }
+
+  if (view.page === 'finder') {
+    return <ProductFinder onBack={goHome} onSelectProduct={goToDetail} />;
   }
 
   return (
     <>
       <Header />
       <main className="main-content">
-        <ProductFinderCard />
+        <ProductFinderCard onStart={goFinder} />
         <CatalogSection onSelectProduct={goToDetail} />
       </main>
     </>
