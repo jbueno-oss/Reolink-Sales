@@ -329,7 +329,7 @@ function Swiper({
     >
       <div className="swiper__track" ref={trackRef}>
         {slides.map((slide, i) => (
-          <div className="swiper__slide" key={i}>
+          <div className={`swiper__slide ${i === currentIndex ? 'swiper__slide--active' : ''}`} key={i}>
             <div className="slide-media">
               {slide.type === 'video' ? (
                 <VideoPlaceholder src={slide.media} alt={slide.title} />
