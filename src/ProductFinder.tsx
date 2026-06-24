@@ -102,7 +102,12 @@ const AI_RECOMMENDATIONS = [
   }
 ];
 
-type Message = { id: string; sender: 'ai' | 'user'; type: 'text' | 'products' | 'comparison'; text?: string; };
+type Message = {
+  id: string;
+  sender: 'ai' | 'user';
+  type: 'text';
+  text: string;
+};
 
 export default function ProductFinder({ onBack }: { onBack: () => void }) {
   const [currentStep, setCurrentStep] = useState(0);
@@ -170,17 +175,12 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
       setIsTyping(true);
       setTimeout(() => {
         setMessages([
-          { id: '1', sender: 'ai', type: 'text', text: "Hi there! 👋 I'm your Reolink AI Assistant. Based on your answers, here are the top 3 cameras I've selected for you:" },
-          { id: '2', sender: 'ai', type: 'products' }
+          { id: '1', sender: 'ai', type: 'text', text: "Hi there! 👋 I'm your Reolink AI Assistant. How can I help you today?" }
         ]);
         setIsTyping(false);
       }, 1500);
     }
   }, [showAiChat, messages.length]);
-
-  const handleSuggestionClick = (text: string) => {
-    sendUserMessage(text);
-  };
 
   const sendUserMessage = (text: string) => {
     if (!text.trim()) return;
@@ -189,13 +189,7 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
     setIsTyping(true);
 
     setTimeout(() => {
-      if (text.toLowerCase().includes("compare")) {
-        setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'ai', type: 'comparison' }]);
-      } else if (text.toLowerCase().includes("cheapest")) {
-        setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'ai', type: 'text', text: "The most budget-friendly option here is the **Reolink E1 Pro** (Indoor), starting at just $49.99." }]);
-      } else {
-        setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'ai', type: 'text', text: "I'm still learning about that, but I can help you find more products!" }]);
-      }
+      setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'ai', type: 'text', text: "I'm still learning, but I can help you answer any questions!" }]);
       setIsTyping(false);
     }, 1500);
   };
@@ -234,87 +228,10 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
         <div className="chat-messages">
           {messages.map((msg) => (
             <div key={msg.id}>
-              {msg.type === 'text' ? (
+              {msg.type === 'text' && (
                 <div className={`chat-msg ${msg.sender === 'user' ? 'chat-msg--user' : ''}`}>
                   {msg.sender === 'ai' && <div className="chat-msg__avatar">R</div>}
                   <div className="chat-msg__bubble">{msg.text}</div>
-                </div>
-              ) : msg.type === 'comparison' ? (
-                <div className="chat-msg">
-                  <div className="chat-msg__avatar">R</div>
-                  <div className="chat-msg__bubble comparison-bubble">
-                    <p style={{ margin: '0 0 12px 0', fontWeight: 600 }}>Feature Comparison</p>
-                    <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
-                      <table className="comparison-table">
-                        <thead>
-                          <tr>
-                            <th>Features</th>
-                            <th>Argus 4 Pro</th>
-                            <th>Go Ranger PT</th>
-                            <th>OMVI 3i PoE</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <td>Resolution</td>
-                            <td>4K 8MP</td>
-                            <td>4K 8MP</td>
-                            <td>4K 8MP</td>
-                          </tr>
-                          <tr>
-                            <td>Pan & Tilt</td>
-                            <td><span className="icon-cross">✗</span></td>
-                            <td><span className="icon-check">✓</span></td>
-                            <td><span className="icon-cross">✗</span></td>
-                          </tr>
-                          <tr>
-                            <td>Solar Power</td>
-                            <td><span className="icon-check">✓</span></td>
-                            <td><span className="icon-check">✓</span></td>
-                            <td><span className="icon-cross">✗</span></td>
-                          </tr>
-                          <tr>
-                            <td>Color Night Vision</td>
-                            <td><span className="icon-check">✓</span></td>
-                            <td><span className="icon-check">✓</span></td>
-                            <td><span className="icon-check">✓</span></td>
-                          </tr>
-                          <tr>
-                            <td>Dual-Lens</td>
-                            <td><span className="icon-check">✓</span></td>
-                            <td><span className="icon-cross">✗</span></td>
-                            <td><span className="icon-cross">✗</span></td>
-                          </tr>
-                          <tr>
-                            <td>PoE Connection</td>
-                            <td><span className="icon-cross">✗</span></td>
-                            <td><span className="icon-cross">✗</span></td>
-                            <td><span className="icon-check">✓</span></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                /* Simplified product list for chat */
-                <div className="chat-msg">
-                  <div className="chat-msg__avatar">R</div>
-                  <div className="chat-msg__bubble chat-product-list">
-                    {AI_RECOMMENDATIONS.map((prod) => (
-                      <div key={prod.id} className="chat-product-list__item">
-                        <div className="chat-product-list__img-wrapper">
-                          <img src={prod.image} alt={prod.name} />
-                        </div>
-                        <div className="chat-product-list__info">
-                          <p className="chat-product-list__name">{prod.name}</p>
-                          <span className="chat-product-list__match">{prod.match}</span>
-                          <p className="chat-product-list__desc">{prod.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                    <p className="chat-product-list__hint">Ask me anything about these products! 🚀</p>
-                  </div>
                 </div>
               )}
             </div>
@@ -334,17 +251,6 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
         </div>
 
         <div className="chat-bottom">
-          <div className="chat-suggestions">
-            <button className="chat-chip" onClick={() => handleSuggestionClick("Can you help me compare this products?")}>
-              Can you help me compare this products?
-            </button>
-            <button className="chat-chip" onClick={() => handleSuggestionClick("I want the cheapest one")}>
-              I want the cheapest one
-            </button>
-            <button className="chat-chip" onClick={() => handleSuggestionClick("Accessories")}>
-              Accessories
-            </button>
-          </div>
 
           <div className="chat-input-box">
             <input 
