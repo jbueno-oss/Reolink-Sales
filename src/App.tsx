@@ -176,17 +176,17 @@ function App() {
 
   const goToDetail = useCallback((product: Product) => {
     setView({ page: 'detail', product });
-    window.scrollTo({ top: 0 });
+    document.getElementById('root')?.scrollTo({ top: 0 });
   }, []);
 
   const goHome = useCallback(() => {
     setView({ page: 'home' });
-    window.scrollTo({ top: 0 });
+    document.getElementById('root')?.scrollTo({ top: 0 });
   }, []);
 
   const goFinder = useCallback(() => {
     setView({ page: 'finder' });
-    window.scrollTo({ top: 0 });
+    document.getElementById('root')?.scrollTo({ top: 0 });
   }, []);
 
   if (view.page === 'detail') {
