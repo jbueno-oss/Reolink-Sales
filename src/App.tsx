@@ -190,11 +190,11 @@ function App() {
   }, []);
 
   if (view.page === 'detail') {
-    return <ProductDetail product={view.product} onBack={goHome} />;
+    return <ProductDetail product={view.product} onHome={goHome} />;
   }
 
   if (view.page === 'finder') {
-    return <ProductFinder onBack={goHome} onSelectProduct={goToDetail} />;
+    return <ProductFinder onBack={goHome} />;
   }
 
   return (

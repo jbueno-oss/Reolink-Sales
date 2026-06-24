@@ -356,9 +356,11 @@ function Swiper({
 export default function ProductDetail({
   product,
   onBack,
+  onHome,
 }: {
   product: Product;
-  onBack: () => void;
+  onBack?: () => void;
+  onHome?: () => void;
 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = getSlidesForProduct(product);
@@ -367,11 +369,24 @@ export default function ProductDetail({
     <div className="product-detail">
       {/* Header */}
       <header className="detail-header">
+        {onBack && (
+          <button
+            type="button"
+            className="detail-header__back-btn"
+            onClick={onBack}
+            aria-label="Go back"
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+        )}
         <img src={logo} alt="Reolink" className="header__logo" />
         <button
           type="button"
           className="detail-header__home-btn"
-          onClick={onBack}
+          onClick={onHome || onBack}
           aria-label="Go to home"
         >
           <img src="/images/home-icon.svg" alt="Home" className="detail-header__home-icon" />

@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import ProductDetail from './ProductDetail';
 
 type QuestionType = 'single' | 'multiple';
 
@@ -102,11 +103,14 @@ const AI_RECOMMENDATIONS = [
 
 type Message = { id: string; sender: 'ai' | 'user'; type: 'text' | 'products' | 'comparison'; text?: string; };
 
-export default function ProductFinder({ onBack, onSelectProduct }: { onBack: () => void, onSelectProduct?: (product: any) => void }) {
+export default function ProductFinder({ onBack }: { onBack: () => void }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string[]>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showAiChat, setShowAiChat] = useState(false);
+  
+  // View Detail State to preserve Chat
+  const [viewingProduct, setViewingProduct] = useState<any | null>(null);
   
   // Chat State
   const [messages, setMessages] = useState<Message[]>([]);
@@ -191,6 +195,17 @@ export default function ProductFinder({ onBack, onSelectProduct }: { onBack: () 
       setIsTyping(false);
     }, 1500);
   };
+
+  // --- View Detailed Product ---
+  if (viewingProduct) {
+    return (
+      <ProductDetail 
+        product={viewingProduct} 
+        onBack={() => setViewingProduct(null)} 
+        onHome={onBack} 
+      />
+    );
+  }
 
   // --- AI Chat Render ---
   if (showAiChat) {
@@ -282,7 +297,7 @@ export default function ProductFinder({ onBack, onSelectProduct }: { onBack: () 
                       </div>
                       <button 
                         className="chat-product-card__btn"
-                        onClick={() => onSelectProduct?.(prod)}
+                        onClick={() => setViewingProduct(prod)}
                       >
                         View product detail
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
