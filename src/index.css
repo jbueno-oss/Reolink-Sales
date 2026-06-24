@@ -1,0 +1,695 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #0050e2;
+  --color-primary-hover: #003db3;
+  --color-bg: #ffffff;
+  --color-text-dark: #041837;
+  --color-text-body: #1f2937;
+  --color-chip-bg: #e8e8e8;
+  --color-card-gradient-start: #ffffff;
+  --color-card-gradient-end: #e3edf7;
+  --radius-sm: 16px;
+  --radius-md: 20px;
+  --radius-lg: 24px;
+  --radius-pill: 372px;
+  --shadow-card: 0px 44px 34px -26px rgba(0, 0, 0, 0.15);
+
+  font-family: 'Poppins', system-ui, -apple-system, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #f0f2f5;
+  min-height: 100svh;
+}
+
+#root {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+  position: relative;
+}
+
+/* ========================================
+   Animations
+   ======================================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========================================
+   Header / Logo
+   ======================================== */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.header__logo {
+  height: 24px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* ========================================
+   Main Content
+   ======================================== */
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+}
+
+/* ========================================
+   Product Finder Card
+   ======================================== */
+
+.product-finder-card {
+  margin: 8px 16px 0;
+  background: linear-gradient(180deg, var(--color-card-gradient-start) 0%, var(--color-card-gradient-end) 100%);
+  border-radius: var(--radius-lg);
+  padding: 16px 16px 24px;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  animation: cardAppear 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+}
+
+.product-finder-card__image-wrapper {
+  width: 100%;
+  aspect-ratio: 338 / 202;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.product-finder-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 70%;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-finder-card:hover .product-finder-card__image {
+  transform: scale(1.03);
+}
+
+.product-finder-card__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-align: center;
+  width: 100%;
+}
+
+.product-finder-card__title {
+  font-size: 23px;
+  font-weight: 500;
+  color: #000000;
+  line-height: 1.2;
+}
+
+.product-finder-card__subtitle {
+  font-size: 16px;
+  font-weight: 300;
+  color: #000000;
+  line-height: 1.4;
+}
+
+.product-finder-card__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  padding: 14px 36px;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-finder-card__btn::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+  transition: left 0.5s ease;
+}
+
+.product-finder-card__btn:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(0, 80, 226, 0.35);
+}
+
+.product-finder-card__btn:hover::after {
+  left: 100%;
+}
+
+.product-finder-card__btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.product-finder-card__btn-arrow {
+  font-size: 18px;
+  transition: transform 0.2s ease;
+}
+
+.product-finder-card__btn:hover .product-finder-card__btn-arrow {
+  transform: translateX(3px);
+}
+
+/* ========================================
+   Catalog Section
+   ======================================== */
+
+.catalog {
+  padding: 32px 16px 0;
+  animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.35s both;
+}
+
+.catalog__title {
+  font-size: 23px;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+/* ========================================
+   Category Filters
+   ======================================== */
+
+.category-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 4px;
+  margin-bottom: 24px;
+}
+
+.category-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.category-chip {
+  flex-shrink: 0;
+  padding: 8px 16px;
+  border-radius: var(--radius-md);
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.category-chip--active {
+  background: var(--color-primary);
+  color: #ffffff;
+}
+
+.category-chip--inactive {
+  background: var(--color-chip-bg);
+  color: var(--color-text-body);
+}
+
+.category-chip--inactive:hover {
+  background: #d9d9d9;
+}
+
+.category-chip--inactive:active {
+  transform: scale(0.96);
+}
+
+/* ========================================
+   Product Grid
+   ======================================== */
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: transform;
+}
+
+.product-card:hover {
+  transform: translateY(-4px);
+}
+
+.product-card:active {
+  transform: scale(0.97);
+}
+
+.product-card__image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: #f5f5f5;
+  position: relative;
+}
+
+.product-card__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.product-card:hover .product-card__image {
+  transform: scale(1.06);
+}
+
+.product-card__name {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--color-text-dark);
+  text-align: center;
+  width: 100%;
+  line-height: 1.3;
+}
+
+/* ========================================
+   Intersection Observer – reveal on scroll
+   ======================================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger product cards */
+.product-card.reveal:nth-child(1) { transition-delay: 0.05s; }
+.product-card.reveal:nth-child(2) { transition-delay: 0.12s; }
+.product-card.reveal:nth-child(3) { transition-delay: 0.19s; }
+.product-card.reveal:nth-child(4) { transition-delay: 0.26s; }
+.product-card.reveal:nth-child(5) { transition-delay: 0.33s; }
+.product-card.reveal:nth-child(6) { transition-delay: 0.40s; }
+
+/* ========================================
+   Responsive fine-tuning
+   ======================================== */
+
+@media (max-width: 360px) {
+  .product-finder-card__title {
+    font-size: 20px;
+  }
+  .product-finder-card__subtitle {
+    font-size: 14px;
+  }
+  .catalog__title {
+    font-size: 20px;
+  }
+  .product-card__name {
+    font-size: 14px;
+  }
+  .product-finder-card__btn {
+    font-size: 14px;
+    padding: 12px 24px;
+  }
+}
+
+/* ========================================
+   PRODUCT DETAIL PAGE
+   ======================================== */
+
+.product-detail {
+  width: 100%;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-bg);
+}
+
+/* ─── Detail Header ─── */
+
+.detail-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: fadeIn 0.5s ease-out;
+}
+
+.detail-header__home-btn {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: 60px;
+  background: rgba(0, 80, 226, 0.1);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.25s ease, transform 0.2s ease;
+}
+
+.detail-header__home-btn:hover {
+  background: rgba(0, 80, 226, 0.2);
+}
+
+.detail-header__home-btn:active {
+  transform: translateY(-50%) scale(0.92);
+}
+
+.detail-header__home-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+/* ─── Detail Body ─── */
+
+.detail-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 32px;
+  overflow: hidden;
+}
+
+/* ─── Swiper ─── */
+
+.swiper {
+  width: 100%;
+  flex: 1;
+  overflow: hidden;
+  touch-action: pan-y;
+}
+
+.swiper__track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.swiper__slide {
+  min-width: 100%;
+  width: 100%;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 16px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* ─── Slide Media ─── */
+
+.slide-media {
+  width: 100%;
+  aspect-ratio: 370 / 529;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f0f3f7;
+  position: relative;
+}
+
+.slide-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Video placeholder */
+.slide-video-wrapper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-video-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  animation: kenBurns 8s ease-in-out infinite alternate;
+}
+
+@keyframes kenBurns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.1) translate(-2%, -1%);
+  }
+}
+
+.slide-video-play-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: 20px;
+  color: white;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+}
+
+.slide-video-play-badge svg {
+  flex-shrink: 0;
+}
+
+/* ─── Slide Content ─── */
+
+.slide-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  text-align: center;
+  padding: 24px 0;
+  width: 100%;
+}
+
+.slide-content__title {
+  font-size: 23px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: 1.2;
+  width: 100%;
+  margin: 0;
+}
+
+.slide-content__description {
+  font-size: 16px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.5;
+  width: 100%;
+  margin: 0;
+}
+
+/* ─── Pagination ─── */
+
+.pagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0 16px;
+}
+
+.pagination__dots {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.pagination__dot {
+  width: 30px;
+  height: 6px;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  background: rgba(0, 80, 226, 0.2);
+  transition: background 0.3s ease, transform 0.2s ease;
+  padding: 0;
+}
+
+.pagination__dot--active {
+  background: var(--color-primary);
+}
+
+.pagination__dot:hover:not(.pagination__dot--active) {
+  background: rgba(0, 80, 226, 0.35);
+}
+
+.pagination__dot:active {
+  transform: scaleY(1.5);
+}
+
+.pagination__hint {
+  font-size: 12px;
+  font-weight: 400;
+  color: #6b7280;
+  text-align: center;
+  margin: 0;
+  animation: fadeIn 1s ease-out 0.5s both;
+}
+
+/* ─── Detail page responsive ─── */
+
+@media (max-width: 360px) {
+  .slide-content__title {
+    font-size: 20px;
+  }
+  .slide-content__description {
+    font-size: 14px;
+  }
+  .slide-media {
+    aspect-ratio: 1 / 1.2;
+  }
+}
+
+@media (min-height: 800px) {
+  .slide-media {
+    max-height: 55vh;
+  }
+}
