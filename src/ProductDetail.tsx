@@ -376,7 +376,7 @@ export default function ProductDetail({
             onClick={onBack}
             aria-label="Go back"
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="19" y1="12" x2="5" y2="12"></line>
               <polyline points="12 19 5 12 12 5"></polyline>
             </svg>
@@ -389,7 +389,10 @@ export default function ProductDetail({
           onClick={onHome || onBack}
           aria-label="Go to home"
         >
-          <img src="/images/home-icon.svg" alt="Home" className="detail-header__home-icon" />
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
         </button>
       </header>
 

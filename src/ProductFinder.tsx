@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import ProductDetail from './ProductDetail';
+import logo from './assets/Logo Reolink.svg';
 
 type QuestionType = 'single' | 'multiple';
 
@@ -107,9 +108,10 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string[]>>({});
   const [isTransitioning, setIsTransitioning] = useState(false);
+  const [showResults, setShowResults] = useState(false);
   const [showAiChat, setShowAiChat] = useState(false);
   
-  // View Detail State to preserve Chat
+  // View Detail State to preserve Chat/Results
   const [viewingProduct, setViewingProduct] = useState<any | null>(null);
   
   // Chat State
@@ -155,18 +157,20 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
       if (currentStep < QUESTIONS.length - 1) {
         setCurrentStep((s) => s + 1);
       } else {
-        setShowAiChat(true);
+        // Show results screen instead of chat
+        setShowResults(true);
       }
       setIsTransitioning(false);
-    }, 300); // Wait for exit animation
+    }, 300);
   };
 
+  // Initialize chat messages when AI chat opens
   useEffect(() => {
     if (showAiChat && messages.length === 0) {
       setIsTyping(true);
       setTimeout(() => {
         setMessages([
-          { id: '1', sender: 'ai', type: 'text', text: "Hi there! 👋 I'm your Reolink AI Assistant. Thanks for taking the time to answer our questions! Based on your responses, I've found the perfect gear for your setup. Here are the top 3 Reolink cameras tailored specifically for you:" },
+          { id: '1', sender: 'ai', type: 'text', text: "Hi there! 👋 I'm your Reolink AI Assistant. Based on your answers, here are the top 3 cameras I've selected for you:" },
           { id: '2', sender: 'ai', type: 'products' }
         ]);
         setIsTyping(false);
@@ -212,8 +216,14 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
     return (
       <div className="chat-screen">
         <header className="chat-header">
-          <h1 className="chat-header__title">Reolink Ai Assistance</h1>
-          <button className="finder-close-btn" onClick={onBack} aria-label="Close">
+          <button className="chat-back-btn" onClick={() => setShowAiChat(false)} aria-label="Back to results">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <h1 className="chat-header__title">AI Assistance</h1>
+          <button className="finder-close-btn" onClick={onBack} aria-label="Home">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
               <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -234,78 +244,77 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
                   <div className="chat-msg__avatar">R</div>
                   <div className="chat-msg__bubble comparison-bubble">
                     <p style={{ margin: '0 0 12px 0', fontWeight: 600 }}>Feature Comparison</p>
-                    <table className="comparison-table">
-                      <thead>
-                        <tr>
-                          <th>Features</th>
-                          <th>Argus 4 Pro</th>
-                          <th>Go Ranger PT</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>Resolution</td>
-                          <td>4K 8MP</td>
-                          <td>4K 8MP</td>
-                        </tr>
-                        <tr>
-                          <td>Pan & Tilt</td>
-                          <td><span className="icon-cross">✗</span></td>
-                          <td><span className="icon-check">✓</span></td>
-                        </tr>
-                        <tr>
-                          <td>Solar Power</td>
-                          <td><span className="icon-check">✓</span></td>
-                          <td><span className="icon-check">✓</span></td>
-                        </tr>
-                        <tr>
-                          <td>Color Night Vision</td>
-                          <td><span className="icon-check">✓</span></td>
-                          <td><span className="icon-check">✓</span></td>
-                        </tr>
-                        <tr>
-                          <td>Dual-Lens</td>
-                          <td><span className="icon-check">✓</span></td>
-                          <td><span className="icon-cross">✗</span></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                    <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+                      <table className="comparison-table">
+                        <thead>
+                          <tr>
+                            <th>Features</th>
+                            <th>Argus 4 Pro</th>
+                            <th>Go Ranger PT</th>
+                            <th>OMVI 3i PoE</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Resolution</td>
+                            <td>4K 8MP</td>
+                            <td>4K 8MP</td>
+                            <td>4K 8MP</td>
+                          </tr>
+                          <tr>
+                            <td>Pan & Tilt</td>
+                            <td><span className="icon-cross">✗</span></td>
+                            <td><span className="icon-check">✓</span></td>
+                            <td><span className="icon-cross">✗</span></td>
+                          </tr>
+                          <tr>
+                            <td>Solar Power</td>
+                            <td><span className="icon-check">✓</span></td>
+                            <td><span className="icon-check">✓</span></td>
+                            <td><span className="icon-cross">✗</span></td>
+                          </tr>
+                          <tr>
+                            <td>Color Night Vision</td>
+                            <td><span className="icon-check">✓</span></td>
+                            <td><span className="icon-check">✓</span></td>
+                            <td><span className="icon-check">✓</span></td>
+                          </tr>
+                          <tr>
+                            <td>Dual-Lens</td>
+                            <td><span className="icon-check">✓</span></td>
+                            <td><span className="icon-cross">✗</span></td>
+                            <td><span className="icon-cross">✗</span></td>
+                          </tr>
+                          <tr>
+                            <td>PoE Connection</td>
+                            <td><span className="icon-cross">✗</span></td>
+                            <td><span className="icon-cross">✗</span></td>
+                            <td><span className="icon-check">✓</span></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
                   </div>
                 </div>
               ) : (
-                <div className="chat-carousel">
-                  {AI_RECOMMENDATIONS.map((prod) => (
-                    <div key={prod.id} className="chat-product-card">
-                      <div className="chat-product-card__header">
-                        <h3 className="chat-product-card__title">{prod.name}</h3>
-                        <span className="chat-product-card__match">{prod.match}</span>
+                /* Simplified product list for chat */
+                <div className="chat-msg">
+                  <div className="chat-msg__avatar">R</div>
+                  <div className="chat-msg__bubble chat-product-list">
+                    {AI_RECOMMENDATIONS.map((prod) => (
+                      <div key={prod.id} className="chat-product-list__item">
+                        <div className="chat-product-list__img-wrapper">
+                          <img src={prod.image} alt={prod.name} />
+                        </div>
+                        <div className="chat-product-list__info">
+                          <p className="chat-product-list__name">{prod.name}</p>
+                          <span className="chat-product-list__match">{prod.match}</span>
+                          <p className="chat-product-list__desc">{prod.desc}</p>
+                        </div>
                       </div>
-                      <div className="chat-product-card__img-wrapper">
-                        <img src={prod.image} alt={prod.name} />
-                      </div>
-                      <p className="chat-product-card__desc">{prod.desc}</p>
-                      <div className="chat-product-card__features">
-                        {prod.features.map((feat, idx) => (
-                          <div key={idx} className="chat-feature">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                            </svg>
-                            {feat}
-                          </div>
-                        ))}
-                      </div>
-                      <button 
-                        className="chat-product-card__btn"
-                        onClick={() => setViewingProduct(prod)}
-                      >
-                        View product detail
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                      </button>
-                    </div>
-                  ))}
+                    ))}
+                    <p className="chat-product-list__hint">Ask me anything about these products! 🚀</p>
+                  </div>
                 </div>
               )}
             </div>
@@ -357,6 +366,78 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
               </svg>
             </button>
           </div>
+        </div>
+      </div>
+    );
+  }
+
+  // --- Results Screen Render ---
+  if (showResults) {
+    return (
+      <div className="results-screen">
+        <header className="results-header">
+          <img src={logo} alt="Reolink" className="header__logo" />
+          <button className="results-header__home-btn" onClick={onBack} aria-label="Go to home">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </button>
+        </header>
+
+        <div className="results-intro">
+          <h1 className="results-intro__title">We think you would like</h1>
+          <p className="results-intro__subtitle">
+            Based on your answers we recommend you these 3 products
+          </p>
+        </div>
+
+        <div className="results-body">
+          {AI_RECOMMENDATIONS.map((prod, idx) => (
+            <div 
+              key={prod.id} 
+              className="result-card"
+              style={{ animationDelay: `${idx * 0.12}s` }}
+            >
+              <div className="result-card__top">
+                <h3 className="result-card__name">{prod.name}</h3>
+                <span className="result-card__match">{prod.match}</span>
+              </div>
+              <div className="result-card__img-wrapper">
+                <img src={prod.image} alt={prod.name} />
+              </div>
+              <p className="result-card__desc">{prod.desc}</p>
+              <div className="result-card__features">
+                {prod.features.map((feat, i) => (
+                  <div key={i} className="result-card__feature">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                      <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                    {feat}
+                  </div>
+                ))}
+              </div>
+              <button 
+                className="result-card__btn"
+                onClick={() => setViewingProduct(prod)}
+              >
+                View product detail
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </button>
+            </div>
+          ))}
+        </div>
+
+        <div className="results-footer">
+          <button 
+            className="ai-assist-btn"
+            onClick={() => setShowAiChat(true)}
+          >
+            ✦ AI Assistance
+          </button>
         </div>
       </div>
     );
