@@ -1078,7 +1078,8 @@ body {
 .chat-carousel {
   display: flex;
   gap: 16px;
-  padding: 0 16px;
+  padding: 8px 16px 16px; /* Added vertical padding to prevent shadow clipping */
+  margin: -8px 0 -16px; /* Negative margin to offset padding visually if needed, though usually just the padding works fine. Let's just rely on the padding */
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scroll-behavior: smooth;
