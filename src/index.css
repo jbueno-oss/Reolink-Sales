@@ -444,12 +444,10 @@ body {
 
 .product-detail {
   width: 100%;
-  height: 100svh;
-  max-height: 100svh;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   background: var(--color-bg);
-  overflow: hidden;
 }
 
 /* ─── Detail Header ─── */
@@ -528,20 +526,20 @@ body {
 
 .detail-body {
   flex: 1;
-  min-height: 0;          /* critical: allows flex child to shrink below content size */
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 /* ─── Swiper ─── */
 
 .swiper {
   width: 100%;
-  flex: 1;
-  min-height: 0;          /* critical: allows flex child to shrink */
+  height: 65svh;
+  min-height: 380px;
+  max-height: 550px;
   overflow: hidden;
   touch-action: pan-y;
+  flex-shrink: 0;
 }
 
 .swiper__track {
@@ -745,6 +743,128 @@ body {
   .slide-content__description {
     font-size: 15px;
   }
+}
+
+/* ========================================
+   ACCORDIONS (Product Detail)
+   ======================================== */
+
+.accordion-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 16px 32px;
+}
+
+.accordion {
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.1), 0px 2px 3px rgba(0, 0, 0, 0.15);
+}
+
+.accordion__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 56px;
+  padding: 0 16px;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.2s ease;
+}
+
+.accordion__header:active {
+  background: #fafafa;
+}
+
+.accordion__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 60px;
+  background: rgba(0, 80, 226, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.accordion__icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-primary);
+}
+
+.accordion__title {
+  flex: 1;
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  line-height: normal;
+  min-width: 0;
+}
+
+.accordion__arrow {
+  flex-shrink: 0;
+  width: 15px;
+  height: 10px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  color: #111;
+}
+
+.accordion__arrow--open {
+  transform: rotate(180deg);
+}
+
+.accordion__content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.accordion__content--open {
+  max-height: 800px;
+}
+
+.accordion__body {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+}
+
+.accordion__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 0;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.accordion__item:last-child {
+  border-bottom: none;
+}
+
+.accordion__item-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  line-height: normal;
+  margin: 0;
+}
+
+.accordion__item-value {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280;
+  line-height: 1.5;
+  margin: 0;
 }
 
 /* ========================================
@@ -1375,41 +1495,25 @@ body {
   flex-shrink: 0;
 }
 
-.result-card__btn {
-  width: 100%;
-  padding: 14px;
-  border-radius: 372px;
-  border: 2px solid var(--color-primary);
-  background: transparent;
-  color: var(--color-primary);
-  font-family: 'Poppins', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
+.result-card--clickable {
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: all 0.2s ease;
-  line-height: 24px;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
 }
 
-.result-card__btn:active {
-  background: rgba(0, 80, 226, 0.05);
+.result-card--clickable:active {
   transform: scale(0.98);
 }
 
-/* ─── Results Footer (Fixed AI Assistance Button) ─── */
+/* ─── Results Footer (Compare + AI Buttons) ─── */
 .results-footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 24px 16px;
+  padding: 20px 16px;
   background: linear-gradient(to top, #ffffff 65%, rgba(255,255,255,0));
   z-index: 100;
   animation: slideUp 0.4s ease-out forwards;
@@ -1417,49 +1521,198 @@ body {
   margin: 0 auto;
 }
 
-.ai-assist-btn {
+.results-footer__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   width: 100%;
-  max-width: 250px;
-  padding: 16px 36px;
+  justify-content: center;
+}
+
+.compare-btn {
+  flex: 1;
+  padding: 16px 24px;
   border-radius: 372px;
-  border: 2px solid var(--color-primary);
+  border: none;
   background: var(--color-primary);
   color: #fff;
   font-family: 'Poppins', sans-serif;
-  font-size: 16px;
+  font-size: 15px;
   font-weight: 500;
   line-height: 24px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  box-shadow: 0px 10px 12px rgba(0, 80, 226, 0.2);
+  box-shadow: 0px 8px 16px rgba(0, 80, 226, 0.25);
   transition: transform 0.2s ease, box-shadow 0.25s ease;
-  position: relative;
-  overflow: hidden;
 }
 
-.ai-assist-btn::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-  animation: shimmerLoop 3s ease-in-out infinite;
-}
-
-@keyframes shimmerLoop {
-  0% { left: -100%; }
-  50% { left: 100%; }
-  100% { left: 100%; }
-}
-
-.ai-assist-btn:active {
+.compare-btn:active {
   transform: scale(0.96);
   box-shadow: 0px 4px 8px rgba(0, 80, 226, 0.15);
+}
+
+.ai-circle-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 80, 226, 0.1);
+  background: #ffffff;
+  color: var(--color-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0px 8px 24px rgba(0, 80, 226, 0.18);
+  transition: transform 0.2s ease, box-shadow 0.25s ease, border-color 0.2s ease;
+  position: relative;
+}
+
+/* Sparkle icon is now static per user request */
+
+.ai-circle-btn:active {
+  transform: scale(0.92);
+  box-shadow: 0px 4px 12px rgba(0, 80, 226, 0.1);
+}
+
+/* ========================================
+   COMPARE PRODUCTS SCREEN
+   ======================================== */
+
+.compare-screen {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+}
+
+.compare-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 8px 16px 16px;
+  text-align: center;
+}
+
+.compare-intro__title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #000;
+  margin: 0;
+}
+
+.compare-intro__subtitle {
+  font-size: 14px;
+  font-weight: 400;
+  color: #6b7280;
+  margin: 0;
+}
+
+.compare-table-wrapper {
+  margin: 0 16px 32px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0px 1px 1px rgba(0,0,0,0.1), 0px 2px 3px rgba(0,0,0,0.15);
+}
+
+.compare-table {
+  width: 100%;
+  min-width: 500px;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 13px;
+  background: #fff;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 14px 12px;
+  text-align: center;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: 'Poppins', sans-serif;
+  white-space: nowrap;
+}
+
+.compare-table thead tr {
+  background: #f8faff;
+}
+
+.compare-table__feature-header {
+  position: sticky;
+  left: 0;
+  z-index: 3;
+  text-align: left !important;
+  font-weight: 600;
+  color: #6b7280;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: #f8faff;
+  min-width: 120px;
+}
+
+.compare-table__product-header {
+  font-weight: 600;
+  color: #111;
+  font-size: 13px;
+  min-width: 110px;
+}
+
+.compare-table__product-thumb {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #f0f3f7;
+  margin: 0 auto 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compare-table__product-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.compare-table__label {
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  text-align: left !important;
+  font-weight: 500;
+  color: #555;
+  background: #fff;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.03);
+  min-width: 120px;
+}
+
+.compare-table tbody td {
+  color: #111;
+  font-weight: 500;
+  font-size: 13px;
+}
+
+.compare-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.compare-yes {
+  color: #219653;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.compare-no {
+  color: #eb5757;
+  font-weight: 700;
+  font-size: 16px;
 }
 
 /* ─── Chat Back Button ─── */

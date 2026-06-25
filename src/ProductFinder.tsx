@@ -115,6 +115,7 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [showAiChat, setShowAiChat] = useState(false);
+  const [showCompare, setShowCompare] = useState(false);
   
   // View Detail State to preserve Chat/Results
   const [viewingProduct, setViewingProduct] = useState<any | null>(null);
@@ -202,6 +203,114 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
         onBack={() => setViewingProduct(null)} 
         onHome={onBack} 
       />
+    );
+  }
+
+  // --- Compare Products Render ---
+  if (showCompare) {
+    return (
+      <div className="compare-screen">
+        <header className="results-header">
+          <button className="chat-back-btn" onClick={() => setShowCompare(false)} aria-label="Back to results">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="19" y1="12" x2="5" y2="12"></line>
+              <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+          </button>
+          <img src={logo} alt="Reolink" className="header__logo" />
+          <button className="results-header__home-btn" onClick={onBack} aria-label="Go to home">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+          </button>
+        </header>
+
+        <div className="compare-intro">
+          <h1 className="compare-intro__title">Compare Products</h1>
+          <p className="compare-intro__subtitle">See how your top recommendations stack up</p>
+        </div>
+
+        <div className="compare-table-wrapper">
+          <table className="compare-table">
+            <thead>
+              <tr>
+                <th className="compare-table__feature-header">Feature</th>
+                {AI_RECOMMENDATIONS.map((prod) => (
+                  <th key={prod.id} className="compare-table__product-header">
+                    <div className="compare-table__product-thumb">
+                      <img src={prod.image} alt={prod.name} />
+                    </div>
+                    <span>{prod.name}</span>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td className="compare-table__label">Resolution</td>
+                <td>4K 8MP</td>
+                <td>4K 8MP</td>
+                <td>4K 8MP</td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Night Vision</td>
+                <td>Color (33ft)</td>
+                <td>Starlight</td>
+                <td>IR (30m)</td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Connectivity</td>
+                <td>Wi-Fi</td>
+                <td>4G LTE</td>
+                <td>PoE</td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Pan & Tilt</td>
+                <td><span className="compare-no">✗</span></td>
+                <td><span className="compare-yes">✓</span></td>
+                <td><span className="compare-no">✗</span></td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Solar Power</td>
+                <td><span className="compare-yes">✓</span></td>
+                <td><span className="compare-yes">✓</span></td>
+                <td><span className="compare-no">✗</span></td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Smart Detection</td>
+                <td><span className="compare-yes">✓</span></td>
+                <td><span className="compare-yes">✓</span></td>
+                <td><span className="compare-yes">✓</span></td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Dual-Lens</td>
+                <td><span className="compare-yes">✓</span></td>
+                <td><span className="compare-no">✗</span></td>
+                <td><span className="compare-no">✗</span></td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Vandal Proof</td>
+                <td><span className="compare-no">✗</span></td>
+                <td><span className="compare-no">✗</span></td>
+                <td><span className="compare-yes">✓</span></td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Weather Rating</td>
+                <td>IP65</td>
+                <td>IP65</td>
+                <td>IP66</td>
+              </tr>
+              <tr>
+                <td className="compare-table__label">Storage</td>
+                <td>MicroSD</td>
+                <td>MicroSD</td>
+                <td>MicroSD / NVR</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
     );
   }
 
@@ -302,8 +411,9 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
           {AI_RECOMMENDATIONS.map((prod, idx) => (
             <div 
               key={prod.id} 
-              className="result-card"
+              className="result-card result-card--clickable"
               style={{ animationDelay: `${idx * 0.12}s` }}
+              onClick={() => setViewingProduct(prod)}
             >
               <div className="result-card__top">
                 <h3 className="result-card__name">{prod.name}</h3>
@@ -324,26 +434,32 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
                   </div>
                 ))}
               </div>
-              <button 
-                className="result-card__btn"
-                onClick={() => setViewingProduct(prod)}
-              >
-                View product detail
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </button>
             </div>
           ))}
         </div>
 
         <div className="results-footer">
-          <button 
-            className="ai-assist-btn"
-            onClick={() => setShowAiChat(true)}
-          >
-            ✦ AI Assistance
-          </button>
+          <div className="results-footer__actions">
+            <button 
+              className="compare-btn"
+              onClick={() => setShowCompare(true)}
+            >
+              Compare Products
+            </button>
+            <button 
+              className="ai-circle-btn"
+              onClick={() => setShowAiChat(true)}
+              aria-label="AI Assistance"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="ai-sparkle-icon">
+                <path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z" />
+                <path d="M20 3v4" />
+                <path d="M22 5h-4" />
+                <path d="M4 17v2" />
+                <path d="M5 18H3" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     );
@@ -354,6 +470,16 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
     <div className="finder-container">
       <header className="finder-header">
         <div className="finder-header__top">
+          {currentStep > 0 ? (
+            <button className="finder-close-btn" onClick={() => setCurrentStep((s) => s - 1)} aria-label="Go back">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+              </svg>
+            </button>
+          ) : (
+            <div style={{ width: 44 }} />
+          )}
           <h1 className="finder-title">Product Finder</h1>
           <button className="finder-close-btn" onClick={onBack} aria-label="Close">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
