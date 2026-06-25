@@ -530,13 +530,16 @@ body {
   flex-direction: column;
 }
 
-/* ─── Swiper ─── */
+.detail-slider-area {
+  height: calc(100svh - 76px);
+  display: flex;
+  flex-direction: column;
+}
 
 .swiper {
   width: 100%;
-  height: 65svh;
-  min-height: 380px;
-  max-height: 550px;
+  flex: 1;
+  min-height: 0;
   overflow: hidden;
   touch-action: pan-y;
   flex-shrink: 0;

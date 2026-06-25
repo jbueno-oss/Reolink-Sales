@@ -569,26 +569,28 @@ export default function ProductDetail({
 
       {/* Slider area */}
       <div className="detail-body">
-        <Swiper
-          slides={slides}
-          currentIndex={currentSlide}
-          onIndexChange={setCurrentSlide}
-        />
+        <div className="detail-slider-area">
+          <Swiper
+            slides={slides}
+            currentIndex={currentSlide}
+            onIndexChange={setCurrentSlide}
+          />
 
-        {/* Pagination dots */}
-        <div className="pagination">
-          <div className="pagination__dots">
-            {slides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                className={`pagination__dot ${i === currentSlide ? 'pagination__dot--active' : ''}`}
-                onClick={() => setCurrentSlide(i)}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
+          {/* Pagination dots */}
+          <div className="pagination">
+            <div className="pagination__dots">
+              {slides.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  className={`pagination__dot ${i === currentSlide ? 'pagination__dot--active' : ''}`}
+                  onClick={() => setCurrentSlide(i)}
+                  aria-label={`Go to slide ${i + 1}`}
+                />
+              ))}
+            </div>
+            <p className="pagination__hint">Scroll to see more info</p>
           </div>
-          <p className="pagination__hint">Scroll to see more info</p>
         </div>
 
         {/* Accordion Section */}
