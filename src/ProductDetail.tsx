@@ -1,4 +1,5 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
 import logo from './assets/Logo Reolink.svg';
 
 /* ─── Types ─── */
@@ -242,124 +243,31 @@ function Swiper({
   currentIndex: number;
   onIndexChange: (i: number) => void;
 }) {
-  const trackRef = useRef<HTMLDivElement>(null);
-  const startX = useRef(0);
-  const startY = useRef(0);
-  const deltaX = useRef(0);
-  const isDragging = useRef(false);
-  const isHorizontalSwipe = useRef<boolean | null>(null);
-  const isAnimating = useRef(false);
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
-  // 1-based index (0 is clone of last, length+1 is clone of first)
-  const [internalIndex, setInternalIndex] = useState(currentIndex + 1);
-  const [withTransition, setWithTransition] = useState(true);
-
-  // Sync with parent (pagination dots)
   useEffect(() => {
-    if (!isAnimating.current) {
-      setWithTransition(true);
-      setInternalIndex(currentIndex + 1);
-    }
-  }, [currentIndex]);
-
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    if (isAnimating.current) return;
-    startX.current = e.touches[0].clientX;
-    startY.current = e.touches[0].clientY;
-    deltaX.current = 0;
-    isDragging.current = true;
-    isHorizontalSwipe.current = null;
-    setWithTransition(false);
-  }, []);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (!isDragging.current) return;
-    const dx = e.touches[0].clientX - startX.current;
-    const dy = e.touches[0].clientY - startY.current;
-
-    if (isHorizontalSwipe.current === null) {
-      if (Math.abs(dx) > 8 || Math.abs(dy) > 8) {
-        isHorizontalSwipe.current = Math.abs(dx) > Math.abs(dy);
-      }
-      return;
-    }
-
-    if (!isHorizontalSwipe.current) return;
-    e.preventDefault();
-    deltaX.current = dx;
-
-    if (trackRef.current) {
-      const offset = -internalIndex * 100 + (dx / window.innerWidth) * 100;
-      trackRef.current.style.transform = `translateX(${offset}%)`;
-    }
-  }, [internalIndex]);
-
-  const handleTouchEnd = useCallback(() => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
-    isHorizontalSwipe.current = null;
-    setWithTransition(true);
-
-    const threshold = 50;
-    if (deltaX.current < -threshold) {
-      isAnimating.current = true;
-      setInternalIndex(prev => prev + 1);
-    } else if (deltaX.current > threshold) {
-      isAnimating.current = true;
-      setInternalIndex(prev => prev - 1);
-    } else {
-      setInternalIndex(internalIndex);
-    }
+    if (!emblaApi) return;
     
-    // clear inline style so React state takes over
-    if (trackRef.current) {
-      trackRef.current.style.transform = '';
-    }
-    deltaX.current = 0;
-  }, [internalIndex]);
+    const onSelect = () => {
+      onIndexChange(emblaApi.selectedScrollSnap());
+    };
+    
+    emblaApi.on('select', onSelect);
+    return () => { emblaApi.off('select', onSelect); };
+  }, [emblaApi, onIndexChange]);
 
-  const handleTransitionEnd = () => {
-    isAnimating.current = false;
-    if (internalIndex === 0) {
-      setWithTransition(false);
-      setInternalIndex(slides.length);
-      onIndexChange(slides.length - 1);
-    } else if (internalIndex === slides.length + 1) {
-      setWithTransition(false);
-      setInternalIndex(1);
-      onIndexChange(0);
-    } else {
-      onIndexChange(internalIndex - 1);
+  useEffect(() => {
+    if (!emblaApi) return;
+    if (emblaApi.selectedScrollSnap() !== currentIndex) {
+      emblaApi.scrollTo(currentIndex);
     }
-  };
-
-  const renderedSlides = [
-    slides[slides.length - 1], // Clone last
-    ...slides,
-    slides[0], // Clone first
-  ];
+  }, [emblaApi, currentIndex]);
 
   return (
-    <div
-      className="swiper"
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleTouchEnd}
-    >
-      <div 
-        className="swiper__track" 
-        ref={trackRef}
-        onTransitionEnd={handleTransitionEnd}
-        style={{
-          transform: `translateX(-${internalIndex * 100}%)`,
-          transition: withTransition ? 'transform 0.4s cubic-bezier(0.22, 1, 0.36, 1)' : 'none',
-        }}
-      >
-        {renderedSlides.map((slide, i) => (
-          <div 
-            className={`swiper__slide ${i === internalIndex ? 'swiper__slide--active' : ''}`} 
-            key={i}
-          >
+    <div className="swiper" ref={emblaRef}>
+      <div className="swiper__track">
+        {slides.map((slide, i) => (
+          <div className={`swiper__slide ${i === currentIndex ? 'swiper__slide--active' : ''}`} key={i}>
             <div className="slide-media">
               {slide.type === 'video' ? (
                 <VideoPlaceholder src={slide.media} alt={slide.title} />
