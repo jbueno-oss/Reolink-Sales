@@ -267,17 +267,19 @@ function Swiper({
     <div className="swiper" ref={emblaRef}>
       <div className="swiper__track">
         {slides.map((slide, i) => (
-          <div className={`swiper__slide ${i === currentIndex ? 'swiper__slide--active' : ''}`} key={i}>
-            <div className="slide-media">
-              {slide.type === 'video' ? (
-                <VideoPlaceholder src={slide.media} alt={slide.title} />
-              ) : (
-                <img src={slide.media} alt={slide.title} className="slide-image" />
-              )}
-            </div>
-            <div className="slide-content">
-              <h2 className="slide-content__title">{slide.title}</h2>
-              <p className="slide-content__description">{slide.description}</p>
+          <div className="swiper__slide" key={i}>
+            <div className={`swiper__slide-inner ${i === currentIndex ? 'swiper__slide-inner--active' : ''}`}>
+              <div className="slide-media">
+                {slide.type === 'video' ? (
+                  <VideoPlaceholder src={slide.media} alt={slide.title} />
+                ) : (
+                  <img src={slide.media} alt={slide.title} className="slide-image" />
+                )}
+              </div>
+              <div className="slide-content">
+                <h2 className="slide-content__title">{slide.title}</h2>
+                <p className="slide-content__description">{slide.description}</p>
+              </div>
             </div>
           </div>
         ))}
