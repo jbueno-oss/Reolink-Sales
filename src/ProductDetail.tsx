@@ -1,4 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import logo from './assets/Logo Reolink.svg';
 
