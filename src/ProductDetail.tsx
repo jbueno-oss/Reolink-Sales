@@ -299,10 +299,10 @@ function Swiper({
     }
 
     const threshold = 50;
-    if (deltaX.current < -threshold && currentIndex < slides.length - 1) {
-      onIndexChange(currentIndex + 1);
-    } else if (deltaX.current > threshold && currentIndex > 0) {
-      onIndexChange(currentIndex - 1);
+    if (deltaX.current < -threshold) {
+      onIndexChange((currentIndex + 1) % slides.length);
+    } else if (deltaX.current > threshold) {
+      onIndexChange((currentIndex - 1 + slides.length) % slides.length);
     } else {
       // snap back
       if (trackRef.current) {

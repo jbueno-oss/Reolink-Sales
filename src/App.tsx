@@ -3,6 +3,7 @@ import './index.css';
 import ProductDetail from './ProductDetail';
 import type { Product } from './ProductDetail';
 import ProductFinder from './ProductFinder';
+import CompareScreen from './CompareScreen';
 import logo from './assets/Logo Reolink.svg';
 
 /* ─── Data ─── */
@@ -112,15 +113,43 @@ function CategoryFilters({
 function ProductCard({
   product,
   onSelect,
+  isCompareMode,
+  compareIndex,
 }: {
   product: Product;
   onSelect: (p: Product) => void;
+  isCompareMode?: boolean;
+  compareIndex?: number | null;
 }) {
-  const ref = useReveal<HTMLDivElement>();
+  const ref = useRef<HTMLDivElement>(null);
+  const hasRevealed = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (hasRevealed.current) {
+      el.classList.add('visible');
+      return;
+    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add('visible');
+          hasRevealed.current = true;
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  });
+
+  const isSelected = compareIndex !== null && compareIndex !== undefined;
 
   return (
     <div
-      className="product-card reveal"
+      className={`product-card reveal${isSelected ? ' product-card--selected' : ''}`}
       ref={ref}
       onClick={() => onSelect(product)}
       role="button"
@@ -134,44 +163,130 @@ function ProductCard({
           className="product-card__image"
           loading="lazy"
         />
+        {isCompareMode && (
+          <div className={`product-card__checkbox${isSelected ? ' product-card__checkbox--checked' : ''}`}>
+            {isSelected && (
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            )}
+          </div>
+        )}
       </div>
       <p className="product-card__name">{product.name}</p>
     </div>
   );
 }
 
-function CatalogSection({ onSelectProduct }: { onSelectProduct: (p: Product) => void }) {
+function CatalogSection({ onSelectProduct, onCompare }: { onSelectProduct: (p: Product) => void, onCompare: (products: Product[]) => void }) {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [isCompareMode, setIsCompareMode] = useState(false);
+  const [compareSelection, setCompareSelection] = useState<Product[]>([]);
 
   const filtered =
     activeCategory === 'All'
       ? products
       : products.filter((p) => p.category === activeCategory);
 
+  const handleProductSelect = (product: Product) => {
+    if (isCompareMode) {
+      setCompareSelection(prev => {
+        const isSelected = prev.find(p => p.id === product.id);
+        if (isSelected) {
+          return prev.filter(p => p.id !== product.id);
+        } else if (prev.length < 3) {
+          return [...prev, product];
+        }
+        return prev;
+      });
+    } else {
+      onSelectProduct(product);
+    }
+  };
+
+  const toggleCompareMode = () => {
+    setIsCompareMode(!isCompareMode);
+    if (isCompareMode) {
+      setCompareSelection([]);
+    }
+  };
+
   return (
-    <section className="catalog">
-      <h2 className="catalog__title">Catalog</h2>
+    <>
+      <section className="catalog">
+        <div className="catalog__header">
+          <h2 className="catalog__title">Catalog</h2>
+          <div className="catalog__compare-toggle">
+            <span className="toggle-label">Compare Products</span>
+            <label className="toggle-switch">
+              <input type="checkbox" checked={isCompareMode} onChange={toggleCompareMode} />
+              <span className="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
 
-      <CategoryFilters active={activeCategory} onSelect={setActiveCategory} />
+        <CategoryFilters active={activeCategory} onSelect={setActiveCategory} />
 
-      <div className="product-grid">
-        {filtered.map((product) => (
-          <ProductCard
-            key={`${product.id}-${activeCategory}`}
-            product={product}
-            onSelect={onSelectProduct}
-          />
-        ))}
+        <div className={`product-grid${isCompareMode ? ' product-grid--compare-padded' : ''}`}>
+          {filtered.map((product) => {
+            const selIndex = compareSelection.findIndex(p => p.id === product.id);
+            const compareIndex = selIndex !== -1 ? selIndex + 1 : null;
+            return (
+              <ProductCard
+                key={`${product.id}-${activeCategory}`}
+                product={product}
+                onSelect={handleProductSelect}
+                isCompareMode={isCompareMode}
+                compareIndex={compareIndex}
+              />
+            );
+          })}
+        </div>
+      </section>
+
+      {isCompareMode && (
+        <div className="compare-footer">
+          <button
+            className="compare-footer__btn"
+            disabled={compareSelection.length === 0}
+            onClick={() => onCompare(compareSelection)}
+          >
+            Compare Products
+          </button>
+          <p className="compare-footer__hint">Select up to 3 products</p>
+        </div>
+      )}
+    </>
+  );
+}
+
+function SplashScreen({ onFinish }: { onFinish: () => void }) {
+  const [fadeOut, setFadeOut] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setFadeOut(true), 2300);
+    const remove = setTimeout(onFinish, 3000);
+    return () => { clearTimeout(timer); clearTimeout(remove); };
+  }, [onFinish]);
+
+  return (
+    <div className={`splash${fadeOut ? ' splash--fade-out' : ''}`}>
+      <div className="splash__blob splash__blob--1" />
+      <div className="splash__blob splash__blob--2" />
+      <div className="splash__blob splash__blob--3" />
+      <div className="splash__logo">
+        <img src={logo} alt="Reolink" className="splash__logo-img" />
       </div>
-    </section>
+    </div>
   );
 }
 
 /* ─── App with Client-Side Routing ─── */
 
-type View = { page: 'home' } | { page: 'detail'; product: Product } | { page: 'finder' };
+type View = { page: 'home' } | { page: 'detail'; product: Product } | { page: 'finder' } | { page: 'compare'; products: Product[] };
 
 function App() {
+  const [showSplash, setShowSplash] = useState(true);
   const [view, setView] = useState<View>({ page: 'home' });
 
   const goToDetail = useCallback((product: Product) => {
@@ -189,6 +304,15 @@ function App() {
     document.getElementById('root')?.scrollTo({ top: 0 });
   }, []);
 
+  const goCompare = useCallback((products: Product[]) => {
+    setView({ page: 'compare', products });
+    document.getElementById('root')?.scrollTo({ top: 0 });
+  }, []);
+
+  if (showSplash) {
+    return <SplashScreen onFinish={() => setShowSplash(false)} />;
+  }
+
   if (view.page === 'detail') {
     return <ProductDetail product={view.product} onHome={goHome} />;
   }
@@ -197,12 +321,16 @@ function App() {
     return <ProductFinder onBack={goHome} />;
   }
 
+  if (view.page === 'compare') {
+    return <CompareScreen products={view.products} onBack={goHome} onHome={goHome} />;
+  }
+
   return (
     <>
       <Header />
       <main className="main-content">
         <ProductFinderCard onStart={goFinder} />
-        <CatalogSection onSelectProduct={goToDetail} />
+        <CatalogSection onSelectProduct={goToDetail} onCompare={goCompare} />
       </main>
     </>
   );
