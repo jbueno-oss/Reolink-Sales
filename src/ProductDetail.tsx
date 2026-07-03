@@ -288,172 +288,45 @@ function Swiper({
   );
 }
 
-/* ─── Accordion Data Per Product ─── */
-interface AccordionItem {
-  label: string;
-  value: string;
-}
+/* ─── Specs Table Component ─── */
+import { specsData } from './data/specs';
 
-interface AccordionData {
-  specs: AccordionItem[];
-  packContent: AccordionItem[];
-  installation: AccordionItem[];
-}
-
-function getAccordionData(product: Product): AccordionData {
-  const data: Record<number, AccordionData> = {
-    1: { // Argus 4 Pro
-      specs: [
-        { label: 'Resolution', value: '4K 8MP (3840 × 2160)' },
-        { label: 'Image Sensor', value: '1/3" CMOS Sensor' },
-        { label: 'Night Vision', value: 'Color Night Vision up to 33ft' },
-        { label: 'Connectivity', value: 'Dual-Band Wi-Fi (2.4/5 GHz)' },
-        { label: 'Storage', value: 'MicroSD (up to 128GB)' },
-        { label: 'Battery', value: 'Rechargeable 6500mAh' },
-        { label: 'Weather Rating', value: 'IP65 Weatherproof' },
-      ],
-      packContent: [
-        { label: 'Camera', value: '1 × Argus 4 Pro Camera' },
-        { label: 'Mounting Kit', value: 'Wall mount + screw pack' },
-        { label: 'Power Cable', value: 'USB-C charging cable (2m)' },
-        { label: 'Quick Start Guide', value: 'Setup instructions & QR code' },
-        { label: 'Surveillance Sticker', value: '1 × Security sign sticker' },
-      ],
-      installation: [
-        { label: 'Step 1', value: 'Download the Reolink App and create an account' },
-        { label: 'Step 2', value: 'Scan the QR code on the camera to pair' },
-        { label: 'Step 3', value: 'Choose a mounting location and attach the bracket' },
-        { label: 'Step 4', value: 'Snap the camera onto the mount and adjust angle' },
-      ],
-    },
-    2: { // Go Ranger PT
-      specs: [
-        { label: 'Resolution', value: '4K 8MP (3840 × 2160)' },
-        { label: 'Pan & Tilt', value: '355° Pan / 140° Tilt' },
-        { label: 'Connectivity', value: '4G LTE (SIM card required)' },
-        { label: 'Night Vision', value: 'Starlight Color Night Vision' },
-        { label: 'Battery', value: 'Rechargeable 10400mAh' },
-        { label: 'Storage', value: 'MicroSD (up to 128GB)' },
-        { label: 'Smart Detection', value: 'Person / Vehicle / Animal' },
-      ],
-      packContent: [
-        { label: 'Camera', value: '1 × Go Ranger PT Camera' },
-        { label: 'Antenna', value: '1 × 4G LTE Antenna' },
-        { label: 'Mounting Kit', value: 'Wall mount + screw pack' },
-        { label: 'Power Cable', value: 'USB-C charging cable' },
-        { label: 'Quick Start Guide', value: 'Setup instructions & QR code' },
-      ],
-      installation: [
-        { label: 'Step 1', value: 'Insert a nano SIM card with a data plan' },
-        { label: 'Step 2', value: 'Download the Reolink App and scan the QR code' },
-        { label: 'Step 3', value: 'Mount the camera on a wall or pole' },
-        { label: 'Step 4', value: 'Attach the antenna and power on' },
-      ],
-    },
-    3: { // OMVI 3i PoE
-      specs: [
-        { label: 'Resolution', value: '4K 8MP (3840 × 2160)' },
-        { label: 'Connection', value: 'PoE (IEEE 802.3af)' },
-        { label: 'Night Vision', value: 'IR Night Vision up to 30m' },
-        { label: 'Detection', value: 'AI Person / Vehicle Detection' },
-        { label: 'Vandal Proof', value: 'IK10 Impact Resistant' },
-        { label: 'Weather Rating', value: 'IP66 Weatherproof' },
-        { label: 'Storage', value: 'MicroSD / NVR / FTP' },
-      ],
-      packContent: [
-        { label: 'Camera', value: '1 × OMVI 3i PoE Dome Camera' },
-        { label: 'Ethernet Cable', value: '1 × 1m Cat5e cable' },
-        { label: 'Mounting Kit', value: 'Ceiling/Wall mount + screws' },
-        { label: 'Waterproof Cap', value: '1 × RJ45 waterproof connector' },
-        { label: 'Quick Start Guide', value: 'Setup instructions' },
-      ],
-      installation: [
-        { label: 'Step 1', value: 'Connect Ethernet cable from PoE switch to camera' },
-        { label: 'Step 2', value: 'Download Reolink App and add device by scanning' },
-        { label: 'Step 3', value: 'Mount the dome camera on ceiling or wall' },
-        { label: 'Step 4', value: 'Adjust the lens angle and tighten the housing' },
-      ],
-    },
-  };
-
-  return data[product.id] || data[1];
-}
-
-/* ─── Accordion Icons ─── */
-function SpecsIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
-      <line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
-    </svg>
-  );
-}
-
-function PackIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
-      <polyline points="3.27 6.96 12 12.01 20.73 6.96" /><line x1="12" y1="22.08" x2="12" y2="12" />
-    </svg>
-  );
-}
-
-function InstallIcon() {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
-    </svg>
-  );
-}
-
-/* ─── Arrow SVG ─── */
-function ArrowDown({ open }: { open: boolean }) {
-  return (
-    <svg
-      className={`accordion__arrow ${open ? 'accordion__arrow--open' : ''}`}
-      viewBox="0 0 15 10"
-      fill="none"
-    >
-      <path d="M1 1L7.5 8L14 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-/* ─── Accordion Component ─── */
-function Accordion({
-  icon,
-  title,
-  items,
-  defaultOpen = false,
-}: {
-  icon: React.ReactNode;
-  title: string;
-  items: AccordionItem[];
-  defaultOpen?: boolean;
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-
-  return (
-    <div className="accordion">
-      <button
-        className="accordion__header"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-      >
-        <div className="accordion__icon">{icon}</div>
-        <span className="accordion__title">{title}</span>
-        <ArrowDown open={open} />
-      </button>
-      <div className={`accordion__content ${open ? 'accordion__content--open' : ''}`}>
-        <div className="accordion__body">
-          {items.map((item, i) => (
-            <div key={i} className="accordion__item">
-              <p className="accordion__item-label">{item.label}</p>
-              <p className="accordion__item-value">{item.value}</p>
-            </div>
-          ))}
-        </div>
+function SpecsTable({ product }: { product: Product }) {
+  const specs = specsData[product.id];
+  
+  if (!specs) {
+    return (
+      <div className="specs-table-container">
+        <p className="specs-empty">Specifications not available for this product.</p>
       </div>
+    );
+  }
+
+  return (
+    <div className="specs-table-container">
+      <h3 className="specs-table-title">Technical Specifications</h3>
+      <table className="specs-table">
+        <tbody>
+          {Object.entries(specs).map(([key, value]) => {
+            return (
+              <tr key={key}>
+                <td className="specs-table__label">{key}</td>
+                <td className="specs-table__value">
+                  {typeof value === 'boolean' ? (
+                    value ? (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0050e2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    ) : (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    )
+                  ) : (
+                    value
+                  )}
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </div>
   );
 }
@@ -470,7 +343,6 @@ export default function ProductDetail({
 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = getSlidesForProduct(product);
-  const accordionData = getAccordionData(product);
 
   return (
     <div className="product-detail">
@@ -529,24 +401,9 @@ export default function ProductDetail({
           </div>
         </div>
 
-        {/* Accordion Section */}
-        <div className="accordion-section">
-          <Accordion
-            icon={<SpecsIcon />}
-            title="Specs"
-            items={accordionData.specs}
-            defaultOpen={false}
-          />
-          <Accordion
-            icon={<PackIcon />}
-            title="Pack Content"
-            items={accordionData.packContent}
-          />
-          <Accordion
-            icon={<InstallIcon />}
-            title="Installation"
-            items={accordionData.installation}
-          />
+        {/* Specs Table Section */}
+        <div className="specs-section">
+          <SpecsTable product={product} />
         </div>
       </div>
     </div>
