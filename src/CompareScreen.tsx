@@ -1,5 +1,6 @@
 import logo from './assets/Logo Reolink.svg';
 import type { Product } from './ProductDetail';
+import { specsData } from './data/specs';
 
 interface CompareScreenProps {
   products: Product[];
@@ -8,26 +9,18 @@ interface CompareScreenProps {
 }
 
 export default function CompareScreen({ products, onBack, onHome }: CompareScreenProps) {
-  // Mock features based on product index to simulate comparison
-  const mockFeatures = {
-    resolution: ['4K 8MP', '2K 4MP', '1080P'],
-    nightVision: ['Color (33ft)', 'Starlight', 'IR (30m)'],
-    connectivity: ['Wi-Fi', '4G LTE', 'PoE'],
-    panTilt: [false, true, false],
-    solar: [true, true, false],
-    smartDetection: [true, true, true],
-    dualLens: [true, false, false],
-    vandalProof: [false, false, true],
-    weather: ['IP65', 'IP65', 'IP66'],
-    storage: ['MicroSD', 'MicroSD', 'MicroSD / NVR'],
-  };
+  const specKeys = Object.keys(specsData[1] || {});
 
-  const getFeature = (featureArray: any[], index: number) => {
-    return featureArray[index % featureArray.length];
-  };
-
-  const renderCheck = (value: boolean) => {
-    return value ? <span className="compare-yes">✓</span> : <span className="compare-no">✗</span>;
+  const renderValue = (value: string | boolean | undefined) => {
+    if (value === undefined) return <span className="compare-no">-</span>;
+    if (typeof value === 'boolean') {
+      return value ? (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0050e2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      ) : (
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+      );
+    }
+    return value;
   };
 
   return (
@@ -69,46 +62,14 @@ export default function CompareScreen({ products, onBack, onHome }: CompareScree
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td className="compare-table__label">Resolution</td>
-              {products.map((_, idx) => <td key={idx}>{getFeature(mockFeatures.resolution, idx)}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Night Vision</td>
-              {products.map((_, idx) => <td key={idx}>{getFeature(mockFeatures.nightVision, idx)}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Connectivity</td>
-              {products.map((_, idx) => <td key={idx}>{getFeature(mockFeatures.connectivity, idx)}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Pan & Tilt</td>
-              {products.map((_, idx) => <td key={idx}>{renderCheck(getFeature(mockFeatures.panTilt, idx))}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Solar Power</td>
-              {products.map((_, idx) => <td key={idx}>{renderCheck(getFeature(mockFeatures.solar, idx))}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Smart Detection</td>
-              {products.map((_, idx) => <td key={idx}>{renderCheck(getFeature(mockFeatures.smartDetection, idx))}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Dual-Lens</td>
-              {products.map((_, idx) => <td key={idx}>{renderCheck(getFeature(mockFeatures.dualLens, idx))}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Vandal Proof</td>
-              {products.map((_, idx) => <td key={idx}>{renderCheck(getFeature(mockFeatures.vandalProof, idx))}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Weather Rating</td>
-              {products.map((_, idx) => <td key={idx}>{getFeature(mockFeatures.weather, idx)}</td>)}
-            </tr>
-            <tr>
-              <td className="compare-table__label">Storage</td>
-              {products.map((_, idx) => <td key={idx}>{getFeature(mockFeatures.storage, idx)}</td>)}
-            </tr>
+            {specKeys.map((key) => (
+              <tr key={key}>
+                <td className="compare-table__label">{key}</td>
+                {products.map((prod) => (
+                  <td key={prod.id}>{renderValue(specsData[prod.id]?.[key])}</td>
+                ))}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
