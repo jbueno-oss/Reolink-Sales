@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import logo from './assets/Logo Reolink.svg';
 import placeholderPdf from './assets/58.03.001.0983-Go PT Pus-QSG-EN-澳规-2025-0925.pdf';
+import PdfViewerModal from './components/PdfViewerModal';
 
 /* ─── Types ─── */
 export interface Product {
@@ -442,20 +443,7 @@ export default function ProductDetail({
 
       {/* PDF Viewer Modal */}
       {showPdf && (
-        <div className="pdf-modal">
-          <div className="pdf-modal__header">
-            <h3 className="pdf-modal__title">Full Specifications</h3>
-            <div className="pdf-modal__actions">
-              <a href={placeholderPdf} download="Reolink_Specs.pdf" className="pdf-modal__download" aria-label="Download PDF">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-              </a>
-              <button className="pdf-modal__close" onClick={() => setShowPdf(false)} aria-label="Close PDF">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-              </button>
-            </div>
-          </div>
-          <iframe src={placeholderPdf} className="pdf-modal__iframe" title="PDF Viewer" />
-        </div>
+        <PdfViewerModal pdfUrl={placeholderPdf} onClose={() => setShowPdf(false)} />
       )}
     </div>
   );
