@@ -7,15 +7,26 @@ import CompareScreen from './CompareScreen';
 import logo from './assets/Logo Reolink.svg';
 
 /* ─── Data ─── */
-const categories = ['All', 'Doorbells', 'Bundles', 'Accessories', 'Outdoor', 'Indoor'];
+const categories = ['All', 'Battery', 'Wi-Fi', '4G', 'PoE', 'Floodlight'];
 
 const products: Product[] = [
-  { id: 1, name: 'Argus 4 Pro',        image: '/images/argus4pro.png',       category: 'Outdoor'     },
-  { id: 2, name: 'Go Ranger PT',       image: '/images/go-ranger-pt.png',    category: 'Outdoor'     },
-  { id: 3, name: 'OMVI 3i PoE',        image: '/images/omvi3i-poe.png',      category: 'Bundles'     },
-  { id: 4, name: 'Reolink E1 Pro',     image: '/images/reolink-e1-pro.png',  category: 'Indoor'      },
-  { id: 5, name: 'Reolink Duo 3 PoE',  image: '/images/reolink-duo3-poe.png',category: 'Outdoor'     },
-  { id: 6, name: 'Reolink E1 Pro',     image: '/images/argus4pro.png',       category: 'Accessories' },
+  { id: 1, name: 'Argus 3 Pro 4x Kit + Hub',     image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 2, name: 'Argus 4 Pro Panoramic',        image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 3, name: 'Argus PT Ultra 2-Pack',        image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 4, name: 'Argus PT Ultra Single',        image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 5, name: 'Argus 3 Pro Standalone',       image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 6, name: 'Argus MagiCam Magnetic',       image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 7, name: 'Argus Solar 2-Pack',           image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 8, name: 'Argus Solar Single',           image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 9, name: 'Smart Video Doorbell',         image: '/images/argus4pro.png', category: 'Battery' },
+  { id: 10, name: 'E1 Zoom Indoor 4K',           image: '/images/argus4pro.png', category: 'Wi-Fi' },
+  { id: 11, name: 'E Series E321 Indoor',        image: '/images/argus4pro.png', category: 'Wi-Fi' },
+  { id: 12, name: 'Elite Floodlight WiFi',       image: '/images/argus4pro.png', category: 'Floodlight' },
+  { id: 13, name: 'Go PT Plus 4G LTE',           image: '/images/argus4pro.png', category: '4G' },
+  { id: 14, name: 'NVS8 PoE Kit 8MB4',           image: '/images/argus4pro.png', category: 'PoE' },
+  { id: 15, name: 'NVS8 PoE Kit 8MD4',           image: '/images/argus4pro.png', category: 'PoE' },
+  { id: 16, name: 'NVS8 PoE Kit 12MD6',          image: '/images/argus4pro.png', category: 'PoE' },
+  { id: 17, name: 'Solar Floodlight Cam F310B',  image: '/images/argus4pro.png', category: 'Floodlight' },
 ];
 
 /* ─── Home Components ─── */

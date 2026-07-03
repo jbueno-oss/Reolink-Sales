@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import logo from './assets/Logo Reolink.svg';
 
@@ -344,6 +344,31 @@ export default function ProductDetail({
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = getSlidesForProduct(product);
 
+  const [showFooter, setShowFooter] = useState(false);
+  const [showPdf, setShowPdf] = useState(false);
+  const specsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShowFooter(true);
+        } else {
+          setShowFooter(false);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    
+    if (specsRef.current) {
+      observer.observe(specsRef.current);
+    }
+    
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
   return (
     <div className="product-detail">
       {/* Header */}
@@ -402,10 +427,35 @@ export default function ProductDetail({
         </div>
 
         {/* Specs Table Section */}
-        <div className="specs-section">
+        <div className="specs-section" ref={specsRef}>
           <SpecsTable product={product} />
         </div>
       </div>
+
+      {/* Slide-up Footer */}
+      <div className={`detail-footer ${showFooter ? 'detail-footer--visible' : ''}`}>
+        <button className="detail-footer__btn" onClick={() => setShowPdf(true)}>
+          View Full Specs PDF
+        </button>
+      </div>
+
+      {/* PDF Viewer Modal */}
+      {showPdf && (
+        <div className="pdf-modal">
+          <div className="pdf-modal__header">
+            <h3 className="pdf-modal__title">Full Specifications</h3>
+            <div className="pdf-modal__actions">
+              <a href="/docs/specs_placeholder.pdf" download="Reolink_Specs.pdf" className="pdf-modal__download" aria-label="Download PDF">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+              </a>
+              <button className="pdf-modal__close" onClick={() => setShowPdf(false)} aria-label="Close PDF">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+              </button>
+            </div>
+          </div>
+          <iframe src="/docs/specs_placeholder.pdf" className="pdf-modal__iframe" title="PDF Viewer" />
+        </div>
+      )}
     </div>
   );
 }
