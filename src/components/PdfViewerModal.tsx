@@ -68,7 +68,7 @@ export default function PdfViewerModal({ pdfUrl, onClose }: PdfViewerModalProps)
 
       <div className="pdf-modal__body" ref={onWrapperRef}>
         <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess} className="pdf-document">
-          {Array.from(new Array(numPages || 0), (el, index) => (
+          {Array.from(new Array(numPages || 0), (_, index) => (
             <Page
               key={`page_${index + 1}`}
               pageNumber={index + 1}
