@@ -13,6 +13,7 @@ export interface Product {
   image: string;
   category: string;
   has2Pack?: boolean;
+  isKit?: boolean;
 }
 
 interface Slide {

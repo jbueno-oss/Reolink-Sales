@@ -26,20 +26,20 @@ import imgSolarFloodlight from './assets/Hero Images SKUs- Reolink/Solar Floodli
 const categories = ['All', 'Battery', 'Wi-Fi', '4G', 'PoE', 'Floodlight', 'Kits'];
 
 const products: Product[] = [
-  { id: 1, name: 'Argus 3 Pro 4x Kit + Hub',     image: imgArgus3ProKit, category: 'Kits' },
+  { id: 1, name: 'Argus 3 Pro 4x Kit + Hub',     image: imgArgus3ProKit, category: 'Battery', isKit: true },
   { id: 2, name: 'Argus 4 Pro Panoramic',        image: imgArgus4Pro, category: 'Battery' },
-  { id: 4, name: 'Argus PT Ultra',               image: imgArgusPTUltraSingle, category: 'Battery', has2Pack: true },
+  { id: 4, name: 'Argus PT Ultra',               image: imgArgusPTUltraSingle, category: 'Battery', has2Pack: true, isKit: true },
   { id: 5, name: 'Argus 3 Pro Standalone',       image: imgArgus3ProStandalone, category: 'Battery' },
   { id: 6, name: 'Argus MagiCam Magnetic',       image: imgArgusMagiCam, category: 'Battery' },
-  { id: 8, name: 'Argus Solar',                  image: imgArgusSolarSingle, category: 'Battery', has2Pack: true },
+  { id: 8, name: 'Argus Solar',                  image: imgArgusSolarSingle, category: 'Battery', has2Pack: true, isKit: true },
   { id: 9, name: 'Smart Video Doorbell',         image: imgSmartVideoDoorbell, category: 'Battery' },
   { id: 10, name: 'E1 Zoom Indoor 4K',           image: imgE1Zoom, category: 'Wi-Fi' },
   { id: 11, name: 'E Series E321 Indoor',        image: imgE321Indoor, category: 'Wi-Fi' },
   { id: 12, name: 'Elite Floodlight WiFi',       image: imgEliteFloodlight, category: 'Floodlight' },
   { id: 13, name: 'Go PT Plus 4G LTE',           image: imgGoPTPlus, category: '4G' },
-  { id: 14, name: 'NVS8 PoE Kit 8MB4',           image: imgNVSPoE8MB4, category: 'Kits' },
-  { id: 15, name: 'NVS8 PoE Kit 8MD4',           image: imgNVSPoE8MD4, category: 'Kits' },
-  { id: 16, name: 'NVS8 PoE Kit 12MD6',          image: imgNVSPoE12MD6, category: 'Kits' },
+  { id: 14, name: 'NVS8 PoE Kit 8MB4',           image: imgNVSPoE8MB4, category: 'PoE', isKit: true },
+  { id: 15, name: 'NVS8 PoE Kit 8MD4',           image: imgNVSPoE8MD4, category: 'PoE', isKit: true },
+  { id: 16, name: 'NVS8 PoE Kit 12MD6',          image: imgNVSPoE12MD6, category: 'PoE', isKit: true },
   { id: 17, name: 'Solar Floodlight Cam F310B',  image: imgSolarFloodlight, category: 'Floodlight' },
 ];
 
@@ -193,6 +193,8 @@ function CatalogSection({ onSelectProduct, onCompare }: { onSelectProduct: (p: P
   const filtered =
     activeCategory === 'All'
       ? products
+      : activeCategory === 'Kits'
+      ? products.filter((p) => p.isKit)
       : products.filter((p) => p.category === activeCategory);
 
   const handleProductSelect = (product: Product) => {
