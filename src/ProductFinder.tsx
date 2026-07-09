@@ -73,11 +73,15 @@ const QUESTIONS: Question[] = [
   },
 ];
 
+import imgArgus4Pro from './assets/Hero Images SKUs- Reolink/Argus 4 Pro Panoramic..jpg';
+import imgGoRangerPT from './assets/Hero Images SKUs- Reolink/Go PT Plus 4G LTE.jpg';
+import imgOmvi3iPoE from './assets/Hero Images SKUs- Reolink/NVS8 PoE Kit 8MB4.jpg';
+
 const AI_RECOMMENDATIONS = [
   {
     id: 1,
     name: 'Argus 4 Pro',
-    image: '/images/argus4pro.png',
+    image: imgArgus4Pro,
     match: '100% Match',
     desc: '5 MP Wi-Fi camera with automatic tracking',
     features: ['Wire-Free Setup', '4K Ultra HD Video', 'Color Night Vision'],
@@ -85,19 +89,19 @@ const AI_RECOMMENDATIONS = [
   },
   {
     id: 2,
-    name: 'Go Ranger PT',
-    image: '/images/go-ranger-pt.png',
+    name: 'Go PT Plus 4G',
+    image: imgGoRangerPT,
     match: '85% Match',
-    desc: '4K Pan & Tilt camera with solar power support',
+    desc: '4K Pan & Tilt camera with cellular connectivity',
     features: ['360° View', 'Smart Detection', 'Solar Compatible'],
     category: 'Outdoor'
   },
   {
     id: 3,
-    name: 'OMVI 3i PoE',
-    image: '/images/omvi3i-poe.png',
+    name: 'NVS8 PoE Kit',
+    image: imgOmvi3iPoE,
     match: '70% Match',
-    desc: 'Smart PoE Dome with reliable connection',
+    desc: 'Smart PoE Kit with reliable connection',
     features: ['PoE Connection', 'Vandal Proof', 'Color Night Vision'],
     category: 'Bundles'
   }

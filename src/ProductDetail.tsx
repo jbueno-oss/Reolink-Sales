@@ -3,6 +3,8 @@ import useEmblaCarousel from 'embla-carousel-react';
 import logo from './assets/Logo Reolink.svg';
 import placeholderPdf from './assets/58.03.001.0983-Go PT Pus-QSG-EN-澳规-2025-0925.pdf';
 import PdfViewerModal from './components/PdfViewerModal';
+import { getAccordionData } from './data/accordionData';
+import type { AccordionItem, SpecSection } from './data/accordionData';
 
 /* ─── Types ─── */
 export interface Product {
@@ -290,45 +292,102 @@ function Swiper({
   );
 }
 
-/* ─── Specs Table Component ─── */
-import { specsData } from './data/specs';
 
-function SpecsTable({ product }: { product: Product }) {
-  const specs = specsData[product.id];
-  
-  if (!specs) {
-    return (
-      <div className="specs-table-container">
-        <p className="specs-empty">Specifications not available for this product.</p>
-      </div>
-    );
-  }
+
+/* ─── Accordion Icons ─── */
+function SpecsIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="8" y1="6" x2="21" y2="6" /><line x1="8" y1="12" x2="21" y2="12" /><line x1="8" y1="18" x2="21" y2="18" />
+      <line x1="3" y1="6" x2="3.01" y2="6" /><line x1="3" y1="12" x2="3.01" y2="12" /><line x1="3" y1="18" x2="3.01" y2="18" />
+    </svg>
+  );
+}
+
+function PackIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z" />
+      <polyline points="3.27 6.96 12 12.01 20.73 6.96" />
+      <line x1="12" y1="22.08" x2="12" y2="12" />
+    </svg>
+  );
+}
+
+function InstallIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+    </svg>
+  );
+}
+
+/* ─── Arrow SVG ─── */
+function ArrowDown({ open }: { open: boolean }) {
+  return (
+    <svg
+      className={`accordion__arrow ${open ? 'accordion__arrow--open' : ''}`}
+      viewBox="0 0 15 10"
+      fill="none"
+    >
+      <path d="M1 1L7.5 8L14 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/* ─── Accordion Component ─── */
+function Accordion({
+  icon,
+  title,
+  items,
+  defaultOpen = false,
+}: {
+  icon: React.ReactNode;
+  title: string;
+  items: AccordionItem[] | SpecSection[];
+  defaultOpen?: boolean;
+}) {
+  const [open, setOpen] = useState(defaultOpen);
+
+  const isSpecSection = (items: AccordionItem[] | SpecSection[]): items is SpecSection[] => {
+    return items.length > 0 && 'category' in items[0];
+  };
 
   return (
-    <div className="specs-table-container">
-      <h3 className="specs-table-title">Technical Specifications</h3>
-      <table className="specs-table">
-        <tbody>
-          {Object.entries(specs).map(([key, value]) => {
-            return (
-              <tr key={key}>
-                <td className="specs-table__label">{key}</td>
-                <td className="specs-table__value">
-                  {typeof value === 'boolean' ? (
-                    value ? (
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0050e2" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    ) : (
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9ca3af" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    )
-                  ) : (
-                    value
-                  )}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="accordion">
+      <button
+        className="accordion__header"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <div className="accordion__icon">{icon}</div>
+        <span className="accordion__title">{title}</span>
+        <ArrowDown open={open} />
+      </button>
+      <div className={`accordion__content ${open ? 'accordion__content--open' : ''}`}>
+        <div className="accordion__body">
+          {isSpecSection(items) ? (
+            items.map((section, idx) => (
+              <div key={idx} className="accordion__section">
+                <h4 className="accordion__section-title">{section.category}</h4>
+                {section.items.map((item, i) => (
+                  <div key={i} className="accordion__item">
+                    <p className="accordion__item-label">{item.label}</p>
+                    <p className="accordion__item-value">{item.value}</p>
+                  </div>
+                ))}
+              </div>
+            ))
+          ) : (
+            (items as AccordionItem[]).map((item, i) => (
+              <div key={i} className="accordion__item">
+                <p className="accordion__item-label">{item.label}</p>
+                <p className="accordion__item-value">{item.value}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 }
@@ -345,6 +404,7 @@ export default function ProductDetail({
 }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = getSlidesForProduct(product);
+  const accordionData = getAccordionData(product);
 
   const [showFooter, setShowFooter] = useState(false);
   const [showPdf, setShowPdf] = useState(false);
@@ -428,9 +488,24 @@ export default function ProductDetail({
           </div>
         </div>
 
-        {/* Specs Table Section */}
-        <div className="specs-section" ref={specsRef}>
-          <SpecsTable product={product} />
+        {/* Accordion Section */}
+        <div className="accordion-section" ref={specsRef}>
+          <Accordion
+            icon={<SpecsIcon />}
+            title="Specs"
+            items={accordionData.specs}
+            defaultOpen={false}
+          />
+          <Accordion
+            icon={<PackIcon />}
+            title="Pack Content"
+            items={accordionData.packContent}
+          />
+          <Accordion
+            icon={<InstallIcon />}
+            title="Installation"
+            items={accordionData.installation}
+          />
         </div>
       </div>
 
