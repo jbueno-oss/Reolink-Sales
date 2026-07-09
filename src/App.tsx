@@ -30,12 +30,10 @@ const categories = ['All', 'Battery', 'Wi-Fi', '4G', 'PoE', 'Floodlight', 'Kits'
 const products: Product[] = [
   { id: 1, name: 'Argus 3 Pro 4x Kit + Hub',     image: imgArgus3ProKit, category: 'Kits' },
   { id: 2, name: 'Argus 4 Pro Panoramic',        image: imgArgus4Pro, category: 'Battery' },
-  { id: 3, name: 'Argus PT Ultra 2-Pack',        image: imgArgusPTUltra2Pack, category: 'Kits' },
-  { id: 4, name: 'Argus PT Ultra Single',        image: imgArgusPTUltraSingle, category: 'Battery' },
+  { id: 4, name: 'Argus PT Ultra',               image: imgArgusPTUltraSingle, category: 'Battery', has2Pack: true },
   { id: 5, name: 'Argus 3 Pro Standalone',       image: imgArgus3ProStandalone, category: 'Battery' },
   { id: 6, name: 'Argus MagiCam Magnetic',       image: imgArgusMagiCam, category: 'Battery' },
-  { id: 7, name: 'Argus Solar 2-Pack',           image: imgArgusSolar2Pack, category: 'Kits' },
-  { id: 8, name: 'Argus Solar Single',           image: imgArgusSolarSingle, category: 'Battery' },
+  { id: 8, name: 'Argus Solar',                  image: imgArgusSolarSingle, category: 'Battery', has2Pack: true },
   { id: 9, name: 'Smart Video Doorbell',         image: imgSmartVideoDoorbell, category: 'Battery' },
   { id: 10, name: 'E1 Zoom Indoor 4K',           image: imgE1Zoom, category: 'Wi-Fi' },
   { id: 11, name: 'E Series E321 Indoor',        image: imgE321Indoor, category: 'Wi-Fi' },
@@ -177,7 +175,14 @@ function ProductCard({
           </div>
         )}
       </div>
-      <p className="product-card__name">{product.name}</p>
+      <div className="product-card__content" style={{ marginTop: '12px' }}>
+        <p className="product-card__name" style={{ margin: 0 }}>{product.name}</p>
+        {product.has2Pack && (
+          <span className="product-card__badge" style={{ fontSize: '12px', color: '#666', display: 'block', marginTop: '4px' }}>
+            Available in Single & 2-Pack
+          </span>
+        )}
+      </div>
     </div>
   );
 }

@@ -12,6 +12,7 @@ export interface Product {
   name: string;
   image: string;
   category: string;
+  has2Pack?: boolean;
 }
 
 interface Slide {
@@ -29,7 +30,7 @@ function getSlidesForProduct(product: Product): Slide[] {
       type: 'image',
       media: product.image,
       title: `Meet the ${product.name}`,
-      description: 'A powerful security solution designed for every corner of your home or business. Enjoy peace of mind with crystal-clear monitoring.',
+      description: `${product.has2Pack ? 'Available in Single and 2-Pack options. ' : ''}A powerful security solution designed for every corner of your home or business. Enjoy peace of mind with crystal-clear monitoring.`,
     },
     {
       type: 'video',
