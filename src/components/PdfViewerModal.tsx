@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
@@ -14,11 +14,19 @@ interface PdfViewerModalProps {
   onClose: () => void;
 }
 
+function getDistance(touches: TouchList): number {
+  const [t1, t2] = [touches[0], touches[1]];
+  return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+}
+
 export default function PdfViewerModal({ pdfUrl, onClose }: PdfViewerModalProps) {
   const [numPages, setNumPages] = useState<number>();
   const [scale, setScale] = useState(1);
   const [rotation, setRotation] = useState(0);
   const [containerWidth, setContainerWidth] = useState<number>();
+
+  const bodyRef = useRef<HTMLDivElement>(null);
+  const pinchRef = useRef<{ startDist: number; startScale: number } | null>(null);
 
   const onWrapperRef = useCallback((node: HTMLDivElement | null) => {
     if (node) {
@@ -30,9 +38,53 @@ export default function PdfViewerModal({ pdfUrl, onClose }: PdfViewerModalProps)
     setNumPages(numPages);
   }
 
-  const handleZoomIn = () => setScale((prev) => Math.min(prev + 0.2, 3));
-  const handleZoomOut = () => setScale((prev) => Math.max(prev - 0.2, 0.5));
+  const clampScale = (s: number) => Math.min(Math.max(s, 0.5), 3);
+
+  const handleZoomIn = () => setScale((prev) => clampScale(prev + 0.2));
+  const handleZoomOut = () => setScale((prev) => clampScale(prev - 0.2));
   const handleRotate = () => setRotation((prev) => (prev + 90) % 360);
+
+  // Pinch-to-zoom touch handlers
+  useEffect(() => {
+    const el = bodyRef.current;
+    if (!el) return;
+
+    const onTouchStart = (e: TouchEvent) => {
+      if (e.touches.length === 2) {
+        e.preventDefault();
+        pinchRef.current = {
+          startDist: getDistance(e.touches),
+          startScale: scale,
+        };
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (e.touches.length === 2 && pinchRef.current) {
+        e.preventDefault();
+        const currentDist = getDistance(e.touches);
+        const ratio = currentDist / pinchRef.current.startDist;
+        const newScale = clampScale(pinchRef.current.startScale * ratio);
+        setScale(newScale);
+      }
+    };
+
+    const onTouchEnd = (e: TouchEvent) => {
+      if (e.touches.length < 2) {
+        pinchRef.current = null;
+      }
+    };
+
+    el.addEventListener('touchstart', onTouchStart, { passive: false });
+    el.addEventListener('touchmove', onTouchMove, { passive: false });
+    el.addEventListener('touchend', onTouchEnd);
+
+    return () => {
+      el.removeEventListener('touchstart', onTouchStart);
+      el.removeEventListener('touchmove', onTouchMove);
+      el.removeEventListener('touchend', onTouchEnd);
+    };
+  }, [scale]);
 
   return (
     <div className="pdf-modal">
@@ -66,7 +118,11 @@ export default function PdfViewerModal({ pdfUrl, onClose }: PdfViewerModalProps)
         </div>
       </div>
 
-      <div className="pdf-modal__body" ref={onWrapperRef}>
+      <div
+        className="pdf-modal__body"
+        ref={(node) => { bodyRef.current = node; onWrapperRef(node); }}
+        style={{ touchAction: 'pan-x pan-y' }}
+      >
         <Document file={pdfUrl} onLoadSuccess={onDocumentLoadSuccess} className="pdf-document">
           {Array.from(new Array(numPages || 0), (_, index) => (
             <Page

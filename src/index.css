@@ -1115,6 +1115,163 @@ body {
   margin: 0;
 }
 
+/* ─── Pack Content Grid (Figma layout) ─── */
+
+.pack-content-body {
+  padding: 24px 16px;
+  background: #fff;
+}
+
+.pack-content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px 16px;
+}
+
+.pack-content-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  border-radius: 24px;
+}
+
+.pack-content-card__image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #f0f4f8;
+}
+
+.pack-content-card__image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  border-radius: 16px;
+}
+
+.pack-content-card__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #eef2f6;
+  border-radius: 16px;
+}
+
+.pack-content-card__placeholder svg {
+  width: 36px;
+  height: 36px;
+  opacity: 0.5;
+}
+
+.pack-content-card__quantity {
+  font-family: 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #041837;
+  text-align: center;
+  margin: 0;
+  line-height: normal;
+  width: 100%;
+}
+
+.pack-content-card__name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #041837;
+  text-align: center;
+  margin: 0;
+  line-height: normal;
+  width: 100%;
+}
+
+/* ─── Installation Steps (Figma layout) ─── */
+
+.installation-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0 16px;
+  background: #fff;
+}
+
+.installation-step {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 16px 0;
+}
+
+.installation-step--border {
+  border-bottom: 1px solid #ebebeb;
+}
+
+.installation-step__number {
+  display: block;
+  list-style: decimal;
+  font-family: 'Inter', 'Poppins', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+}
+
+.installation-step__number li {
+  margin-left: 24px;
+}
+
+.installation-step__number li span {
+  line-height: normal;
+}
+
+.installation-step__description {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #1f2937;
+  line-height: 1.5;
+  margin: 0;
+  width: 100%;
+}
+
+.installation-step__image {
+  width: 100%;
+  height: 150px;
+  overflow: hidden;
+  background: #f5f5f5;
+  position: relative;
+}
+
+.installation-step__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.installation-step__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.installation-step__placeholder svg {
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
+}
+
 /* ─── Detail Footer & PDF Modal ─── */
 
 .detail-footer {

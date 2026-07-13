@@ -4,7 +4,7 @@ import logo from './assets/Logo Reolink.svg';
 import placeholderPdf from './assets/58.03.001.0983-Go PT Pus-QSG-EN-澳规-2025-0925.pdf';
 import PdfViewerModal from './components/PdfViewerModal';
 import { getAccordionData } from './data/accordionData';
-import type { AccordionItem, SpecSection } from './data/accordionData';
+import type { AccordionItem, SpecSection, PackContentItem, InstallationStep } from './data/accordionData';
 
 /* ─── Types ─── */
 export interface Product {
@@ -230,6 +230,102 @@ function Accordion({
   );
 }
 
+/* ─── Pack Content Accordion (Figma grid layout) ─── */
+function PackContentAccordion({
+  items,
+}: {
+  items: PackContentItem[];
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="accordion">
+      <button
+        className="accordion__header"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <div className="accordion__icon"><PackIcon /></div>
+        <span className="accordion__title">Pack Content</span>
+        <ArrowDown open={open} />
+      </button>
+      <div className={`accordion__content ${open ? 'accordion__content--open' : ''}`}>
+        <div className="pack-content-body">
+          <div className="pack-content-grid">
+            {items.map((item, i) => (
+              <div key={i} className="pack-content-card">
+                <div className="pack-content-card__image">
+                  {item.image ? (
+                    <img src={item.image} alt={item.name} />
+                  ) : (
+                    <div className="pack-content-card__placeholder">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="#b0bec5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <polyline points="21 15 16 10 5 21" />
+                      </svg>
+                    </div>
+                  )}
+                </div>
+                <p className="pack-content-card__quantity">{i + 1}</p>
+                <p className="pack-content-card__name">{item.name}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ─── Installation Accordion (Figma step layout) ─── */
+function InstallationAccordion({
+  items,
+}: {
+  items: InstallationStep[];
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <div className="accordion">
+      <button
+        className="accordion__header"
+        onClick={() => setOpen(!open)}
+        aria-expanded={open}
+      >
+        <div className="accordion__icon"><InstallIcon /></div>
+        <span className="accordion__title">Installation</span>
+        <ArrowDown open={open} />
+      </button>
+      <div className={`accordion__content ${open ? 'accordion__content--open' : ''}`}>
+        <div className="installation-body">
+          {items.map((step, i) => (
+            <div key={i} className={`installation-step${i < items.length - 1 ? ' installation-step--border' : ''}`}>
+              <ol className="installation-step__number" start={i + 1}>
+                <li><span>{step.title}</span></li>
+              </ol>
+              <p className="installation-step__description">{step.description}</p>
+              <div className="installation-step__image">
+                {step.image ? (
+                  <img src={step.image} alt={step.title} />
+                ) : (
+                  <div className="installation-step__placeholder">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#b0bec5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                      <circle cx="8.5" cy="8.5" r="1.5" />
+                      <polyline points="21 15 16 10 5 21" />
+                    </svg>
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 /* ─── Main ProductDetail Component ─── */
 export default function ProductDetail({
   product,
@@ -334,14 +430,10 @@ export default function ProductDetail({
             items={accordionData.specs}
             defaultOpen={false}
           />
-          <Accordion
-            icon={<PackIcon />}
-            title="Pack Content"
+          <PackContentAccordion
             items={accordionData.packContent}
           />
-          <Accordion
-            icon={<InstallIcon />}
-            title="Installation"
+          <InstallationAccordion
             items={accordionData.installation}
           />
         </div>

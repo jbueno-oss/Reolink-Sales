@@ -5,6 +5,18 @@ export interface AccordionItem {
   value: string;
 }
 
+export interface PackContentItem {
+  name: string;
+  quantity: number;
+  image?: string;
+}
+
+export interface InstallationStep {
+  title: string;
+  description: string;
+  image?: string;
+}
+
 export interface SpecSection {
   category: string;
   items: AccordionItem[];
@@ -12,23 +24,23 @@ export interface SpecSection {
 
 export interface AccordionData {
   specs: SpecSection[];
-  packContent: AccordionItem[];
-  installation: AccordionItem[];
+  packContent: PackContentItem[];
+  installation: InstallationStep[];
 }
 
-const defaultPackContent: AccordionItem[] = [
-  { label: 'Camera', value: '1 × Reolink Camera' },
-  { label: 'Mounting Kit', value: 'Wall mount + screw pack' },
-  { label: 'Power Cable', value: 'Included power cable' },
-  { label: 'Quick Start Guide', value: 'Setup instructions & QR code' },
-  { label: 'Surveillance Sign', value: '1 × Security sign sticker' },
+const defaultPackContent: PackContentItem[] = [
+  { name: 'Camera', quantity: 1 },
+  { name: 'Mounting Kit', quantity: 1 },
+  { name: 'Power Cable', quantity: 1 },
+  { name: 'Quick Start Guide', quantity: 1 },
+  { name: 'Surveillance Sign', quantity: 1 },
 ];
 
-const defaultInstallation: AccordionItem[] = [
-  { label: 'Step 1', value: 'Download the Reolink App and create an account' },
-  { label: 'Step 2', value: 'Scan the QR code on the camera or device to pair' },
-  { label: 'Step 3', value: 'Follow in-app prompts to configure Wi-Fi or connection' },
-  { label: 'Step 4', value: 'Install device in final location and adjust angle' },
+const defaultInstallation: InstallationStep[] = [
+  { title: 'Download the Reolink App', description: 'Download the Reolink App and create an account to get started.' },
+  { title: 'Scan QR Code', description: 'Scan the QR code on the camera or device to pair it with the app.' },
+  { title: 'Configure Connection', description: 'Follow in-app prompts to configure Wi-Fi or network connection.' },
+  { title: 'Install Device', description: 'Install the device in its final location and adjust the viewing angle.' },
 ];
 
 export function getAccordionData(product: Product): AccordionData {
@@ -64,8 +76,8 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { label: 'Camera', value: '4 × Argus 3 Pro Camera' },
-        { label: 'Hub', value: '1 × Reolink Home Hub Mini' },
+        { name: 'Argus 3 Pro Camera', quantity: 4 },
+        { name: 'Reolink Home Hub Mini', quantity: 1 },
         ...defaultPackContent.slice(1)
       ],
       installation: defaultInstallation,
@@ -131,7 +143,7 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { label: 'Camera', value: '2 × Argus PT Ultra Camera' },
+        { name: 'Argus PT Ultra Camera', quantity: 2 },
         ...defaultPackContent.slice(1)
       ],
       installation: defaultInstallation,
@@ -257,7 +269,7 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { label: 'Camera', value: '2 × Argus Solar Camera' },
+        { name: 'Argus Solar Camera', quantity: 2 },
         ...defaultPackContent.slice(1)
       ],
       installation: defaultInstallation,
@@ -323,15 +335,15 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { label: 'Doorbell', value: '1 × Video Doorbell' },
-        { label: 'Chime', value: '1 × Reolink Chime' },
+        { name: 'Video Doorbell', quantity: 1 },
+        { name: 'Reolink Chime', quantity: 1 },
         ...defaultPackContent.slice(1)
       ],
       installation: [
-        { label: 'Step 1', value: 'Mount the wedge/bracket near your door' },
-        { label: 'Step 2', value: 'Connect doorbell to power or use battery' },
-        { label: 'Step 3', value: 'Plug in the Chime in an indoor socket' },
-        { label: 'Step 4', value: 'Pair devices using the Reolink App' },
+        { title: 'Mount the Bracket', description: 'Mount the wedge or bracket near your door at the desired height.' },
+        { title: 'Connect Power', description: 'Connect the doorbell to power or use the built-in battery.' },
+        { title: 'Plug in the Chime', description: 'Plug in the Chime into an indoor power socket.' },
+        { title: 'Pair Devices', description: 'Pair devices together using the Reolink App.' },
       ],
     },
     // 10: E1 Zoom Indoor 4K -> PDF 19
@@ -483,16 +495,16 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { label: 'NVR', value: '1 × NVS8 NVR' },
-        { label: 'Cameras', value: '4 × PoE Cameras' },
-        { label: 'HDD', value: '1 × 2TB HDD pre-installed' },
+        { name: 'NVS8 NVR', quantity: 1 },
+        { name: 'PoE Cameras', quantity: 4 },
+        { name: '2TB HDD', quantity: 1 },
         ...defaultPackContent.slice(1)
       ],
       installation: [
-        { label: 'Step 1', value: 'Connect cameras to NVR using Ethernet cables' },
-        { label: 'Step 2', value: 'Connect NVR to your router and a monitor' },
-        { label: 'Step 3', value: 'Power on the NVR and follow setup wizard' },
-        { label: 'Step 4', value: 'Mount cameras in desired locations' },
+        { title: 'Connect Cameras', description: 'Connect cameras to the NVR using Ethernet cables.' },
+        { title: 'Connect NVR', description: 'Connect the NVR to your router and a monitor.' },
+        { title: 'Power On & Setup', description: 'Power on the NVR and follow the setup wizard.' },
+        { title: 'Mount Cameras', description: 'Mount cameras in their desired locations and adjust angles.' },
       ],
     },
     // 15: NVS8 PoE Kit 8MD4 -> PDF 21
@@ -523,16 +535,16 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { label: 'NVR', value: '1 × NVS8 NVR' },
-        { label: 'Cameras', value: '4 × PoE Dome Cameras' },
-        { label: 'HDD', value: '1 × 2TB HDD pre-installed' },
+        { name: 'NVS8 NVR', quantity: 1 },
+        { name: 'PoE Dome Cameras', quantity: 4 },
+        { name: '2TB HDD', quantity: 1 },
         ...defaultPackContent.slice(1)
       ],
       installation: [
-        { label: 'Step 1', value: 'Connect cameras to NVR using Ethernet cables' },
-        { label: 'Step 2', value: 'Connect NVR to your router and a monitor' },
-        { label: 'Step 3', value: 'Power on the NVR and follow setup wizard' },
-        { label: 'Step 4', value: 'Mount cameras in desired locations' },
+        { title: 'Connect Cameras', description: 'Connect cameras to the NVR using Ethernet cables.' },
+        { title: 'Connect NVR', description: 'Connect the NVR to your router and a monitor.' },
+        { title: 'Power On & Setup', description: 'Power on the NVR and follow the setup wizard.' },
+        { title: 'Mount Cameras', description: 'Mount cameras in their desired locations and adjust angles.' },
       ],
     },
     // 16: NVS8 PoE Kit 12MD6 -> PDF 23
@@ -563,16 +575,16 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { label: 'NVR', value: '1 × NVS8 NVR' },
-        { label: 'Cameras', value: '6 × 12MP PoE Dome Cameras' },
-        { label: 'HDD', value: '1 × 2TB HDD pre-installed' },
+        { name: 'NVS8 NVR', quantity: 1 },
+        { name: '12MP PoE Dome Cameras', quantity: 6 },
+        { name: '2TB HDD', quantity: 1 },
         ...defaultPackContent.slice(1)
       ],
       installation: [
-        { label: 'Step 1', value: 'Connect cameras to NVR using Ethernet cables' },
-        { label: 'Step 2', value: 'Connect NVR to your router and a monitor' },
-        { label: 'Step 3', value: 'Power on the NVR and follow setup wizard' },
-        { label: 'Step 4', value: 'Mount cameras in desired locations' },
+        { title: 'Connect Cameras', description: 'Connect cameras to the NVR using Ethernet cables.' },
+        { title: 'Connect NVR', description: 'Connect the NVR to your router and a monitor.' },
+        { title: 'Power On & Setup', description: 'Power on the NVR and follow the setup wizard.' },
+        { title: 'Mount Cameras', description: 'Mount cameras in their desired locations and adjust angles.' },
       ],
     },
     // 17: Solar Floodlight Cam F310B -> PDF 13
