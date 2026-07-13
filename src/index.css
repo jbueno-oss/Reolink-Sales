@@ -1385,9 +1385,18 @@ body {
   width: 100%;
   background: #f0f2f5;
   overflow: auto;
-  display: flex;
-  justify-content: center;
+  /* Do NOT center — centering prevents horizontal scroll when content is wider */
   padding: 20px;
+  box-sizing: border-box;
+  /* Allow scroll in all directions with one finger, 
+     pinch is handled manually in JS */
+  -webkit-overflow-scrolling: touch;
+}
+
+.pdf-modal__inner {
+  /* transform-origin set via JS during pinch */
+  display: inline-block;
+  min-width: 100%;
 }
 
 .pdf-document {
@@ -1399,7 +1408,6 @@ body {
 
 .pdf-page {
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
 }
 
 /* ========================================
