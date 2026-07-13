@@ -21,6 +21,7 @@ import imgNVSPoE8MB4 from './assets/Hero Images SKUs- Reolink/NVS8 PoE Kit 8MB4.
 import imgNVSPoE8MD4 from './assets/Hero Images SKUs- Reolink/NVS8 PoE Kit 8MD4.jpg';
 import imgNVSPoE12MD6 from './assets/Hero Images SKUs- Reolink/NVS8 PoE Kit 12MD6.jpg';
 import imgSolarFloodlight from './assets/Hero Images SKUs- Reolink/Solar Floodlight Cam F310B.jpg';
+import imgProductSearch from './assets/Hero Images SKUs- Reolink/Product Search.png';
 
 /* ─── Data ─── */
 const categories = ['All', 'Battery', 'Wi-Fi', '4G', 'PoE', 'Floodlight', 'Kits'];
@@ -62,7 +63,7 @@ function ProductFinderCard({ onStart }: { onStart: () => void }) {
     <section className="product-finder-card">
       <div className="product-finder-card__image-wrapper">
         <img
-          src="/images/product-finder-hero.png"
+          src={imgProductSearch}
           alt="Reolink security cameras showcase"
           className="product-finder-card__image"
         />
