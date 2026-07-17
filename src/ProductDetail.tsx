@@ -281,8 +281,10 @@ function PackContentAccordion({
 /* ─── Installation Accordion (Figma step layout) ─── */
 function InstallationAccordion({
   items,
+  note
 }: {
   items: InstallationStep[];
+  note?: string;
 }) {
   const [open, setOpen] = useState(false);
 
@@ -305,21 +307,22 @@ function InstallationAccordion({
                 <li><span>{step.title}</span></li>
               </ol>
               <p className="installation-step__description">{step.description}</p>
-              <div className="installation-step__image">
-                {step.image ? (
+              {step.image && (
+                <div className="installation-step__image">
                   <img src={step.image} alt={step.title} />
-                ) : (
-                  <div className="installation-step__placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="#b0bec5" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                      <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                      <circle cx="8.5" cy="8.5" r="1.5" />
-                      <polyline points="21 15 16 10 5 21" />
-                    </svg>
-                  </div>
-                )}
-              </div>
+                </div>
+              )}
             </div>
           ))}
+          {note && (
+            <div className="installation-note">
+              <div className="installation-note__icon">!</div>
+              <p className="installation-note__text">
+                <span className="installation-note__title">NOTE:</span>
+                {note}
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
@@ -435,6 +438,7 @@ export default function ProductDetail({
           />
           <InstallationAccordion
             items={accordionData.installation}
+            note={accordionData.installationNote}
           />
         </div>
       </div>

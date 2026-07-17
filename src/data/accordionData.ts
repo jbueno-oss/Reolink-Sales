@@ -1,5 +1,16 @@
 import type { Product } from '../ProductDetail';
 
+import svgCamera from '../assets/SVG and images/Camera.svg';
+import svgMountingTemplate from '../assets/SVG and images/Morintain Template.svg';
+import svgMountingBracket from '../assets/SVG and images/Mounting Bracket.svg';
+import svgOperationalInstruction from '../assets/SVG and images/Operational Instruction.svg';
+import svgPackOfScrews from '../assets/SVG and images/Pack of Screws.svg';
+import svgSurveillanceSticker from '../assets/SVG and images/Surveillance Sticker.svg';
+import svgUSBCable from '../assets/SVG and images/USB-C Cable.svg';
+import svgStep1 from '../assets/SVG and images/Step 1 Instalation.svg';
+import svgStep2 from '../assets/SVG and images/Step 2 Instalation.svg';
+import svgStep3 from '../assets/SVG and images/Step 3 Instalation.svg';
+
 export interface AccordionItem {
   label: string;
   value: string;
@@ -26,6 +37,7 @@ export interface AccordionData {
   specs: SpecSection[];
   packContent: PackContentItem[];
   installation: InstallationStep[];
+  installationNote?: string;
 }
 
 const defaultPackContent: PackContentItem[] = [
@@ -36,11 +48,43 @@ const defaultPackContent: PackContentItem[] = [
   { name: 'Surveillance Sign', quantity: 1 },
 ];
 
+const argus3ProPackContent: PackContentItem[] = [
+  { name: 'Argus 3 Pro Camera', quantity: 1, image: svgCamera },
+  { name: 'Mounting Template', quantity: 1, image: svgMountingTemplate },
+  { name: 'Mounting Bracket', quantity: 1, image: svgMountingBracket },
+  { name: 'Operational Instruction', quantity: 1, image: svgOperationalInstruction },
+  { name: 'Pack of Screws', quantity: 1, image: svgPackOfScrews },
+  { name: 'Surveillance Sticker', quantity: 1, image: svgSurveillanceSticker },
+  { name: 'USB-C Cable', quantity: 1, image: svgUSBCable },
+];
+
 const defaultInstallation: InstallationStep[] = [
   { title: 'Download the Reolink App', description: 'Download the Reolink App and create an account to get started.' },
   { title: 'Scan QR Code', description: 'Scan the QR code on the camera or device to pair it with the app.' },
   { title: 'Configure Connection', description: 'Follow in-app prompts to configure Wi-Fi or network connection.' },
   { title: 'Install Device', description: 'Install the device in its final location and adjust the viewing angle.' },
+];
+
+const argus3ProInstallation: InstallationStep[] = [
+  { 
+    title: 'Download the Reolink App', 
+    description: 'Scan to download the Reolink App from the App Store or Google Play store.',
+    image: svgStep1
+  },
+  { 
+    title: 'Power on the Camera', 
+    description: 'Turn on the power switch to power on the camera.',
+    image: svgStep2
+  },
+  { 
+    title: 'Launch App & Scan', 
+    description: 'Launch the Reolink App, click the "+" button in the top right corner to add the camera. Scan the QR code on the device and follow the onscreen instructions to finish initial setup.',
+    image: svgStep3
+  },
+  { 
+    title: 'Configure Wi-Fi Connection', 
+    description: 'In the "Add Device" page, configure the Wi-Fi connection by enabling Bluetooth on your phone and follow the onscreen instructions to finish the initial setup.'
+  },
 ];
 
 export function getAccordionData(product: Product): AccordionData {
@@ -76,11 +120,11 @@ export function getAccordionData(product: Product): AccordionData {
         }
       ],
       packContent: [
-        { name: 'Argus 3 Pro Camera', quantity: 4 },
-        { name: 'Reolink Home Hub Mini', quantity: 1 },
-        ...defaultPackContent.slice(1)
+        { name: 'Argus 3 Pro Camera', quantity: 4, image: svgCamera },
+        ...argus3ProPackContent.slice(1)
       ],
-      installation: defaultInstallation,
+      installation: argus3ProInstallation,
+      installationNote: 'This device supports 2.4 GHz and 5 GHz Wi-Fi networks. It is recommended to connect the device to 5 GHz Wi-Fi for a better network experience.',
     },
     // 2: Argus 4 Pro Panoramic -> PDF 11
     2: {
@@ -206,8 +250,9 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         }
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: argus3ProPackContent,
+      installation: argus3ProInstallation,
+      installationNote: 'This device supports 2.4 GHz and 5 GHz Wi-Fi networks. It is recommended to connect the device to 5 GHz Wi-Fi for a better network experience.',
     },
     // 6: Argus MagiCam Magnetic -> PDF 3
     6: {

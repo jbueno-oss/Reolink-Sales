@@ -6,21 +6,21 @@ import ProductFinder from './ProductFinder';
 import CompareScreen from './CompareScreen';
 import logo from './assets/Logo Reolink.svg';
 
-import imgArgus3ProKit from './assets/Hero Images SKUs- Reolink/Argus 3 Pro 4x Kit + Hub..jpg';
-import imgArgus4Pro from './assets/Hero Images SKUs- Reolink/Argus 4 Pro Panoramic..jpg';
-import imgArgusPTUltraSingle from './assets/Hero Images SKUs- Reolink/Argus PT Ultra Single..jpg';
-import imgArgus3ProStandalone from './assets/Hero Images SKUs- Reolink/Argus 3 Pro Standalone.jpg';
-import imgArgusMagiCam from './assets/Hero Images SKUs- Reolink/Argus MagiCam Magnetic.jpg';
-import imgArgusSolarSingle from './assets/Hero Images SKUs- Reolink/Argus Solar Single..jpg';
-import imgSmartVideoDoorbell from './assets/Hero Images SKUs- Reolink/Smart Video Doorbell..jpg';
-import imgE1Zoom from './assets/Hero Images SKUs- Reolink/E1 Zoom Indoor 4K..jpg';
-import imgE321Indoor from './assets/Hero Images SKUs- Reolink/E Series E321 Indoor..jpg';
-import imgEliteFloodlight from './assets/Hero Images SKUs- Reolink/Elite Floodlight WiFi.jpg';
-import imgGoPTPlus from './assets/Hero Images SKUs- Reolink/Go PT Plus 4G LTE.jpg';
-import imgNVSPoE8MB4 from './assets/Hero Images SKUs- Reolink/NVS8 PoE Kit 8MB4.jpg';
-import imgNVSPoE8MD4 from './assets/Hero Images SKUs- Reolink/NVS8 PoE Kit 8MD4.jpg';
-import imgNVSPoE12MD6 from './assets/Hero Images SKUs- Reolink/NVS8 PoE Kit 12MD6.jpg';
-import imgSolarFloodlight from './assets/Hero Images SKUs- Reolink/Solar Floodlight Cam F310B.jpg';
+import imgArgus3ProKit from './assets/SVG and images/IMG/Argus 3 Pro 4x Kit + Hub.jpg';
+import imgArgus4Pro from './assets/SVG and images/IMG/Argus 4 Pro Panoramic.jpg';
+import imgArgusPTUltraSingle from './assets/SVG and images/IMG/Argus PT Ultra.jpg';
+import imgArgus3ProStandalone from './assets/SVG and images/IMG/Argus 3 Pro Standalone.jpg';
+import imgArgusMagiCam from './assets/SVG and images/IMG/Argus MagiCam Magnetic.jpg';
+import imgArgusSolarSingle from './assets/SVG and images/IMG/Argus Solar.jpg';
+import imgSmartVideoDoorbell from './assets/SVG and images/IMG/Battery Video Doorbell.jpg';
+import imgE1Zoom from './assets/SVG and images/IMG/E1 Zoom.jpg';
+import imgE321Indoor from './assets/SVG and images/IMG/E Series E321.jpg';
+import imgEliteFloodlight from './assets/SVG and images/IMG/Elite Floodlight WiFi.jpg';
+import imgGoPTPlus from './assets/SVG and images/IMG/Go PT Plus 4G LTE.jpg';
+import imgNVSPoE8MB4 from './assets/SVG and images/IMG/NVS8-8MB4.jpg';
+import imgNVSPoE8MD4 from './assets/SVG and images/IMG/NVS8-8MD4.jpg';
+import imgNVSPoE12MD6 from './assets/SVG and images/IMG/NVS8-12MD6.jpg';
+import imgSolarFloodlight from './assets/SVG and images/IMG/Solar Floodlight Cam F310B.jpg';
 import imgProductSearch from './assets/Hero Images SKUs- Reolink/Product Search.png';
 
 /* ─── Data ─── */

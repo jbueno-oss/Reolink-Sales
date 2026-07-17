@@ -1124,7 +1124,7 @@ body {
 
 .pack-content-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px 16px;
 }
 
@@ -1150,7 +1150,9 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 16px;
+  box-sizing: border-box;
   pointer-events: none;
   border-radius: 16px;
 }
@@ -1198,8 +1200,7 @@ body {
 .installation-body {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 0 16px;
+  padding: 0 16px 24px 16px;
   background: #fff;
 }
 
@@ -1255,7 +1256,9 @@ body {
 .installation-step__image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 16px;
+  box-sizing: border-box;
 }
 
 .installation-step__placeholder {
@@ -1271,6 +1274,45 @@ body {
   height: 24px;
   opacity: 0.5;
 }
+
+.installation-note {
+  display: flex;
+  align-items: flex-start;
+  background: #eef2f6;
+  padding: 16px;
+  border-radius: 12px;
+  margin-top: 8px;
+  gap: 12px;
+}
+
+.installation-note__icon {
+  background: #4a5568;
+  color: #fff;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.installation-note__text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #4a5568;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.installation-note__title {
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  color: #1f2937;
+}
+
 
 /* ─── Detail Footer & PDF Modal ─── */
 
