@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import ProductDetail from './ProductDetail';
 import CompareScreen from './CompareScreen';
+import AiAvatarView from './AiAvatarView';
 import logo from './assets/Logo Reolink.svg';
 
 type QuestionType = 'single' | 'multiple';
@@ -146,10 +147,10 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
   // View Detail State to preserve Chat/Results
   const [viewingProduct, setViewingProduct] = useState<any | null>(null);
   
-  // Chat State
+  // Chat State (legacy text chat, kept for AiAvatarView fallback reference)
   const [messages, setMessages] = useState<Message[]>([]);
   const [isTyping, setIsTyping] = useState(false);
-  const [chatInput, setChatInput] = useState("");
+  // const [chatInput, setChatInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const question = QUESTIONS[currentStep];
@@ -167,6 +168,7 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
   }, [messages, isTyping, showAiChat]);
 
   const handleOptionClick = (optionId: string) => {
+    if (isTransitioning) return;
     if (isMultiple) {
       setAnswers((prev) => {
         const selected = prev[question.id] || [];
@@ -186,12 +188,14 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
   const goNext = () => {
     setIsTransitioning(true);
     setTimeout(() => {
-      if (currentStep < QUESTIONS.length - 1) {
-        setCurrentStep((s) => s + 1);
-      } else {
+      setCurrentStep((s) => {
+        if (s < QUESTIONS.length - 1) {
+          return s + 1;
+        }
         // Show results screen instead of chat
         setShowResults(true);
-      }
+        return s;
+      });
       setIsTransitioning(false);
     }, 300);
   };
@@ -209,17 +213,17 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
     }
   }, [showAiChat, messages.length]);
 
-  const sendUserMessage = (text: string) => {
-    if (!text.trim()) return;
-    setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'user', type: 'text', text }]);
-    setChatInput("");
-    setIsTyping(true);
-
-    setTimeout(() => {
-      setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'ai', type: 'text', text: "I'm still learning, but I can help you answer any questions!" }]);
-      setIsTyping(false);
-    }, 1500);
-  };
+  // const sendUserMessage = (text: string) => {
+  //   if (!text.trim()) return;
+  //   setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'user', type: 'text', text }]);
+  //   setChatInput("");
+  //   setIsTyping(true);
+  //
+  //   setTimeout(() => {
+  //     setMessages(prev => [...prev, { id: Date.now().toString(), sender: 'ai', type: 'text', text: "I'm still learning, but I can help you answer any questions!" }]);
+  //     setIsTyping(false);
+  //   }, 1500);
+  // };
 
   // --- View Detailed Product ---
   if (viewingProduct) {
@@ -243,75 +247,82 @@ export default function ProductFinder({ onBack }: { onBack: () => void }) {
     );
   }
 
-  // --- AI Chat Render ---
+  // --- AI Chat Render (legacy text chat, replaced by AiAvatarView below) ---
+  // if (showAiChat) {
+  //   return (
+  //     <div className="chat-screen">
+  //       <header className="chat-header">
+  //         <button className="chat-back-btn" onClick={() => setShowAiChat(false)} aria-label="Back to results">
+  //           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  //             <line x1="19" y1="12" x2="5" y2="12"></line>
+  //             <polyline points="12 19 5 12 12 5"></polyline>
+  //           </svg>
+  //         </button>
+  //         <h1 className="chat-header__title">AI Assistance</h1>
+  //         <button className="finder-close-btn" onClick={onBack} aria-label="Home">
+  //           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  //             <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+  //             <polyline points="9 22 9 12 15 12 15 22"></polyline>
+  //           </svg>
+  //         </button>
+  //       </header>
+  //
+  //       <div className="chat-messages">
+  //         {messages.map((msg) => (
+  //           <div key={msg.id}>
+  //             {msg.type === 'text' && (
+  //               <div className={`chat-msg ${msg.sender === 'user' ? 'chat-msg--user' : ''}`}>
+  //                 {msg.sender === 'ai' && <div className="chat-msg__avatar">R</div>}
+  //                 <div className="chat-msg__bubble">{msg.text}</div>
+  //               </div>
+  //             )}
+  //           </div>
+  //         ))}
+  //
+  //         {isTyping && (
+  //           <div className="chat-msg">
+  //             <div className="chat-msg__avatar">R</div>
+  //             <div className="chat-msg__bubble typing-indicator">
+  //               <span className="typing-dot"></span>
+  //               <span className="typing-dot"></span>
+  //               <span className="typing-dot"></span>
+  //             </div>
+  //           </div>
+  //         )}
+  //         <div ref={messagesEndRef} />
+  //       </div>
+  //
+  //       <div className="chat-bottom">
+  //
+  //         <div className="chat-input-box">
+  //           <input
+  //             type="text"
+  //             placeholder="Ask me anything..."
+  //             value={chatInput}
+  //             onChange={(e) => setChatInput(e.target.value)}
+  //             onKeyDown={(e) => { if (e.key === 'Enter') sendUserMessage(chatInput); }}
+  //             disabled={isTyping}
+  //           />
+  //           <button
+  //             className="chat-send-btn"
+  //             onClick={() => sendUserMessage(chatInput)}
+  //             disabled={isTyping || !chatInput.trim()}
+  //           >
+  //             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+  //               <line x1="22" y1="2" x2="11" y2="13"></line>
+  //               <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+  //             </svg>
+  //           </button>
+  //         </div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  // --- AI Avatar Render ---
   if (showAiChat) {
     return (
-      <div className="chat-screen">
-        <header className="chat-header">
-          <button className="chat-back-btn" onClick={() => setShowAiChat(false)} aria-label="Back to results">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <line x1="19" y1="12" x2="5" y2="12"></line>
-              <polyline points="12 19 5 12 12 5"></polyline>
-            </svg>
-          </button>
-          <h1 className="chat-header__title">AI Assistance</h1>
-          <button className="finder-close-btn" onClick={onBack} aria-label="Home">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-              <polyline points="9 22 9 12 15 12 15 22"></polyline>
-            </svg>
-          </button>
-        </header>
-
-        <div className="chat-messages">
-          {messages.map((msg) => (
-            <div key={msg.id}>
-              {msg.type === 'text' && (
-                <div className={`chat-msg ${msg.sender === 'user' ? 'chat-msg--user' : ''}`}>
-                  {msg.sender === 'ai' && <div className="chat-msg__avatar">R</div>}
-                  <div className="chat-msg__bubble">{msg.text}</div>
-                </div>
-              )}
-            </div>
-          ))}
-
-          {isTyping && (
-            <div className="chat-msg">
-              <div className="chat-msg__avatar">R</div>
-              <div className="chat-msg__bubble typing-indicator">
-                <span className="typing-dot"></span>
-                <span className="typing-dot"></span>
-                <span className="typing-dot"></span>
-              </div>
-            </div>
-          )}
-          <div ref={messagesEndRef} />
-        </div>
-
-        <div className="chat-bottom">
-
-          <div className="chat-input-box">
-            <input 
-              type="text" 
-              placeholder="Ask me anything..." 
-              value={chatInput}
-              onChange={(e) => setChatInput(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter') sendUserMessage(chatInput); }}
-              disabled={isTyping}
-            />
-            <button 
-              className="chat-send-btn" 
-              onClick={() => sendUserMessage(chatInput)}
-              disabled={isTyping || !chatInput.trim()}
-            >
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="22" y1="2" x2="11" y2="13"></line>
-                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
+      <AiAvatarView onBack={() => setShowAiChat(false)} onHome={onBack} />
     );
   }
 
