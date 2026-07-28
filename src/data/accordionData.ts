@@ -96,28 +96,39 @@ export function getAccordionData(product: Product): AccordionData {
           category: 'Video & Audio',
           items: [
             { label: 'Video Resolution', value: '5MP (2880 x 1616) @15fps' },
-            { label: 'Viewing Angle', value: 'H: 110°; V: 58°; D: 132°' },
-            { label: 'IR Night Vision', value: 'Up to 10m (33ft)' },
+            { label: 'Lens', value: 'f=4mm, F/1.6 mm' },
+            { label: 'Viewing Angle', value: 'Horizontal 90°, Vertical 47°, Diagonal 110°' },
+            { label: 'Pan/Tilt Angle', value: '355° pan, 140° tilt' },
+            { label: 'Auto Tracking', value: 'Yes' },
+            { label: 'Infrared Night Vision', value: 'Up to 10m' },
             { label: 'Colour Night Vision', value: 'Yes' },
-            { label: 'Audio', value: 'Two-way audio, Siren Yes' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
             { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
-            { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
+            { label: 'PIR Detection', value: 'Up to 10m; horizontal 120°' },
+            { label: 'Record Mode', value: 'Motion-triggered recording' },
+            { label: 'Frequency Bands', value: '3G/4G^' },
+            { label: 'Works with', value: 'Google Assistant, Alexa' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Battery', value: 'Rechargeable 5200mAh Lithium-ion' },
-            { label: 'Storage', value: 'microSD card slot, works with Reolink Hub' },
-            { label: 'Weatherproof', value: 'Yes, IP67 rated' },
-            { label: 'Hub Support', value: 'Up to 8 Cameras, Max 1TB microSD' },
+            { label: 'Spotlight', value: '2pcs/2.4W/6500K (cool white)' },
+            { label: 'Rechargeable Battery', value: 'Lithium-ion battery (6000mAh)' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card)' },
+            { label: 'Operating Temp.', value: '-10oC ~ 55oC' },
+            { label: 'Weatherproof', value: 'Indoor/Outdoor' },
+            { label: 'Dimensions', value: 'Φ 100 x 129 mm' },
+            { label: 'Weight', value: '500g' },
           ]
-        }
+        },
       ],
       packContent: [
         { name: 'Argus 3 Pro Camera', quantity: 4, image: svgCamera },
@@ -132,28 +143,34 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '4K/8MP (5120 X 1440) @ 15fps' },
-            { label: 'Viewing Angle', value: 'Diagonal: 180°' },
-            { label: 'Color Night Vision', value: 'ColorX' },
-            { label: 'Spotlight', value: '5pcs/2W/6500K/300 Lumens' },
-            { label: 'Audio', value: 'Two-way audio, Siren Yes' },
+            { label: 'Video Resolution', value: '2MP (1920 X 1080) @15fps(Battery)/ @20fps (Power-on)' },
+            { label: 'Lens', value: 'f=2.3mm, F/2.2' },
+            { label: 'Viewing Angle', value: 'H: 113°; V: 63°; D: 132o IR Night Vision Up to 8m' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Person/vehicle/animal/motion detection' },
-            { label: 'PIR Detection', value: 'Up to 10m; 170° (horizontal)' },
+            { label: 'Smart Alarm', value: 'Person/motion detection' },
+            { label: 'Record Mode', value: 'Motion Recording; schedule recording (24/7 recording when plugged in to power)' },
+            { label: 'Works with', value: 'Alexa, Google Assistant' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Wi-Fi Bands', value: '2.4/5 GHz Wi-Fi 6' },
-            { label: 'Battery', value: 'Rechargeable 5000mAh Lithium-ion' },
-            { label: 'Weatherproof', value: 'Yes, IP66 rated' },
+            { label: 'Power', value: '2x AA batteries or 5V/1A Direct Power Mode' },
+            { label: 'Wi-Fi Bands', value: '2.4/5GHz' },
+            { label: 'Storage', value: 'microSD card slot (Max. 256GB)' },
+            { label: 'Operating Temp.', value: '-10oC ~ 55oC' },
+            { label: 'Weatherproof', value: 'IP67' },
+            { label: 'Dimensions', value: '68 x 68 x 29 mm' },
+            { label: 'Weight', value: '108 g (without batties)' },
           ]
-        }
+        },
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -165,9 +182,14 @@ export function getAccordionData(product: Product): AccordionData {
           category: 'Video & Audio',
           items: [
             { label: 'Video Resolution', value: '4K/8MP (3840 X 2160)' },
+            { label: 'Lens', value: '4mm, F=1.6 mm' },
+            { label: 'Viewing Angle', value: 'Horizontal 90°, Vertical 47°' },
             { label: 'Pan/Tilt Angle', value: '355° pan, 140° tilt' },
-            { label: 'IR Night Vision', value: 'Up to 10m (33ft)' },
+            { label: 'Infrared Night Vision', value: 'Up to 10m (33ft)' },
             { label: 'Colour Night Vision', value: 'Yes' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
@@ -175,16 +197,23 @@ export function getAccordionData(product: Product): AccordionData {
           items: [
             { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
             { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
+            { label: 'Record Mode', value: 'Motion-triggered recording' },
+            { label: 'WiFi Bands', value: '2.4/5GHz Wi-Fi 6' },
+            { label: 'Works with', value: 'Alexa, Google Assistant' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Wi-Fi Bands', value: '2.4/5GHz Wi-Fi 6' },
-            { label: 'Battery', value: 'Rechargeable 6000mAh' },
+            { label: 'Spotlight', value: '2pcs/2.4W/6500K (cool white)' },
+            { label: 'Rechargeable Battery', value: 'Lithium-ion battery (6000mAh)' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card)' },
+            { label: 'Operating Temp.', value: '-10oC ~ 55oC (14°F ~ 131°F)' },
             { label: 'Weatherproof', value: 'Indoor/Outdoor' },
+            { label: 'Dimensions', value: 'Φ 100 x 129 mm (Φ 3.94 x 5.08 in)' },
+            { label: 'Weight', value: '495g (1.09 lbs)' },
           ]
-        }
+        },
       ],
       packContent: [
         { name: 'Argus PT Ultra Camera', quantity: 2 },
@@ -199,9 +228,14 @@ export function getAccordionData(product: Product): AccordionData {
           category: 'Video & Audio',
           items: [
             { label: 'Video Resolution', value: '4K/8MP (3840 X 2160)' },
+            { label: 'Lens', value: '4mm, F=1.6 mm' },
+            { label: 'Viewing Angle', value: 'Horizontal 90°, Vertical 47°' },
             { label: 'Pan/Tilt Angle', value: '355° pan, 140° tilt' },
-            { label: 'IR Night Vision', value: 'Up to 10m (33ft)' },
+            { label: 'Infrared Night Vision', value: 'Up to 10m (33ft)' },
             { label: 'Colour Night Vision', value: 'Yes' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
@@ -209,16 +243,23 @@ export function getAccordionData(product: Product): AccordionData {
           items: [
             { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
             { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
+            { label: 'Record Mode', value: 'Motion-triggered recording' },
+            { label: 'WiFi Bands', value: '2.4/5GHz Wi-Fi 6' },
+            { label: 'Works with', value: 'Alexa, Google Assistant' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Wi-Fi Bands', value: '2.4/5GHz Wi-Fi 6' },
-            { label: 'Battery', value: 'Rechargeable 6000mAh' },
+            { label: 'Spotlight', value: '2pcs/2.4W/6500K (cool white)' },
+            { label: 'Rechargeable Battery', value: 'Lithium-ion battery (6000mAh)' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card)' },
+            { label: 'Operating Temp.', value: '-10oC ~ 55oC (14°F ~ 131°F)' },
             { label: 'Weatherproof', value: 'Indoor/Outdoor' },
+            { label: 'Dimensions', value: 'Φ 100 x 129 mm (Φ 3.94 x 5.08 in)' },
+            { label: 'Weight', value: '495g (1.09 lbs)' },
           ]
-        }
+        },
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -230,9 +271,12 @@ export function getAccordionData(product: Product): AccordionData {
           category: 'Video & Audio',
           items: [
             { label: 'Video Resolution', value: '5MP (2880 x 1616) @15fps' },
-            { label: 'Viewing Angle', value: 'H: 110°; V: 58°; D: 132°' },
-            { label: 'IR Night Vision', value: 'Up to 10m (33ft)' },
-            { label: 'Colour Night Vision', value: 'Yes' },
+            { label: 'Lens', value: 'f=3.0mm, F/1.6' },
+            { label: 'Viewing Angle', value: 'H: 110°; V: 58°; D: 132o IR Night Vision Up to 10m (33ft)' },
+            { label: 'Spotlight', value: '2pcs/6500K (cool white)' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
@@ -240,15 +284,22 @@ export function getAccordionData(product: Product): AccordionData {
           items: [
             { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
             { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
+            { label: 'Record Mode', value: 'Motion recording, schedule recording, 24/7 recording (only Direct Power)' },
+            { label: 'Works with', value: 'Alexa, Google Assistant, Reolink Cloud, Reolink Hub' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Battery', value: 'Rechargeable 5200mAh Lithium-ion' },
-            { label: 'Weatherproof', value: 'Yes, IP67 rated' },
+            { label: 'Rechargeable Batt.', value: 'Lithium-ion battery (6500mAh)' },
+            { label: 'Wi-Fi Bands', value: '2.4/5GHz Wi-Fi 6' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card), Reolink Hub' },
+            { label: 'Operating Temp.', value: '-20oC ~ 55oC (-4°F ~ 131°F)' },
+            { label: 'Weatherproof', value: 'IP67' },
+            { label: 'Dimensions', value: '106 x 74 x 54 mm (4.17” x 2.91“ x 2.13”)' },
+            { label: 'Weight', value: '(w/o bracket) 293 g (0.65 lbs)' },
           ]
-        }
+        },
       ],
       packContent: argus3ProPackContent,
       installation: argus3ProInstallation,
@@ -260,27 +311,37 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '2MP (1920 X 1080)' },
-            { label: 'Viewing Angle', value: 'H: 113°; V: 63°; D: 132°' },
-            { label: 'IR Night Vision', value: 'Up to 8m' },
+            { label: 'Video Resolution', value: '5MP (2880 x 1616) @15fps' },
+            { label: 'Lens', value: 'f=2.8mm, F/1.6' },
+            { label: 'Viewing Angle', value: 'H: 110°; V: 58°; D: 132o IR Night Vision Up to 33ft (10m)' },
+            { label: 'Colour Night Vision', value: 'Yes' },
+            { label: 'IR Cut Filter', value: 'Yes' },
             { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Person/motion detection' },
+            { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
+            { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
             { label: 'Record Mode', value: 'Motion Recording' },
+            { label: 'Works with', value: 'Alexa, Google Assistant, Reolink Cloud, Reolink Hub' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Power', value: '2x AA batteries or 5V/1A Direct' },
-            { label: 'Wi-Fi Bands', value: '2.4/5GHz' },
-            { label: 'Weatherproof', value: 'IP67' },
+            { label: 'Spotlight', value: '2pcs/6500K (cool white)' },
+            { label: 'Rechargeable Batt.', value: 'Lithium-ion battery (5200mAh)' },
+            { label: 'Wi-Fi Bands', value: '2.4/5GHz Wi-Fi' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card), Reolink Hub' },
+            { label: 'Operating Temp.', value: '-20oC ~ 55oC (-4°F ~ 131°F)' },
+            { label: 'Weatherproof', value: 'Yes, IP67 rated' },
+            { label: 'Dimensions', value: '2.68” x 2.20“ x 3.58” (68 x 56 x 91 mm)' },
+            { label: 'Weight', value: '(w/o stand) 0.48 lbs (218 g)' },
           ]
-        }
+        },
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -291,27 +352,39 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '5MP (2880 x 1616) @15fps' },
-            { label: 'Viewing Angle', value: 'H: 110°; V: 58°; D: 132°' },
-            { label: 'IR Night Vision', value: 'Up to 10m (33ft)' },
-            { label: 'Spotlight', value: '2pcs/6500K (cool white)' },
+            { label: 'Video Resolution', value: '4K/8MP (5120 X 1440) @ 15fps' },
+            { label: 'Lens', value: 'f=4.0mm, F=1.0' },
+            { label: 'Viewing Angle', value: 'Diagonal: 180°' },
+            { label: 'Digital Zoom', value: '10x' },
+            { label: 'Color Night Vision', value: 'ColorX' },
+            { label: 'Spotlight', value: '5pcs/2W/6500K/300 Lumens' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
-            { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
+            { label: 'OS Supported', value: 'PC: Windows, Mac OS; Smartphone: iOS, Android' },
+            { label: 'Smart Alarm', value: 'Person/vehicle/animal/motion detection' },
+            { label: 'PIR Detection', value: 'Up to 10m; 170° (horizontal)' },
+            { label: 'Record Mode', value: 'Motion-triggered recording' },
+            { label: 'Works with', value: 'Alexa, Google Assistant' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Wi-Fi Bands', value: '2.4/5GHz Wi-Fi 6' },
-            { label: 'Battery', value: 'Rechargeable 6500mAh' },
-            { label: 'Weatherproof', value: 'IP67' },
+            { label: 'Wi-Fi Bands', value: '2.4/5 GHz Wi-Fi 6' },
+            { label: 'Bluetooth', value: 'Bluetooth V5.0' },
+            { label: 'Rechargeable Battery', value: 'Lithium-ion battery (5000mAh)' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card)' },
+            { label: 'Operating Temp.', value: '-10oC ~ 55oC' },
+            { label: 'Weatherproof', value: 'Yes, IP66 rated' },
+            { label: 'Dimensions', value: '128 x 87 x 80 mm' },
+            { label: 'Weight', value: '400g' },
           ]
-        }
+        },
       ],
       packContent: [
         { name: 'Argus Solar Camera', quantity: 2 },
@@ -325,27 +398,37 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '5MP (2880 x 1616) @15fps' },
-            { label: 'Viewing Angle', value: 'H: 110°; V: 58°; D: 132°' },
-            { label: 'IR Night Vision', value: 'Up to 10m (33ft)' },
-            { label: 'Spotlight', value: '2pcs/6500K (cool white)' },
+            { label: 'Video Resolution', value: '2K/4MP (2560x1440) @ 15fps' },
+            { label: 'Lens', value: 'f=2.2mm fixed, F=2.2' },
+            { label: 'Viewing Angle', value: 'H:125°, V:70°, D:151°' },
+            { label: 'Infrared Night Vision', value: 'Up to 10m (33ft)' },
+            { label: 'Colour Night Vision', value: 'Yes' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
             { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
-            { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
+            { label: 'Record Mode', value: 'Motion recording' },
+            { label: 'Wi-Fi Bands', value: '2.4/5GHz Wi-Fi 6' },
+            { label: 'Works with', value: 'Alexa, Google Assistant, Reolink Cloud, Reolink Hub' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Wi-Fi Bands', value: '2.4/5GHz Wi-Fi 6' },
-            { label: 'Battery', value: 'Rechargeable 6500mAh' },
-            { label: 'Weatherproof', value: 'IP67' },
+            { label: 'Battery Capacity', value: '3.6V 7800mAh' },
+            { label: 'Solar Panel', value: '3W' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card)' },
+            { label: 'Operating Temp.', value: '-20oC ~ 55oC (-4°F ~ 131°F)' },
+            { label: 'Weatherproof', value: 'IP66' },
+            { label: 'Dimensions', value: '102 x 264 x 161 mm (4.02 x 10.39 x 6.34 in)' },
+            { label: 'Weight', value: '721 g (1.59 lbs)' },
           ]
-        }
+        },
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -356,28 +439,37 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '4MP (2048 X 2048) @ 15fps' },
-            { label: 'Viewing Angle', value: 'Diagonal 180°' },
-            { label: 'Audio', value: 'Two-way audio, noise reduction' },
-            { label: 'Chime Sound', value: '10 Music, 100db adjustable' },
+            { label: 'Video Resolution', value: '5MP (2880 x 1616) @15fps' },
+            { label: 'Lens', value: 'f=2.8mm, F/1.6' },
+            { label: 'Viewing Angle', value: 'H: 110°; V: 58°; D: 132o IR Night Vision Up to 10m (33ft)' },
+            { label: 'Colour Night Vision', value: 'Yes' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Motion/Person/Vehicle/Package Detection' },
-            { label: 'PIR Detection', value: 'Up to 8m' },
-            { label: 'Quick Replies', value: 'Support' },
+            { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
+            { label: 'PIR Detection', value: 'Up to 10m (33ft); horizontal 120°' },
+            { label: 'Record Mode', value: 'Motion Recording' },
+            { label: 'Works with', value: 'Alexa, Google Assistant, Reolink Cloud, Reolink Hub' },
           ]
         },
         {
           category: 'General',
           items: [
+            { label: 'Spotlight', value: '2pcs/6500K (cool white)' },
+            { label: 'Rechargeable Batt.', value: 'Lithium-ion battery (5200mAh)' },
             { label: 'Wi-Fi Bands', value: '2.4/5GHz' },
-            { label: 'Battery', value: 'Rechargeable 7000mAh' },
-            { label: 'Weatherproof', value: 'Yes' },
+            { label: 'Storage', value: 'microSD card slot (supports up to 512GB microSD card), Reolink Hub' },
+            { label: 'Operating Temp.', value: '-20oC ~ 55oC (-4°F ~ 131°F)' },
+            { label: 'Weatherproof', value: 'Yes, IP67 rated' },
+            { label: 'Dimensions', value: '68 x 56 x 91 mm (2.68” x 2.20“ x 3.58”)' },
+            { label: 'Weight', value: '(w/o stand) 218g (0.48 lbs)' },
           ]
-        }
+        },
       ],
       packContent: [
         { name: 'Video Doorbell', quantity: 1 },
@@ -394,29 +486,6 @@ export function getAccordionData(product: Product): AccordionData {
     // 10: E1 Zoom Indoor 4K -> PDF 19
     10: {
       specs: [
-        {
-          category: 'Video & Audio',
-          items: [
-            { label: 'Video Resolution', value: '4K/8MP (3840 X 2160) @15fps' },
-            { label: 'Optical Zoom', value: '3x' },
-            { label: 'Pan/Tilt Angle', value: '355° pan, 50° tilt' },
-            { label: 'IR Night Vision', value: 'Up to 12m' },
-          ]
-        },
-        {
-          category: 'Software Features',
-          items: [
-            { label: 'Smart Alarm', value: 'Person/pet/motion/baby crying detection' },
-            { label: 'Auto Tracking', value: 'Support' },
-          ]
-        },
-        {
-          category: 'General',
-          items: [
-            { label: 'Wi-Fi Bands', value: '2.4/5 GHz' },
-            { label: 'Weatherproof', value: 'Indoor only' },
-          ]
-        }
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -427,25 +496,34 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '3MP (2304x1296) @15fps' },
-            { label: 'Pan/Tilt Angle', value: '355° pan, 50° tilt' },
-            { label: 'IR Night Vision', value: 'Up to 40ft (12m)' },
+            { label: 'Video Resolution', value: '4MP (2048 X 2048) @ 15fps' },
+            { label: 'Lens', value: 'f=1.2mm, F=1.8 mm' },
+            { label: 'Viewing Angle', value: 'Diagonal 180°' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio, noise reduction, echo suppression Quick Replies Support' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Person/pet/baby crying/motion detection' },
-            { label: 'Record Mode', value: 'Motion Recording; schedule recording' },
+            { label: 'Smart Alarm', value: 'Motion/Person/Vehicle/Package Detection Visitor Notification' },
+            { label: 'PIR Detection', value: 'Up to 8m' },
+            { label: 'Record Mode', value: 'Motion recording (default)' },
+            { label: 'Works with', value: 'Alexa/Google Assistant Rich Notification Support' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Wi-Fi Bands', value: '2.4GHz' },
-            { label: 'Weatherproof', value: 'Indoor only' },
+            { label: 'WiFi Bands', value: '2.4/5GHz' },
+            { label: 'Rechargeable Batt.', value: 'Lithium-ion battery (7000mAh)' },
+            { label: 'Storage', value: 'microSD card slot (Max. 256GB), works with Reolink Home Hub' },
+            { label: 'Operating Temp.', value: '-10oC ~ 55oC' },
+            { label: 'Weatherproof', value: 'Yes' },
+            { label: 'Dimensions', value: '160 x 48 x 29.5 mm' },
+            { label: 'Weight', value: '(incl. Batt.) 231g' },
           ]
-        }
+        },
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -456,27 +534,33 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '4K/8MP (5120 X 1552) @ 20fps' },
-            { label: 'Viewing Angle', value: 'Horizontal 180°, Vertical 59°' },
-            { label: 'IR Night Vision', value: 'Up to 100ft (30m)' },
-            { label: 'Color Night Vision', value: 'Yes' },
+            { label: 'Video Resolution', value: '3MP (2304x1296) @15fps' },
+            { label: 'Lens', value: 'f=4mm, F2.0' },
+            { label: 'Viewing Angle', value: 'H: 77°; V: 41°' },
+            { label: 'Pan/Tilt Angle', value: 'Pan: 355°, Tilt: 50° IR Night Vision Up to 40ft (12m)' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
-            { label: 'Record Mode', value: '24/7 recording; scheduled recording' },
+            { label: 'Smart Alarm', value: 'Person/pet/baby crying/motion detection' },
+            { label: 'Record Mode', value: 'Motion Recording; schedule recording (24/7 recording)' },
+            { label: 'Works with', value: 'Alexa, Google Assistant' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Floodlight', value: '19W/3000K~6500K/3000 Lumens' },
-            { label: 'Power', value: 'AC 100~240V' },
-            { label: 'Weatherproof', value: 'Yes' },
+            { label: 'Wi-Fi Bands', value: '2.4GHz' },
+            { label: 'Storage', value: 'microSD card slot (Max. 512GB); Reolink Cloud; Reolink NVR' },
+            { label: 'Operating Temp.', value: '14oF ~ 104oF (-10oC ~ 40oC) Indoor/Outdoor Indoor' },
+            { label: 'Dimensions', value: 'Φ 2.87” x 4.49” (Φ 73 x 114 mm)' },
+            { label: 'Weight', value: '0.37 lbs (167g)' },
           ]
-        }
+        },
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -487,27 +571,36 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Video Resolution', value: '5MP (2880 x 1616) @15fps' },
-            { label: 'Pan/Tilt Angle', value: '355° pan, 140° tilt' },
-            { label: 'IR Night Vision', value: 'Up to 10m' },
-            { label: 'Color Night Vision', value: 'Yes' },
+            { label: 'Video Resolution', value: '4K/8MP (3840 X 2160) @15fps' },
+            { label: 'Lens', value: 'f=2.8-8mm, F1.6' },
+            { label: 'Optical Zoom', value: '3x' },
+            { label: 'Viewing Angle', value: 'Horizontal : 94° - 50°; Vertical : 53° - 30°' },
+            { label: 'Pan/Tilt Angle', value: 'Pan: 355°, Tilt: 50°' },
+            { label: 'Auto Tracking', value: 'Support' },
+            { label: 'Infrared Night Vision', value: 'Up to 12m' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
-            { label: 'Network', value: 'Frequency Bands 3G/4G' },
+            { label: 'Smart Alarm', value: 'Person/pet/motion/baby crying detection' },
+            { label: 'Record Mode', value: 'Motion-triggered recording (default); scheduled recording' },
+            { label: 'Works with', value: 'Alexa, Google Assistant' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'Battery', value: 'Rechargeable 6000mAh' },
-            { label: 'Spotlight', value: '2pcs/2.4W/6500K' },
-            { label: 'Weatherproof', value: 'Indoor/Outdoor' },
+            { label: 'Wi-Fi Bands', value: '2.4/5 GHz' },
+            { label: 'Storage', value: 'microSD card slot (Max. 512GB)' },
+            { label: 'Operating Temp.', value: '14°F ~ 131°F (-10oC ~ 55oC) Indoor/Outdoor Indoor' },
+            { label: 'Dimensions', value: 'Φ 84 x 118 mm' },
+            { label: 'Weight', value: '275g' },
           ]
-        }
+        },
       ],
       packContent: defaultPackContent,
       installation: defaultInstallation,
@@ -518,26 +611,36 @@ export function getAccordionData(product: Product): AccordionData {
         {
           category: 'Video & Audio',
           items: [
-            { label: 'Camera Resolution', value: '4K/8MP (3840 X 2160) @ 25fps' },
-            { label: 'NVR Output', value: 'Up to 3840 x 2160 (HDMI)' },
-            { label: 'Viewing Angle', value: 'Horizontal: 105°, Vertical: 56°' },
+            { label: 'Video Resolution', value: '4K/8MP (5120 X 1552) @ 20fps' },
+            { label: 'Lens', value: 'f=2.8 fixed, F=1.6' },
+            { label: 'Viewing Angle', value: 'Horizontal 180°, Vertical 59°' },
+            { label: 'Infrared Night Vision', value: 'Up to 100ft (30m)' },
+            { label: 'Color Night Vision', value: 'Yes' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
-            { label: 'Smart Alarm', value: 'Person/vehicle/animal/motion detection' },
-            { label: 'Record Mode', value: '24/7 recording; Scheduled recording' },
+            { label: 'Smart Alarm', value: 'Person/vehicle/animal detection' },
+            { label: 'Record Mode', value: '24/7 recording; scheduled recording; motion recording' },
+            { label: 'WiFi Bands', value: '2.4/5GHz' },
+            { label: 'Works with', value: 'Alexa, Google Assistant' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'NVR Input', value: '8+4 Channels (Supports up to 8 PoE/Wi-Fi)' },
-            { label: 'Hard Drive', value: '2TB SATA HDD included (up to 16TB)' },
-            { label: 'Weatherproof', value: 'Yes, IP67 rated' },
+            { label: 'Power', value: 'AC 100~240V' },
+            { label: 'Storage', value: 'Micro SD card slot (supports up to 512GB microSD card)' },
+            { label: 'Operating Temp.', value: '14°F ~ 131°F (-10oC ~ 55oC)' },
+            { label: 'Weatherproof', value: 'Yes' },
+            { label: 'Dimensions', value: '6.85 x 7.24 x 11.61 in (174 x 184 x 295 mm)' },
+            { label: 'Weight', value: '2.91 lbs (1321g)' },
           ]
-        }
+        },
       ],
       packContent: [
         { name: 'NVS8 NVR', quantity: 1 },
@@ -556,28 +659,148 @@ export function getAccordionData(product: Product): AccordionData {
     15: {
       specs: [
         {
+          category: 'Video',
+          items: [
+            { label: 'Input', value: '8+4 Channels (Supports up to 8 PoE/Wi-Fi' },
+            { label: 'Camera', value: 's or 12 battery-powered cameras excluding 4G)' },
+            { label: 'HDMI Output', value: 'Up to 3840 x 2160' },
+            { label: 'VGA Output', value: 'Up to 1920 x 1080' },
+          ]
+        },
+        {
+          category: 'Audio',
+          items: [
+            { label: 'Input', value: 'Cameras with built-in mic Output 1 channel, RCA' },
+          ]
+        },
+        {
+          category: 'Recording',
+          items: [
+            { label: 'Live View/Playback', value: 'Up to 16MP' },
+            { label: 'Hard Drive Support', value: '2TB SATA HDD included (supports up to 16TB, max. 8TB for each HDD)' },
+          ]
+        },
+        {
+          category: 'Connection',
+          items: [
+            { label: 'Network Interface', value: 'RJ45' },
+            { label: 'USB Interface', value: '2 x USB 2.0' },
+          ]
+        },
+        {
+          category: 'General',
+          items: [
+            { label: 'OS Supported', value: 'PC: Windows, Mac OS' },
+            { label: 'Smartphone', value: 'iOS, Android' },
+            { label: 'Dimensions', value: '255 x 49.5 x 232 mm' },
+            { label: 'Weight', value: '1.4kg' },
+          ]
+        },
+        {
+          category: 'CAMERA',
+          items: [
+          ]
+        },
+        {
           category: 'Video & Audio',
           items: [
-            { label: 'Camera Resolution', value: '4K/8MP (3840 X 2160) @ 25fps' },
-            { label: 'NVR Output', value: 'Up to 3840 x 2160 (HDMI)' },
-            { label: 'Viewing Angle', value: 'Horizontal: 105°, Vertical: 56°' },
+            { label: 'Video Resolution', value: '4K/8MP (3840 X 2160) @ 25fps' },
+            { label: 'Lens', value: 'f=2.8mm, F=1.6' },
+            { label: 'Field of View', value: 'Horizontal: 105°, Vertical: 56° IR Night Vision Up to 30m' },
+            { label: 'Spotlight', value: '1pc/4.3W/6500K (cool white) /700 Lumens' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
           ]
         },
         {
           category: 'Software Features',
           items: [
             { label: 'Smart Alarm', value: 'Person/vehicle/animal/motion detection' },
-            { label: 'Record Mode', value: '24/7 recording; Scheduled recording' },
+            { label: 'Record Mode', value: '24/7 recording; Scheduled recording; Motion recording' },
           ]
         },
         {
           category: 'General',
           items: [
-            { label: 'NVR Input', value: '8+4 Channels (Supports up to 8 PoE/Wi-Fi)' },
-            { label: 'Hard Drive', value: '2TB SATA HDD included (up to 16TB)' },
+            { label: 'Operating Temp.', value: '-10 °C ~ 55 °C' },
             { label: 'Weatherproof', value: 'Yes, IP67 rated' },
+            { label: 'Dimensions', value: '68 x 63 x 188 mm' },
+            { label: 'Weight', value: '452g 17. NVS8 NVR' },
           ]
-        }
+        },
+        {
+          category: 'Video',
+          items: [
+            { label: 'Input', value: 'Supports (all Reolink models except 4G) up to 12 Channels with 8 built-in PoE Ports' },
+            { label: 'HDMI Output', value: 'Up to 3840 x 2160' },
+            { label: 'VGA Output', value: 'Up to 1920 x 1080' },
+          ]
+        },
+        {
+          category: 'Audio',
+          items: [
+            { label: 'Input', value: 'Cameras with built-in mic Output 1 channel, RCA' },
+          ]
+        },
+        {
+          category: 'Recording',
+          items: [
+            { label: 'Live View/Playback', value: 'Up to 16MP' },
+            { label: 'Hard Drive Support', value: '2TB SATA HDD included (supports up to 16TB, max. 8TB for each HDD)' },
+          ]
+        },
+        {
+          category: 'Connection',
+          items: [
+            { label: 'Network Interface', value: 'RJ45' },
+            { label: 'USB Interface', value: '2 x USB 2.0' },
+          ]
+        },
+        {
+          category: 'General',
+          items: [
+            { label: 'AI Video Search', value: 'Yes' },
+            { label: 'OS Supported', value: 'PC: Windows, Mac OS' },
+            { label: 'Smartphone', value: 'iOS, Android' },
+            { label: 'Dimensions', value: '255 x 49.5 x 232 mm (10.04 x 1.95 x 9.13 in)' },
+            { label: 'Weight', value: '1.4kg (3.09 lbs)' },
+          ]
+        },
+        {
+          category: 'CAMERA',
+          items: [
+          ]
+        },
+        {
+          category: 'Video & Audio',
+          items: [
+            { label: 'Video Resolution', value: '12MP (4512 x 2512) @ 20fps' },
+            { label: 'Lens', value: 'f=4mm, F/1.6' },
+            { label: 'Viewing Angle', value: 'Horizontal: 105°, Vertical: 56°, Diagonal: 125º IR Night Vision Up to 100ft (30m)' },
+            { label: 'Spotlight', value: '1pc/4.3W/6500K/700 Lumens' },
+            { label: 'IR Cut Filter', value: 'Yes' },
+            { label: 'Audio', value: 'Two-way audio' },
+            { label: 'Siren', value: 'Yes' },
+          ]
+        },
+        {
+          category: 'Software Features',
+          items: [
+            { label: 'Perimeter Protection', value: 'Line Crossing, Zone Intrusion, Zone Loitering' },
+            { label: 'Smart Alarm', value: 'Person/vehicle/animal/motion detection' },
+            { label: 'Record Mode', value: '24/7 recording; scheduled recording; motion recording' },
+          ]
+        },
+        {
+          category: 'General',
+          items: [
+            { label: 'Operating Temp.', value: '14°F ~ 131°F (-10°C ~ 55°C)' },
+            { label: 'Weatherproof', value: 'Yes, IP67 rated' },
+            { label: 'Dimensions', value: 'Φ117 x 104 mm (Φ4.62 x 4.09 in)' },
+            { label: 'Weight', value: '526g (1.' },
+          ]
+        },
       ],
       packContent: [
         { name: 'NVS8 NVR', quantity: 1 },
