@@ -2212,108 +2212,160 @@ body {
   margin: 0;
 }
 
-.compare-table-wrapper {
-  margin: 0 16px 32px;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  border-radius: 16px;
-  background: #fff;
-  box-shadow: 0px 1px 1px rgba(0,0,0,0.1), 0px 2px 3px rgba(0,0,0,0.15);
-}
+/* ─── Compare Card Layout ─── */
 
-.compare-table {
-  width: 100%;
-  min-width: 500px;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 13px;
-  background: #fff;
-}
-
-.compare-table th,
-.compare-table td {
-  padding: 14px 12px;
-  text-align: center;
-  border-bottom: 1px solid #f0f0f0;
-  font-family: 'Poppins', sans-serif;
-  white-space: nowrap;
-}
-
-.compare-table thead tr {
-  background: #f8faff;
-}
-
-.compare-table__feature-header {
+.compare-card__header {
   position: sticky;
-  left: 0;
-  z-index: 3;
-  text-align: left !important;
-  font-weight: 600;
-  color: #6b7280;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  background: #f8faff;
-  min-width: 120px;
+  top: 56px;
+  z-index: 10;
+  background: #fff;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px 16px;
+  margin: 0;
 }
 
-.compare-table__product-header {
-  font-weight: 600;
-  color: #111;
-  font-size: 13px;
-  min-width: 110px;
+.compare-card__products {
+  display: grid;
+  gap: 8px;
 }
 
-.compare-table__product-thumb {
-  width: 40px;
-  height: 40px;
+.compare-card__products--2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.compare-card__products--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.compare-card__product {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.compare-card__thumb {
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   overflow: hidden;
   background: #f0f3f7;
-  margin: 0 auto 6px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
 }
 
-.compare-table__product-thumb img {
+.compare-card__thumb img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-.compare-table__label {
-  position: sticky;
-  left: 0;
-  z-index: 2;
-  text-align: left !important;
-  font-weight: 500;
-  color: #555;
-  background: #fff;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.03);
-  min-width: 120px;
+.compare-card__name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  color: #1f2937;
+  text-align: center;
+  line-height: 1.3;
 }
 
-.compare-table tbody td {
-  color: #111;
-  font-weight: 500;
+/* Category sections */
+.compare-card__sections {
+  padding: 0 16px 32px;
+}
+
+.compare-section {
+  margin-bottom: 8px;
+}
+
+.compare-section__title {
+  font-family: 'Poppins', sans-serif;
   font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary, #0050e2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 16px 0 8px;
+  margin-bottom: 0;
 }
 
-.compare-table tbody tr:last-child td {
+.compare-section__rows {
+  background: #fff;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+
+/* Spec rows */
+.compare-card__row {
+  padding: 12px 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.compare-card__row:last-child {
   border-bottom: none;
 }
 
-.compare-yes {
-  color: #219653;
-  font-weight: 700;
-  font-size: 16px;
+.compare-card__row--alt {
+  background: #f8fafc;
 }
 
-.compare-no {
-  color: #eb5757;
-  font-weight: 700;
+.compare-card__row--diff {
+  background: #f0f5ff;
+}
+
+.compare-card__label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b5563;
+  margin-bottom: 6px;
+}
+
+.compare-card__values {
+  display: grid;
+  gap: 4px;
+}
+
+.compare-card__values--2 {
+  grid-template-columns: 1fr 1fr;
+}
+
+.compare-card__values--3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.compare-card__value {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 28px;
+  padding: 4px 2px;
+}
+
+.compare-val--text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #1f2937;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.compare-val--yes,
+.compare-val--no {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.compare-val--empty {
   font-size: 16px;
+  color: #d1d5db;
+  font-weight: 600;
 }
 
 /* ─── Chat Back Button ─── */
