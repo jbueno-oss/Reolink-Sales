@@ -2,6 +2,41 @@ import { useState, useEffect, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import logo from './assets/Logo Reolink.svg';
 import placeholderPdf from './assets/58.03.001.0983-Go PT Pus-QSG-EN-澳规-2025-0925.pdf';
+import argus3ProSlide1 from './assets/products/argus-3-pro/slide-1.png';
+import argus3ProSlide2 from './assets/products/argus-3-pro/slide-2.png';
+import argus3ProSlide3 from './assets/products/argus-3-pro/slide-3.png';
+import argus3ProSlide4 from './assets/products/argus-3-pro/slide-4.png';
+import argus3ProSlide5 from './assets/products/argus-3-pro/slide-5.png';
+import argus4ProSlide1 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-1.png';
+import argus4ProSlide2 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-2.png';
+import argus4ProSlide3 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-3.png';
+import argus4ProSlide4 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-4.png';
+import argus4ProSlide5 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-5.png';
+import argusPtUltraSlide1 from './assets/products/argus-pt-ultra-solar-panel/slide-1.png';
+import argusPtUltraSlide2 from './assets/products/argus-pt-ultra-solar-panel/slide-2.png';
+import argusPtUltraSlide3 from './assets/products/argus-pt-ultra-solar-panel/slide-3.png';
+import argusPtUltraSlide4 from './assets/products/argus-pt-ultra-solar-panel/slide-4.png';
+import argusPtUltraSlide5 from './assets/products/argus-pt-ultra-solar-panel/slide-5.png';
+import argusSolarSlide1 from './assets/products/argus-solar/slide-1.png';
+import argusSolarSlide2 from './assets/products/argus-solar/slide-2.png';
+import argusSolarSlide3 from './assets/products/argus-solar/slide-3.png';
+import argusSolarSlide4 from './assets/products/argus-solar/slide-4.png';
+import argusSolarSlide5 from './assets/products/argus-solar/slide-5.png';
+import argusMagiCamSlide1 from './assets/products/argus-magicam-magnetic/slide-1.png';
+import argusMagiCamSlide2 from './assets/products/argus-magicam-magnetic/slide-2.png';
+import argusMagiCamSlide3 from './assets/products/argus-magicam-magnetic/slide-3.png';
+import argusMagiCamSlide4 from './assets/products/argus-magicam-magnetic/slide-4.png';
+import argusMagiCamSlide5 from './assets/products/argus-magicam-magnetic/slide-5.png';
+import smartVideoDoorbellSlide1 from './assets/products/smart-video-doorbell/slide-1.png';
+import smartVideoDoorbellSlide2 from './assets/products/smart-video-doorbell/slide-2.png';
+import smartVideoDoorbellSlide3 from './assets/products/smart-video-doorbell/slide-3.png';
+import smartVideoDoorbellSlide4 from './assets/products/smart-video-doorbell/slide-4.png';
+import smartVideoDoorbellSlide5 from './assets/products/smart-video-doorbell/slide-5.png';
+import solarFloodlightCamSlide1 from './assets/products/solar-floodlight-cam-f310b/slide-1.png';
+import solarFloodlightCamSlide2 from './assets/products/solar-floodlight-cam-f310b/slide-2.png';
+import solarFloodlightCamSlide3 from './assets/products/solar-floodlight-cam-f310b/slide-3.png';
+import solarFloodlightCamSlide4 from './assets/products/solar-floodlight-cam-f310b/slide-4.png';
+import solarFloodlightCamSlide5 from './assets/products/solar-floodlight-cam-f310b/slide-5.png';
 import PdfViewerModal from './components/PdfViewerModal';
 import { getAccordionData } from './data/accordionData';
 import type { AccordionItem, SpecSection, PackContentItem, InstallationStep } from './data/accordionData';
@@ -22,10 +57,300 @@ interface Slide {
   media: string;
   title: string;
   description: string;
+  objectPosition?: string;
 }
+
+const argus3ProSlides: Slide[] = [
+  {
+    type: 'image',
+    media: argus3ProSlide1,
+    title: 'Complete Wire-Free Security',
+    description: 'Install within Wi-Fi range, back up to HomeHub, and store recordings locally to prevent data loss.',
+  },
+  {
+    type: 'image',
+    media: argus3ProSlide2,
+    title: 'Spotlight & Two-Way Audio',
+    description: 'Protect day and night with a motion spotlight, two-way audio, and siren. Greet guests or deter intruders in full colour.',
+  },
+  {
+    type: 'image',
+    media: argus3ProSlide3,
+    title: '5MP Super HD Resolution',
+    description: 'Delivers exceptionally clear images and videos in 5MP Super HD, offering over 2.5X the clarity of 1080p HD in live streaming and playback.',
+  },
+  {
+    type: 'image',
+    media: argus3ProSlide4,
+    title: 'Accurate Smart Security',
+    description: 'Advanced algorithms accurately detect and alert you to human, vehicle and animal movement, while minimizing false alarms.',
+  },
+  {
+    type: 'image',
+    media: argus3ProSlide5,
+    title: 'Real-Time Communication',
+    description: 'Hear and talk with built-in two-way audio to communicate with your family or visitors.',
+  },
+];
+
+const argus4ProSlides: Slide[] = [
+  {
+    type: 'image',
+    media: argus4ProSlide1,
+    title: '4K UHD 180º Panoramic View',
+    description: 'Seamlessly stitches two views into one, double field of view with one camera.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argus4ProSlide2,
+    title: 'ColorX True Color Night Vision',
+    description: 'The F1.0 aperture and 1/1.8 sensor capture vivid, full-color night vision without IR lights. ColorX technology boosts standby time by 30%, improves concealment, and reduces light pollution.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argus4ProSlide3,
+    title: 'Turbocharge with Wi-Fi 6',
+    description: 'Enjoy lightning-fast, stable, and secure Wi-Fi. Say goodbye to buffering and lag with dual-band support and WPA3 security.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argus4ProSlide4,
+    title: 'All Inclusive Smart Detection',
+    description: 'Maximize alert accuracy with dual PIR and AI Detects humans, vehicles, and pets while minimizing false alarms. No monthly fees.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argus4ProSlide5,
+    title: 'Solar Powered',
+    description: 'Eco-friendly and cost-effective solution for areas without electricity access.',
+    objectPosition: 'top center',
+  },
+];
+
+const argusPtUltraSlides: Slide[] = [
+  {
+    type: 'image',
+    media: argusPtUltraSlide1,
+    title: 'Pan/Tilt with Spotlights and Audio',
+    description: 'A powerful wire-free security camera with 4K resolution, color night vision, and smart detection - designed for every corner of your home.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusPtUltraSlide2,
+    title: 'Smart Detection & Tracking',
+    description: 'Detects events that matter and alert you. Tracks moving objects to keep them in view, minimizing false alarms and notifications.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusPtUltraSlide3,
+    title: 'Accurate Smart Security',
+    description: 'Advanced algorithms accurately detect and alert you to human movement, while minimising false alarms.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusPtUltraSlide4,
+    title: 'Real-Time Communication',
+    description: 'Hear and talk with built-in two-way audio to communicate with your kids or pets.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusPtUltraSlide5,
+    title: 'Wired Option',
+    description: 'Camera can be connected directly to power for 24/7 recording with included USB-C cable.',
+    objectPosition: 'top center',
+  },
+];
+
+const argusSolarSlides: Slide[] = [
+  {
+    type: 'image',
+    media: argusSolarSlide1,
+    title: 'Non-Stop Solar Power',
+    description: 'Drop the constant charging cycle. High-efficiency SolarEase tech keeps your camera continuously powered even on cloudy or shaded days.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusSolarSlide2,
+    title: 'Vibrant 3K Super HD',
+    description: 'Never miss a critical detail. Sharp 5MP resolution captures flawless clarity across your entire yard, ensuring absolute visual certainty day or night.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusSolarSlide3,
+    title: 'Active Deterrence',
+    description: 'Stop intruders before they enter. Motion-activated spotlights and a powerful siren instantly trigger to protect your property and warn uninvited guests.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusSolarSlide4,
+    title: 'Accurate Smart Detection',
+    description: 'Eliminate annoying false alerts. Advanced intelligence instantly differentiates between people, vehicle, and animal so you only get notifications that matter.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusSolarSlide5,
+    title: 'No Monthly Storage Fees',
+    description: 'Keep your videos private and free. Secure local storage options deliver premium, intelligent security right out of the box with zero mandatory subscriptions.',
+    objectPosition: 'top center',
+  },
+];
+
+const argusMagiCamSlides: Slide[] = [
+  {
+    type: 'image',
+    media: argusMagiCamSlide1,
+    title: 'Magnetic Wire-Free Freedom',
+    description: 'Installs instantly to fences, fridges, or RVs. Enjoy faster, more stable streaming thanks to Dual-Band 2.4/5GHz Wi-Fi. Connect directly to power for 24/7 recording.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusMagiCamSlide2,
+    title: 'The Battery Cam That Goes the Distance',
+    description: 'Stop the constant charging cycle. Powered by an ultra-efficient Qualcomm chip, this security camera is built for endurance, not downtime.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusMagiCamSlide3,
+    title: 'Accurate Smart Security',
+    description: 'Advanced algorithms accurately detect and alert you to human movement, while minimising false alarms.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusMagiCamSlide4,
+    title: 'Real-Time Communication',
+    description: 'Hear and talk with built-in two-way audio to communicate with your kids or pets.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: argusMagiCamSlide5,
+    title: 'Wired Option',
+    description: 'Camera can be connected directly to power for 24/7 recording with included USB-C cable.',
+    objectPosition: 'top center',
+  },
+];
+
+const smartVideoDoorbellSlides: Slide[] = [
+  {
+    type: 'image',
+    media: smartVideoDoorbellSlide1,
+    title: 'Head-to-Toe Doorstep Coverage',
+    description: 'See the whole picture. An expanded 1:1 aspect ratio captures a top-to-bottom view, keeping both visitors\' faces and packages on the mat in full view.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: smartVideoDoorbellSlide2,
+    title: 'Long-Lasting Wire-Free Power',
+    description: 'Enjoy effortless security with up to 150 days of battery life on a single charge. Easy, wire-free setup installs anywhere on your porch in minutes.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: smartVideoDoorbellSlide3,
+    title: 'Smart Person & Package Detection',
+    description: 'Stop chasing false alarms. On-camera AI accurately identifies people, vehicles, and packages, notifying you only when actual activity happens at your door.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: smartVideoDoorbellSlide4,
+    title: 'Instant Indoor Chime Included',
+    description: 'Hear your doorbell ring clearly from any room. The included plug-in Reolink Chime provides instant audible alerts inside your home without relying on your phone.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: smartVideoDoorbellSlide5,
+    title: 'Zero Monthly Storage Fees',
+    description: 'Keep your video footage private and free. Enjoy smart detection and secure local hardware storage right out of the box with no mandatory recurring costs.',
+    objectPosition: 'top center',
+  },
+];
+
+const solarFloodlightSlides: Slide[] = [
+  {
+    type: 'image',
+    media: solarFloodlightCamSlide1,
+    title: 'Endless Solar Energy',
+    description: 'Drop the constant battery charging cycle. High-efficiency solar power keeps your floodlight camera continuously powered through every season.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: solarFloodlightCamSlide2,
+    title: '150° Ultra-Wide Coverage',
+    description: 'See your entire yard on one screen. An ultra-wide 150° view captures expansive outdoor spaces, completely wiping out dark blind spots.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: solarFloodlightCamSlide3,
+    title: 'Ultra-Bright 1000 Lumens',
+    description: 'Drench dark corners in day-like light. Powerful motion-activated floodlights deliver 1000 lumens of brightness to expose and deter suspicious activity instantly.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: solarFloodlightCamSlide4,
+    title: 'AI-Based Adaptive Floodlight Modes',
+    description: 'Customise your response to flash for people/ vehicles but remain off for animals, providing intelligent, event-based maximum brightness.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: solarFloodlightCamSlide5,
+    title: 'No Monthly Storage Fees',
+    description: 'Take control of your data and your wallet. Choose between microSD card (Max. 512GB), NVR or Hub storage.',
+    objectPosition: 'top center',
+  },
+];
 
 /* ─── Slide Data Per Product ─── */
 function getSlidesForProduct(product: Product): Slide[] {
+  if (product.id === 1) {
+    return argus3ProSlides;
+  }
+
+  if (product.id === 2) {
+    return argus4ProSlides;
+  }
+
+  if (product.id === 4) {
+    return argusPtUltraSlides;
+  }
+
+  if (product.id === 6) {
+    return argusMagiCamSlides;
+  }
+
+  if (product.id === 8) {
+    return argusSolarSlides;
+  }
+
+  if (product.id === 9) {
+    return smartVideoDoorbellSlides;
+  }
+
+  if (product.id === 17) {
+    return solarFloodlightSlides;
+  }
+
   return [
     {
       type: 'image',
@@ -115,7 +440,12 @@ function Swiper({
                 {slide.type === 'video' ? (
                   <VideoPlaceholder src={slide.media} alt={slide.title} />
                 ) : (
-                  <img src={slide.media} alt={slide.title} className="slide-image" />
+                  <img
+                    src={slide.media}
+                    alt={slide.title}
+                    className="slide-image"
+                    style={slide.objectPosition ? { objectPosition: slide.objectPosition } : undefined}
+                  />
                 )}
               </div>
               <div className="slide-content">
@@ -267,7 +597,6 @@ function PackContentAccordion({
                     </div>
                   )}
                 </div>
-                <p className="pack-content-card__quantity">{i + 1}</p>
                 <p className="pack-content-card__name">{item.name}</p>
               </div>
             ))}
@@ -348,23 +677,38 @@ export default function ProductDetail({
   const specsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          setShowFooter(true);
-        } else {
-          setShowFooter(false);
+    const root = document.getElementById('root');
+    const specs = specsRef.current;
+    if (!root || !specs) return;
+
+    let frame = 0;
+    let isVisible = false;
+
+    const updateFooterVisibility = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const accordionScrollStart = specs.offsetTop - root.clientHeight;
+        const showAt = Math.max(112, accordionScrollStart + 112);
+        const hideAt = Math.max(56, accordionScrollStart + 56);
+        const shouldShow = isVisible
+          ? root.scrollTop > hideAt
+          : root.scrollTop > showAt;
+
+        if (shouldShow !== isVisible) {
+          isVisible = shouldShow;
+          setShowFooter(shouldShow);
         }
-      },
-      { threshold: 0.1 }
-    );
-    
-    if (specsRef.current) {
-      observer.observe(specsRef.current);
-    }
-    
+      });
+    };
+
+    updateFooterVisibility();
+    root.addEventListener('scroll', updateFooterVisibility, { passive: true });
+    window.addEventListener('resize', updateFooterVisibility);
+
     return () => {
-      observer.disconnect();
+      cancelAnimationFrame(frame);
+      root.removeEventListener('scroll', updateFooterVisibility);
+      window.removeEventListener('resize', updateFooterVisibility);
     };
   }, []);
 

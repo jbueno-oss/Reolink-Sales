@@ -1,16 +1,5 @@
 import type { Product } from '../ProductDetail';
 
-import svgCamera from '../assets/SVG and images/Camera.svg';
-import svgMountingTemplate from '../assets/SVG and images/Morintain Template.svg';
-import svgMountingBracket from '../assets/SVG and images/Mounting Bracket.svg';
-import svgOperationalInstruction from '../assets/SVG and images/Operational Instruction.svg';
-import svgPackOfScrews from '../assets/SVG and images/Pack of Screws.svg';
-import svgSurveillanceSticker from '../assets/SVG and images/Surveillance Sticker.svg';
-import svgUSBCable from '../assets/SVG and images/USB-C Cable.svg';
-import svgStep1 from '../assets/SVG and images/Step 1 Instalation.svg';
-import svgStep2 from '../assets/SVG and images/Step 2 Instalation.svg';
-import svgStep3 from '../assets/SVG and images/Step 3 Instalation.svg';
-
 export interface AccordionItem {
   label: string;
   value: string;
@@ -48,15 +37,25 @@ const defaultPackContent: PackContentItem[] = [
   { name: 'Surveillance Sign', quantity: 1 },
 ];
 
-const argus3ProPackContent: PackContentItem[] = [
-  { name: 'Argus 3 Pro Camera', quantity: 1, image: svgCamera },
-  { name: 'Mounting Template', quantity: 1, image: svgMountingTemplate },
-  { name: 'Mounting Bracket', quantity: 1, image: svgMountingBracket },
-  { name: 'Operational Instruction', quantity: 1, image: svgOperationalInstruction },
-  { name: 'Pack of Screws', quantity: 1, image: svgPackOfScrews },
-  { name: 'Surveillance Sticker', quantity: 1, image: svgSurveillanceSticker },
-  { name: 'USB-C Cable', quantity: 1, image: svgUSBCable },
-];
+const packContentImages = import.meta.glob<string>(
+  '../assets/products/*/pack-content/item-*.png',
+  { eager: true, import: 'default', query: '?url' }
+);
+
+const packContentImage = (folder: string, item: number) => {
+  const image = packContentImages[`../assets/products/${folder}/pack-content/item-${item}.png`];
+  if (!image) {
+    throw new Error(`Missing pack content image: ${folder}/item-${item}.png`);
+  }
+  return image;
+};
+
+const numberedPackContent = (folder: string, count: number): PackContentItem[] =>
+  Array.from({ length: count }, (_, i) => ({
+    name: String(i + 1),
+    quantity: 1,
+    image: packContentImage(folder, i + 1),
+  }));
 
 const defaultInstallation: InstallationStep[] = [
   { title: 'Download the Reolink App', description: 'Download the Reolink App and create an account to get started.' },
@@ -65,27 +64,85 @@ const defaultInstallation: InstallationStep[] = [
   { title: 'Install Device', description: 'Install the device in its final location and adjust the viewing angle.' },
 ];
 
-const argus3ProInstallation: InstallationStep[] = [
-  { 
-    title: 'Download the Reolink App', 
-    description: 'Scan to download the Reolink App from the App Store or Google Play store.',
-    image: svgStep1
-  },
-  { 
-    title: 'Power on the Camera', 
-    description: 'Turn on the power switch to power on the camera.',
-    image: svgStep2
-  },
-  { 
-    title: 'Launch App & Scan', 
-    description: 'Launch the Reolink App, click the "+" button in the top right corner to add the camera. Scan the QR code on the device and follow the onscreen instructions to finish initial setup.',
-    image: svgStep3
-  },
-  { 
-    title: 'Configure Wi-Fi Connection', 
-    description: 'In the "Add Device" page, configure the Wi-Fi connection by enabling Bluetooth on your phone and follow the onscreen instructions to finish the initial setup.'
-  },
-];
+const installationImages = import.meta.glob<string>(
+  '../assets/products/*/installation/step-*.png',
+  { eager: true, import: 'default', query: '?url' }
+);
+
+const installationImage = (folder: string, step: number) => {
+  const image = installationImages[`../assets/products/${folder}/installation/step-${step}.png`];
+  if (!image) {
+    throw new Error(`Missing installation image: ${folder}/step-${step}.png`);
+  }
+  return image;
+};
+
+const installationSteps = (folder: string, descriptions: string[]): InstallationStep[] =>
+  descriptions.map((description, i) => ({
+    title: `Step ${i + 1}`,
+    description,
+    image: installationImage(folder, i + 1),
+  }));
+
+const argus3ProInstallation = installationSteps('argus-3-pro', [
+  'Screw the camera to the bracket.',
+  'Adjust the camera angle for the best field of view.',
+  'Secure the camera by turning the base clockwise.',
+]);
+
+const argus3ProIntegratedInstallation = installationSteps('home-hub-mini-4x-argus-3-pro-solar-panel-lite', [
+  'Mount the solar panel directly on top of the camera. Secure the camera by turning the base clockwise.',
+  'Place your solar panel where it gets at least 20 minutes of direct sunlight daily.',
+  "Make sure the panel doesn't block the camera's view.",
+]);
+
+const argus4ProInstallation = installationSteps('argus-4-pro-reolink-solar-panel-2', [
+  'Rotate to separate the base from the bracket.',
+  'Mark drilling points using the template. Drill holes, screw the bracket base to the wall, and twist the remaining bracket part onto the base.',
+  'Screw the camera to the bracket. Adjust the camera angle to get the best field of view.',
+  'Secure the camera by turning the part on the bracket identified in the chart clockwise.',
+]);
+
+const argusPtUltraInstallation = installationSteps('argus-pt-ultra-solar-panel', [
+  'Attach bracket base and antenna to camera.',
+  'Mount the wall bracket & camera.',
+  'Choose the installation location for the solar panel.',
+  'To Install the Solar Panel Integrated with the Camera.',
+  'To Install the Solar Panel Separately from the Camera.',
+]);
+
+const argusSolarInstallation = installationSteps('argus-solar', [
+  'Choose a sunny spot. Ensure the solar panel gets at least 1 hour of direct sunlight daily.',
+  'Drill holes.',
+  'Insert anchors.',
+  'Attach the base.',
+  'Mount the camera.',
+]);
+
+const solarFloodlightInstallation = installationSteps('solar-floodlight-cam-f310b', [
+  'Unscrew the back cover.',
+  'Drill holes and insert anchors.',
+  'Install the base.',
+  'Tighten the base.',
+  'Mount the camera.',
+  'Adjust the angle. Ensure the solar panel gets at least 1 hour of direct sunlight daily.',
+]);
+
+const argusMagiCamInstallation = installationSteps('argus-magicam-magnetic', [
+  'Peel and stick.',
+  'Attach the camera.',
+  'Drill holes.',
+  'Insert anchors.',
+  'Attach the base.',
+  'Mount the camera.',
+  'Adjust to optimal angle.',
+]);
+
+const smartVideoDoorbellInstallation = installationSteps('smart-video-doorbell', [
+  'Optional: Install the wedge on the wall.',
+  'Attach the mounting plate to the wedge.',
+  'Secure the Doorbell.',
+]);
 
 export function getAccordionData(product: Product): AccordionData {
   const data: Record<number, AccordionData> = {
@@ -130,11 +187,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: [
-        { name: 'Argus 3 Pro Camera', quantity: 4, image: svgCamera },
-        ...argus3ProPackContent.slice(1)
-      ],
-      installation: argus3ProInstallation,
+      packContent: numberedPackContent('home-hub-mini-4x-argus-3-pro-solar-panel-lite', 13),
+      installation: argus3ProIntegratedInstallation,
       installationNote: 'This device supports 2.4 GHz and 5 GHz Wi-Fi networks. It is recommended to connect the device to 5 GHz Wi-Fi for a better network experience.',
     },
     // 2: Argus 4 Pro Panoramic -> PDF 11
@@ -172,8 +226,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: numberedPackContent('argus-4-pro-reolink-solar-panel-2', 9),
+      installation: argus4ProInstallation,
     },
     // 3: Argus PT Ultra 2-Pack -> PDF 4
     3: {
@@ -215,11 +269,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: [
-        { name: 'Argus PT Ultra Camera', quantity: 2 },
-        ...defaultPackContent.slice(1)
-      ],
-      installation: defaultInstallation,
+      packContent: numberedPackContent('argus-pt-ultra-solar-panel', 11),
+      installation: argusPtUltraInstallation,
     },
     // 4: Argus PT Ultra Single -> PDF 4
     4: {
@@ -261,8 +312,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: numberedPackContent('argus-pt-ultra-solar-panel', 11),
+      installation: argusPtUltraInstallation,
     },
     // 5: Argus 3 Pro Standalone -> PDF 10
     5: {
@@ -301,7 +352,7 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: argus3ProPackContent,
+      packContent: numberedPackContent('argus-3-pro', 6),
       installation: argus3ProInstallation,
       installationNote: 'This device supports 2.4 GHz and 5 GHz Wi-Fi networks. It is recommended to connect the device to 5 GHz Wi-Fi for a better network experience.',
     },
@@ -343,8 +394,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: numberedPackContent('argus-magicam-magnetic', 9),
+      installation: argusMagiCamInstallation,
     },
     // 7: Argus Solar 2-Pack -> PDF 8
     7: {
@@ -386,11 +437,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: [
-        { name: 'Argus Solar Camera', quantity: 2 },
-        ...defaultPackContent.slice(1)
-      ],
-      installation: defaultInstallation,
+      packContent: numberedPackContent('argus-solar', 7),
+      installation: argusSolarInstallation,
     },
     // 8: Argus Solar Single -> PDF 8
     8: {
@@ -430,8 +478,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: numberedPackContent('argus-solar', 7),
+      installation: argusSolarInstallation,
     },
     // 9: Smart Video Doorbell -> PDF 16 + PDF 17
     9: {
@@ -476,12 +524,7 @@ export function getAccordionData(product: Product): AccordionData {
         { name: 'Reolink Chime', quantity: 1 },
         ...defaultPackContent.slice(1)
       ],
-      installation: [
-        { title: 'Mount the Bracket', description: 'Mount the wedge or bracket near your door at the desired height.' },
-        { title: 'Connect Power', description: 'Connect the doorbell to power or use the built-in battery.' },
-        { title: 'Plug in the Chime', description: 'Plug in the Chime into an indoor power socket.' },
-        { title: 'Pair Devices', description: 'Pair devices together using the Reolink App.' },
-      ],
+      installation: smartVideoDoorbellInstallation,
     },
     // 10: E1 Zoom Indoor 4K -> PDF 19
     10: {
@@ -884,8 +927,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         }
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: numberedPackContent('solar-floodlight-cam-f310b', 6),
+      installation: solarFloodlightInstallation,
     },
   };
 

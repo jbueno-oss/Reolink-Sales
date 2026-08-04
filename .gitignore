@@ -10,6 +10,12 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
+tmp/
+src/assets/products/_original-before-ai-composition/
+src/assets/products/*/candidates/
+src/assets/products/*/contact.png
+src/assets/products/*/pack-content/contact.png
+src/assets/products/*/installation/contact.png
 *.local
 
 # Editor directories and files
