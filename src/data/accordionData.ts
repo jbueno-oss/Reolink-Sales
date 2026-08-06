@@ -144,6 +144,21 @@ const smartVideoDoorbellInstallation = installationSteps('smart-video-doorbell',
   'Secure the Doorbell.',
 ]);
 
+const e1ZoomInstallation = installationSteps('e1-zoom-indoor-4k', [
+  'Drill two holes on the wall according to the mounting hole template.',
+  'Insert the two plastic anchors into the holes.',
+  'Secure the Mounting Plate in place by tightening the screws into the plastic anchors.',
+  'Align the camera with the bracket and turn the camera unit clockwise to lock it in position.',
+]);
+
+const goPtPlusInstallation = installationSteps('go-pt-plus-4g-lte', [
+  'Attach bracket base and antenna to camera.',
+  'Mount the wall bracket & camera.',
+  'Choose the installation location for the solar panel.',
+  'To Install the Solar Panel Integrated with the Camera.',
+  'To Install the Solar Panel Separately from the Camera.',
+]);
+
 export function getAccordionData(product: Product): AccordionData {
   const data: Record<number, AccordionData> = {
     // 1: Argus 3 Pro 4x Kit + Hub -> PDF 10 (Argus 3 Pro) + PDF 15 (Hub)
@@ -519,19 +534,38 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: [
-        { name: 'Video Doorbell', quantity: 1 },
-        { name: 'Reolink Chime', quantity: 1 },
-        ...defaultPackContent.slice(1)
-      ],
+      packContent: numberedPackContent('smart-video-doorbell', 10),
       installation: smartVideoDoorbellInstallation,
     },
     // 10: E1 Zoom Indoor 4K -> PDF 19
     10: {
       specs: [
+        {
+          category: 'Video & Audio',
+          items: [
+            { label: 'Video Resolution', value: '4K/8MP (3840 X 2160) @15fps' },
+            { label: 'Optical Zoom', value: '3x' },
+            { label: 'Pan/Tilt Angle', value: '355° pan, 50° tilt' },
+            { label: 'IR Night Vision', value: 'Up to 12m' },
+          ]
+        },
+        {
+          category: 'Software Features',
+          items: [
+            { label: 'Smart Alarm', value: 'Person/pet/motion/baby crying detection' },
+            { label: 'Auto Tracking', value: 'Support' },
+          ]
+        },
+        {
+          category: 'General',
+          items: [
+            { label: 'Wi-Fi Bands', value: '2.4/5 GHz' },
+            { label: 'Weatherproof', value: 'Indoor only' },
+          ]
+        }
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: numberedPackContent('e1-zoom-indoor-4k', 7),
+      installation: e1ZoomInstallation,
     },
     // 11: E Series E321 Indoor -> PDF 18
     11: {
@@ -605,7 +639,7 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: defaultPackContent,
+      packContent: numberedPackContent('elite-floodlight-wifi', 11),
       installation: defaultInstallation,
     },
     // 13: Go PT Plus 4G LTE -> PDF 1
@@ -645,8 +679,8 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: numberedPackContent('go-pt-plus-4g-lte', 11),
+      installation: goPtPlusInstallation,
     },
     // 14: NVS8 PoE Kit 8MB4 -> PDF 21
     14: {

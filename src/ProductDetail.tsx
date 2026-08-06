@@ -7,6 +7,11 @@ import argus3ProSlide2 from './assets/products/argus-3-pro/slide-2.png';
 import argus3ProSlide3 from './assets/products/argus-3-pro/slide-3.png';
 import argus3ProSlide4 from './assets/products/argus-3-pro/slide-4.png';
 import argus3ProSlide5 from './assets/products/argus-3-pro/slide-5.png';
+import homeHubMiniArgus3ProSlide1 from './assets/products/home-hub-mini-4x-argus-3-pro-solar-panel-lite/slide-1.png';
+import homeHubMiniArgus3ProSlide2 from './assets/products/home-hub-mini-4x-argus-3-pro-solar-panel-lite/slide-2.png';
+import homeHubMiniArgus3ProSlide3 from './assets/products/home-hub-mini-4x-argus-3-pro-solar-panel-lite/slide-3.png';
+import homeHubMiniArgus3ProSlide4 from './assets/products/home-hub-mini-4x-argus-3-pro-solar-panel-lite/slide-4.png';
+import homeHubMiniArgus3ProSlide5 from './assets/products/home-hub-mini-4x-argus-3-pro-solar-panel-lite/slide-5.png';
 import argus4ProSlide1 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-1.png';
 import argus4ProSlide2 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-2.png';
 import argus4ProSlide3 from './assets/products/argus-4-pro-reolink-solar-panel-2/slide-3.png';
@@ -37,6 +42,21 @@ import solarFloodlightCamSlide2 from './assets/products/solar-floodlight-cam-f31
 import solarFloodlightCamSlide3 from './assets/products/solar-floodlight-cam-f310b/slide-3.png';
 import solarFloodlightCamSlide4 from './assets/products/solar-floodlight-cam-f310b/slide-4.png';
 import solarFloodlightCamSlide5 from './assets/products/solar-floodlight-cam-f310b/slide-5.png';
+import e1ZoomSlide1 from './assets/products/e1-zoom-indoor-4k/slide-1.png';
+import e1ZoomSlide2 from './assets/products/e1-zoom-indoor-4k/slide-2.png';
+import e1ZoomSlide3 from './assets/products/e1-zoom-indoor-4k/slide-3.png';
+import e1ZoomSlide4 from './assets/products/e1-zoom-indoor-4k/slide-4.png';
+import e1ZoomSlide5 from './assets/products/e1-zoom-indoor-4k/slide-5.png';
+import eliteFloodlightSlide1 from './assets/products/elite-floodlight-wifi/slide-1.png';
+import eliteFloodlightSlide2 from './assets/products/elite-floodlight-wifi/slide-2.png';
+import eliteFloodlightSlide3 from './assets/products/elite-floodlight-wifi/slide-3.png';
+import eliteFloodlightSlide4 from './assets/products/elite-floodlight-wifi/slide-4.png';
+import eliteFloodlightSlide5 from './assets/products/elite-floodlight-wifi/slide-5.png';
+import goPtPlusSlide1 from './assets/products/go-pt-plus-4g-lte/slide-1.png';
+import goPtPlusSlide2 from './assets/products/go-pt-plus-4g-lte/slide-2.png';
+import goPtPlusSlide3 from './assets/products/go-pt-plus-4g-lte/slide-3.png';
+import goPtPlusSlide4 from './assets/products/go-pt-plus-4g-lte/slide-4.png';
+import goPtPlusSlide5 from './assets/products/go-pt-plus-4g-lte/slide-5.png';
 import PdfViewerModal from './components/PdfViewerModal';
 import { getAccordionData } from './data/accordionData';
 import type { AccordionItem, SpecSection, PackContentItem, InstallationStep } from './data/accordionData';
@@ -90,6 +110,44 @@ const argus3ProSlides: Slide[] = [
     media: argus3ProSlide5,
     title: 'Real-Time Communication',
     description: 'Hear and talk with built-in two-way audio to communicate with your family or visitors.',
+  },
+];
+
+const homeHubMiniArgus3ProSlides: Slide[] = [
+  {
+    type: 'image',
+    media: homeHubMiniArgus3ProSlide1,
+    title: 'Mount It Your Way',
+    description: "The camera's battery power and integrated bracket enable truly wire-free, effortless installation, allowing you to secure it virtually anywhere using the Wall, Ceiling, or Strap Mounts.",
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: homeHubMiniArgus3ProSlide2,
+    title: '5MP Super HD Resolution',
+    description: 'Delivers exceptionally clear images and videos in 5MP Super HD, offering over 2.5X the clarity of 1080p HD in live streaming and playback.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: homeHubMiniArgus3ProSlide3,
+    title: 'Focus only on what matters',
+    description: 'This camera intelligently recognizes people, vehicles, and animals, sending you instant alerts for true threats while actively minimizing false alarms and unwanted notifications.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: homeHubMiniArgus3ProSlide4,
+    title: 'Spotlight & Two-Way Audio',
+    description: 'Protect day and night with a motion spotlight, two-way audio, and siren. Greet guests or deter intruders in full colour.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: homeHubMiniArgus3ProSlide5,
+    title: 'Home Hub Local Protection',
+    description: 'Install within Wi-Fi range for automatic recording to the Home Hub. Footage is secured separately from the camera - safe from theft or damage at the source.',
+    objectPosition: 'top center',
   },
 ];
 
@@ -321,10 +379,124 @@ const solarFloodlightSlides: Slide[] = [
   },
 ];
 
+const e1ZoomSlides: Slide[] = [
+  {
+    type: 'image',
+    media: e1ZoomSlide1,
+    title: 'Auto-Tracking Pan & Tilt',
+    description: 'Eliminate blind spots completely. The camera smoothly tracks movement across the room, keeping active kids or pets perfectly in frame at all times.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: e1ZoomSlide2,
+    title: 'AI Smart Detection',
+    description: 'Stop chasing false alarms. Advanced on-camera AI instantly distinguishes between people, pets, and background motion to send alerts that actually matter.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: e1ZoomSlide3,
+    title: 'Baby Cry Detection & Two-Way Audio',
+    description: 'Stay connected to your nursery. Smart sensors detect baby cries and alert you instantly, letting you comfort your child using real-time two-way audio.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: e1ZoomSlide4,
+    title: 'Instant Privacy Mode',
+    description: 'Instantly disable recording and lens activity, giving you control when you need it.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: e1ZoomSlide5,
+    title: 'No Monthly Storage Fees',
+    description: 'Keep your videos private and free. Secure local storage options deliver premium, intelligent security right out of the box with zero mandatory subscriptions.',
+    objectPosition: 'top center',
+  },
+];
+
+const goPtPlusSlides: Slide[] = [
+  {
+    type: 'image',
+    media: goPtPlusSlide1,
+    title: 'Pan/Tilt with Spotlights and Audio',
+    description: 'A powerful wire-free security camera with 4K resolution, color night vision, and smart detection - designed for every corner of your home.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: goPtPlusSlide2,
+    title: 'Smart Detection & Tracking',
+    description: 'Detects events that matter and alert you. Tracks moving objects to keep them in view, minimizing false alarms and notifications.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: goPtPlusSlide3,
+    title: 'Accurate Smart Security',
+    description: 'Advanced algorithms accurately detect and alert you to human, vehicle and animal movement, while minimizing false alarms.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: goPtPlusSlide4,
+    title: '4K Colour Night Vision',
+    description: 'Powerful motion-triggered spotlights to turn night into day, capturing vivid details in 4K Ultra HD at night.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: goPtPlusSlide5,
+    title: 'Flexible Solar Power',
+    description: 'Mount the panel directly on the camera or separately using the extension cable to maximize sunlight exposure.',
+    objectPosition: 'top center',
+  },
+];
+
+const eliteFloodlightSlides: Slide[] = [
+  {
+    type: 'image',
+    media: eliteFloodlightSlide1,
+    title: 'Pan/Tilt with Spotlights and Audio',
+    description: 'A powerful wire-free security camera with 4K resolution, color night vision, and smart detection - designed for every corner of your home.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eliteFloodlightSlide2,
+    title: 'Smart Detection & Tracking',
+    description: 'Detects events that matter and alert you. Tracks moving objects to keep them in view, minimizing false alarms and notifications.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eliteFloodlightSlide3,
+    title: 'Accurate Smart Security',
+    description: 'Advanced algorithms accurately detect and alert you to human, vehicle and animal movement, while minimizing false alarms.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eliteFloodlightSlide4,
+    title: '4K Colour Night Vision',
+    description: 'Powerful motion-triggered spotlights to turn night into day, capturing vivid details in 4K Ultra HD at night.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eliteFloodlightSlide5,
+    title: 'Flexible Solar Power',
+    description: 'Mount the panel directly on the camera or separately using the extension cable to maximize sunlight exposure.',
+    objectPosition: 'top center',
+  },
+];
+
 /* ─── Slide Data Per Product ─── */
 function getSlidesForProduct(product: Product): Slide[] {
   if (product.id === 1) {
-    return argus3ProSlides;
+    return homeHubMiniArgus3ProSlides;
   }
 
   if (product.id === 2) {
@@ -333,6 +505,10 @@ function getSlidesForProduct(product: Product): Slide[] {
 
   if (product.id === 4) {
     return argusPtUltraSlides;
+  }
+
+  if (product.id === 5) {
+    return argus3ProSlides;
   }
 
   if (product.id === 6) {
@@ -345,6 +521,18 @@ function getSlidesForProduct(product: Product): Slide[] {
 
   if (product.id === 9) {
     return smartVideoDoorbellSlides;
+  }
+
+  if (product.id === 10) {
+    return e1ZoomSlides;
+  }
+
+  if (product.id === 12) {
+    return eliteFloodlightSlides;
+  }
+
+  if (product.id === 13) {
+    return goPtPlusSlides;
   }
 
   if (product.id === 17) {
