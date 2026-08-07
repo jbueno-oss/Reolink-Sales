@@ -111,7 +111,7 @@ const AI_RECOMMENDATIONS = [
   },
   {
     id: 2,
-    name: 'Go PT Plus 4G',
+    name: 'Reolink Go PT Plus',
     image: imgGoRangerPT,
     match: '85% Match',
     desc: '4K Pan & Tilt camera with cellular connectivity',
@@ -120,7 +120,7 @@ const AI_RECOMMENDATIONS = [
   },
   {
     id: 3,
-    name: 'NVS8 PoE Kit',
+    name: 'NVS8-8MB4',
     image: imgOmvi3iPoE,
     match: '70% Match',
     desc: 'Smart PoE Kit with reliable connection',

@@ -29,14 +29,6 @@ export interface AccordionData {
   installationNote?: string;
 }
 
-const defaultPackContent: PackContentItem[] = [
-  { name: 'Camera', quantity: 1 },
-  { name: 'Mounting Kit', quantity: 1 },
-  { name: 'Power Cable', quantity: 1 },
-  { name: 'Quick Start Guide', quantity: 1 },
-  { name: 'Surveillance Sign', quantity: 1 },
-];
-
 const packContentImages = import.meta.glob<string>(
   '../assets/products/*/pack-content/item-*.png',
   { eager: true, import: 'default', query: '?url' }
@@ -50,19 +42,18 @@ const packContentImage = (folder: string, item: number) => {
   return image;
 };
 
-const numberedPackContent = (folder: string, count: number): PackContentItem[] =>
-  Array.from({ length: count }, (_, i) => ({
-    name: String(i + 1),
-    quantity: 1,
-    image: packContentImage(folder, i + 1),
-  }));
-
-const defaultInstallation: InstallationStep[] = [
-  { title: 'Download the Reolink App', description: 'Download the Reolink App and create an account to get started.' },
-  { title: 'Scan QR Code', description: 'Scan the QR code on the camera or device to pair it with the app.' },
-  { title: 'Configure Connection', description: 'Follow in-app prompts to configure Wi-Fi or network connection.' },
-  { title: 'Install Device', description: 'Install the device in its final location and adjust the viewing angle.' },
-];
+const packContent = (
+  folder: string,
+  items: Array<string | [name: string, quantity: number]>
+): PackContentItem[] =>
+  items.map((item, i) => {
+    const [name, quantity] = Array.isArray(item) ? item : [item, 1];
+    return {
+      name,
+      quantity,
+      image: packContentImage(folder, i + 1),
+    };
+  });
 
 const installationImages = import.meta.glob<string>(
   '../assets/products/*/installation/step-*.png',
@@ -159,6 +150,30 @@ const goPtPlusInstallation = installationSteps('go-pt-plus-4g-lte', [
   'To Install the Solar Panel Separately from the Camera.',
 ]);
 
+const eSeriesE321Installation = installationSteps('e-series-e321', [
+  'Drill two holes on the wall according to the mounting hole template.',
+  'Insert the two plastic anchors into the holes.',
+  'Secure the mounting plate in place by tightening the screws into the plastic anchors.',
+  'Align the camera with the bracket and turn the camera unit clockwise to lock it in position.',
+]);
+
+const eliteFloodlightInstallation = installationSteps('elite-floodlight-wifi', [
+  'Choose the installation location and mark the drilling points with the mounting template.',
+  'Drill holes and insert the anchors.',
+  'Secure the mounting bracket to the wall.',
+  'Attach the camera to the bracket.',
+  'Adjust the camera angle for the best field of view.',
+  'Tighten the camera to lock the installation in place.',
+]);
+
+const nvsCameraInstallation = (folder: string): InstallationStep[] => installationSteps(folder, [
+  'Drill holes according to the mounting template.',
+  'Install the mounting base.',
+  'Attach the camera to the mounting base.',
+  'Adjust the camera angle for the best field of view.',
+  'Tighten the camera to secure the installation.',
+]);
+
 export function getAccordionData(product: Product): AccordionData {
   const data: Record<number, AccordionData> = {
     // 1: Argus 3 Pro 4x Kit + Hub -> PDF 10 (Argus 3 Pro) + PDF 15 (Hub)
@@ -202,11 +217,25 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('home-hub-mini-4x-argus-3-pro-solar-panel-lite', 13),
+      packContent: packContent('home-hub-mini-4x-argus-3-pro-solar-panel-lite', [
+        'Hub',
+        'USB-C Cable',
+        ['Camera', 4],
+        ['Solar Panel Extension Cable', 4],
+        ['Solar Panel', 4],
+        'Mounting Template',
+        ['Integrated Bracket', 4],
+        'Surveillance Sticker',
+        ['Strap', 4],
+        'Operational Instructions',
+        'Power Adapter',
+        'Pack of Screws',
+        '1m Ethernet Cable',
+      ]),
       installation: argus3ProIntegratedInstallation,
       installationNote: 'This device supports 2.4 GHz and 5 GHz Wi-Fi networks. It is recommended to connect the device to 5 GHz Wi-Fi for a better network experience.',
     },
-    // 2: Argus 4 Pro Panoramic -> PDF 11
+    // 2: Argus 4 Pro -> PDF 11
     2: {
       specs: [
         {
@@ -241,7 +270,17 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('argus-4-pro-reolink-solar-panel-2', 9),
+      packContent: packContent('argus-4-pro-reolink-solar-panel-2', [
+        'USB-C Cable',
+        'Camera',
+        'Solar Panel 2 with 4m cable',
+        'Surveillance Sticker',
+        'Security Bracket',
+        'Operational Instructions',
+        'Strap',
+        'Pack of Screws',
+        'Mounting Template',
+      ]),
       installation: argus4ProInstallation,
     },
     // 3: Argus PT Ultra 2-Pack -> PDF 4
@@ -284,7 +323,19 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('argus-pt-ultra-solar-panel', 11),
+      packContent: packContent('argus-pt-ultra-solar-panel', [
+        'USB-C Cable',
+        'Camera',
+        'Mounting Template',
+        'Reolink Solar Panel',
+        'Surveillance Sticker',
+        'Solar Panel Bracket',
+        'Operational Instructions',
+        'Wall & Ceiling Bracket',
+        'Pack of Screws',
+        'Strap',
+        'Solar Panel Extension Cable',
+      ]),
       installation: argusPtUltraInstallation,
     },
     // 4: Argus PT Ultra Single -> PDF 4
@@ -327,10 +378,22 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('argus-pt-ultra-solar-panel', 11),
+      packContent: packContent('argus-pt-ultra-solar-panel', [
+        'USB-C Cable',
+        'Camera',
+        'Mounting Template',
+        'Reolink Solar Panel',
+        'Surveillance Sticker',
+        'Solar Panel Bracket',
+        'Operational Instructions',
+        'Wall & Ceiling Bracket',
+        'Pack of Screws',
+        'Strap',
+        'Solar Panel Extension Cable',
+      ]),
       installation: argusPtUltraInstallation,
     },
-    // 5: Argus 3 Pro Standalone -> PDF 10
+    // 5: Argus 3 Pro -> PDF 10
     5: {
       specs: [
         {
@@ -367,11 +430,18 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('argus-3-pro', 6),
+      packContent: packContent('argus-3-pro', [
+        'Camera',
+        'Surveillance Sticker',
+        'Mounting Bracket',
+        'Operational Instructions',
+        'USB-C Cable',
+        'Pack of Screws',
+      ]),
       installation: argus3ProInstallation,
       installationNote: 'This device supports 2.4 GHz and 5 GHz Wi-Fi networks. It is recommended to connect the device to 5 GHz Wi-Fi for a better network experience.',
     },
-    // 6: Argus MagiCam Magnetic -> PDF 3
+    // 6: Argus MagiCam -> PDF 3
     6: {
       specs: [
         {
@@ -409,7 +479,17 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('argus-magicam-magnetic', 9),
+      packContent: packContent('argus-magicam-magnetic', [
+        'Camera',
+        'Mounting Template',
+        'Magnetic Bracket',
+        'Surveillance Sticker',
+        'USB-C Cable',
+        'Operational Instructions',
+        'AA Battery x2',
+        'Pack of Screws',
+        'Magnetic Mount Pad',
+      ]),
       installation: argusMagiCamInstallation,
     },
     // 7: Argus Solar 2-Pack -> PDF 8
@@ -452,7 +532,15 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('argus-solar', 7),
+      packContent: packContent('argus-solar', [
+        'Camera',
+        'Surveillance Sticker',
+        'Security Bracket',
+        'Operational Instructions',
+        'USB-C Cable',
+        'Pack of Screws',
+        'Mounting Template',
+      ]),
       installation: argusSolarInstallation,
     },
     // 8: Argus Solar Single -> PDF 8
@@ -493,10 +581,18 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('argus-solar', 7),
+      packContent: packContent('argus-solar', [
+        'Camera',
+        'Surveillance Sticker',
+        'Security Bracket',
+        'Operational Instructions',
+        'USB-C Cable',
+        'Pack of Screws',
+        'Mounting Template',
+      ]),
       installation: argusSolarInstallation,
     },
-    // 9: Smart Video Doorbell -> PDF 16 + PDF 17
+    // 9: Reolink Video Doorbell -> PDF 16 + PDF 17
     9: {
       specs: [
         {
@@ -534,10 +630,21 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('smart-video-doorbell', 10),
+      packContent: packContent('smart-video-doorbell', [
+        'Video Doorbell',
+        'Mounting Hole Template',
+        'Reolink Chime',
+        'Jumper Cables',
+        'Mounting Plate',
+        'Surveillance Sticker',
+        'Angle Wedge',
+        'Operational Instructions',
+        'USB-C Cable',
+        'Pack of Screws',
+      ]),
       installation: smartVideoDoorbellInstallation,
     },
-    // 10: E1 Zoom Indoor 4K -> PDF 19
+    // 10: E1 Zoom -> PDF 19
     10: {
       specs: [
         {
@@ -564,10 +671,18 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         }
       ],
-      packContent: numberedPackContent('e1-zoom-indoor-4k', 7),
+      packContent: packContent('e1-zoom-indoor-4k', [
+        'Camera',
+        'Surveillance Sticker',
+        'Mounting Plate',
+        'Operational Instructions',
+        'Power Adapter',
+        'Pack of Screws',
+        'Mounting Template',
+      ]),
       installation: e1ZoomInstallation,
     },
-    // 11: E Series E321 Indoor -> PDF 18
+    // 11: E Series E321 -> PDF 18
     11: {
       specs: [
         {
@@ -602,8 +717,16 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: defaultPackContent,
-      installation: defaultInstallation,
+      packContent: packContent('e-series-e321', [
+        'Camera',
+        'Surveillance Sticker',
+        'Mounting Plate',
+        'Operational Instructions',
+        'Power Adapter',
+        'Pack of Screws',
+        'Mounting Template',
+      ]),
+      installation: eSeriesE321Installation,
     },
     // 12: Elite Floodlight WiFi -> PDF 20 (Floodlight Series F751W)
     12: {
@@ -639,10 +762,17 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('elite-floodlight-wifi', 11),
-      installation: defaultInstallation,
+      packContent: packContent('elite-floodlight-wifi', [
+        'Camera',
+        'Surveillance Sticker',
+        'Mounting Bracket',
+        'Operational Instructions',
+        'Pack of Screws',
+        'USB-C Cable',
+      ]),
+      installation: eliteFloodlightInstallation,
     },
-    // 13: Go PT Plus 4G LTE -> PDF 1
+    // 13: Reolink Go PT Plus -> PDF 1
     13: {
       specs: [
         {
@@ -679,10 +809,23 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: numberedPackContent('go-pt-plus-4g-lte', 11),
+      packContent: packContent('go-pt-plus-4g-lte', [
+        'Camera',
+        'Sim Card',
+        'Reolink Solar Panel',
+        'USB-C Cable',
+        'Solar Panel Bracket',
+        'Mounting Template',
+        'Surveillance Sticker',
+        'Wall & Ceiling Bracket',
+        'Operational Instructions',
+        'Strap',
+        'Pack of Screws + Needle',
+        'Solar Panel Extension Cable',
+      ]),
       installation: goPtPlusInstallation,
     },
-    // 14: NVS8 PoE Kit 8MB4 -> PDF 21
+    // 14: NVS8-8MB4 -> PDF 21
     14: {
       specs: [
         {
@@ -719,20 +862,23 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: [
-        { name: 'NVS8 NVR', quantity: 1 },
-        { name: 'PoE Cameras', quantity: 4 },
-        { name: '2TB HDD', quantity: 1 },
-        ...defaultPackContent.slice(1)
-      ],
-      installation: [
-        { title: 'Connect Cameras', description: 'Connect cameras to the NVR using Ethernet cables.' },
-        { title: 'Connect NVR', description: 'Connect the NVR to your router and a monitor.' },
-        { title: 'Power On & Setup', description: 'Power on the NVR and follow the setup wizard.' },
-        { title: 'Mount Cameras', description: 'Mount cameras in their desired locations and adjust angles.' },
-      ],
+      packContent: packContent('nvs8-8mb4', [
+        'NVS8',
+        ['18m Network Cables', 4],
+        'Mounting Templates',
+        ['Camera', 4],
+        'USB Mouse',
+        'Waterproof Lids',
+        'NVR Power Adapter',
+        'Surveillance Sticker',
+        'HDMI Cable',
+        'Operational Instructions',
+        'Pack of Screws',
+        '1m Network Cable',
+      ]),
+      installation: nvsCameraInstallation('nvs8-8mb4'),
     },
-    // 15: NVS8 PoE Kit 8MD4 -> PDF 21
+    // 15: NVS8-8MD4 -> PDF 21
     15: {
       specs: [
         {
@@ -879,20 +1025,23 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         },
       ],
-      packContent: [
-        { name: 'NVS8 NVR', quantity: 1 },
-        { name: 'PoE Dome Cameras', quantity: 4 },
-        { name: '2TB HDD', quantity: 1 },
-        ...defaultPackContent.slice(1)
-      ],
-      installation: [
-        { title: 'Connect Cameras', description: 'Connect cameras to the NVR using Ethernet cables.' },
-        { title: 'Connect NVR', description: 'Connect the NVR to your router and a monitor.' },
-        { title: 'Power On & Setup', description: 'Power on the NVR and follow the setup wizard.' },
-        { title: 'Mount Cameras', description: 'Mount cameras in their desired locations and adjust angles.' },
-      ],
+      packContent: packContent('nvs8-8md4', [
+        'NVS8',
+        ['18m Network Cables', 4],
+        'Mounting Templates',
+        ['Camera', 4],
+        'USB Mouse',
+        'Waterproof Lids',
+        'NVR Power Adapter',
+        'Surveillance Sticker',
+        'HDMI Cable',
+        'Operational Instructions',
+        'Pack of Screws',
+        '1m Network Cable',
+      ]),
+      installation: nvsCameraInstallation('nvs8-8md4'),
     },
-    // 16: NVS8 PoE Kit 12MD6 -> PDF 23
+    // 16: NVS8-12MD6 -> PDF 23
     16: {
       specs: [
         {
@@ -919,20 +1068,23 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         }
       ],
-      packContent: [
-        { name: 'NVS8 NVR', quantity: 1 },
-        { name: '12MP PoE Dome Cameras', quantity: 6 },
-        { name: '2TB HDD', quantity: 1 },
-        ...defaultPackContent.slice(1)
-      ],
-      installation: [
-        { title: 'Connect Cameras', description: 'Connect cameras to the NVR using Ethernet cables.' },
-        { title: 'Connect NVR', description: 'Connect the NVR to your router and a monitor.' },
-        { title: 'Power On & Setup', description: 'Power on the NVR and follow the setup wizard.' },
-        { title: 'Mount Cameras', description: 'Mount cameras in their desired locations and adjust angles.' },
-      ],
+      packContent: packContent('nvs8-12md6', [
+        'NVS8',
+        ['18m Network Cables', 6],
+        'Mounting Templates',
+        ['Camera', 6],
+        'USB Mouse',
+        'Waterproof Lids',
+        'NVR Power Adapter',
+        'Surveillance Sticker',
+        'HDMI Cable',
+        'Operational Instructions',
+        'Pack of Screws',
+        '1m Network Cable',
+      ]),
+      installation: nvsCameraInstallation('nvs8-12md6'),
     },
-    // 17: Solar Floodlight Cam F310B -> PDF 13
+    // 17: Solar Floodlight Cam -> PDF 13
     17: {
       specs: [
         {
@@ -961,7 +1113,14 @@ export function getAccordionData(product: Product): AccordionData {
           ]
         }
       ],
-      packContent: numberedPackContent('solar-floodlight-cam-f310b', 6),
+      packContent: packContent('solar-floodlight-cam-f310b', [
+        'Camera',
+        'Surveillance Sticker',
+        'Mounting Bracket',
+        'Operational Instructions',
+        'USB-C Cable',
+        'Pack of Screws',
+      ]),
       installation: solarFloodlightInstallation,
     },
   };

@@ -1,7 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
 import useEmblaCarousel from 'embla-carousel-react';
 import logo from './assets/Logo Reolink.svg';
-import placeholderPdf from './assets/58.03.001.0983-Go PT Pus-QSG-EN-澳规-2025-0925.pdf';
+import argus3ProKitPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/01 - Argus 3 Pro 4x Kit + Hub.pdf';
+import argus4ProPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/02 - Argus 4 Pro Panoramic.pdf';
+import argusPtUltraPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/03 - Argus PT Ultra.pdf';
+import argus3ProStandalonePdf from './assets/Reolink_QSG_15_Products_Vercel_Names/04 - Argus 3 Pro Standalone.pdf';
+import argusMagiCamPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/05 - Argus MagiCam Magnetic.pdf';
+import argusSolarPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/06 - Argus Solar.pdf';
+import smartVideoDoorbellPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/07 - Smart Video Doorbell.pdf';
+import e1ZoomPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/08 - E1 Zoom Indoor 4K.pdf';
+import eSeriesE321Pdf from './assets/Reolink_QSG_15_Products_Vercel_Names/09 - E Series E321 Indoor.pdf';
+import eliteFloodlightPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/10 - Elite Floodlight WiFi.pdf';
+import goPtPlusPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/11 - Go PT Plus 4G LTE.pdf';
+import nvs88mb4Pdf from './assets/Reolink_QSG_15_Products_Vercel_Names/12 - NVS8 PoE Kit 8MB4.pdf';
+import nvs88md4Pdf from './assets/Reolink_QSG_15_Products_Vercel_Names/13 - NVS8 PoE Kit 8MD4.pdf';
+import nvs812md6Pdf from './assets/Reolink_QSG_15_Products_Vercel_Names/14 - NVS8 PoE Kit 12MD6.pdf';
+import solarFloodlightPdf from './assets/Reolink_QSG_15_Products_Vercel_Names/15 - Solar Floodlight Cam F310B.pdf';
 import argus3ProSlide1 from './assets/products/argus-3-pro/slide-1.png';
 import argus3ProSlide2 from './assets/products/argus-3-pro/slide-2.png';
 import argus3ProSlide3 from './assets/products/argus-3-pro/slide-3.png';
@@ -57,6 +71,26 @@ import goPtPlusSlide2 from './assets/products/go-pt-plus-4g-lte/slide-2.png';
 import goPtPlusSlide3 from './assets/products/go-pt-plus-4g-lte/slide-3.png';
 import goPtPlusSlide4 from './assets/products/go-pt-plus-4g-lte/slide-4.png';
 import goPtPlusSlide5 from './assets/products/go-pt-plus-4g-lte/slide-5.png';
+import eSeriesE321Slide1 from './assets/products/e-series-e321/slide-1.png';
+import eSeriesE321Slide2 from './assets/products/e-series-e321/slide-2.png';
+import eSeriesE321Slide3 from './assets/products/e-series-e321/slide-3.png';
+import eSeriesE321Slide4 from './assets/products/e-series-e321/slide-4.png';
+import eSeriesE321Slide5 from './assets/products/e-series-e321/slide-5.png';
+import nvs88mb4Slide1 from './assets/products/nvs8-8mb4/slide-1.png';
+import nvs88mb4Slide2 from './assets/products/nvs8-8mb4/slide-2.png';
+import nvs88mb4Slide3 from './assets/products/nvs8-8mb4/slide-3.png';
+import nvs88mb4Slide4 from './assets/products/nvs8-8mb4/slide-4.png';
+import nvs88mb4Slide5 from './assets/products/nvs8-8mb4/slide-5.png';
+import nvs88md4Slide1 from './assets/products/nvs8-8md4/slide-1.png';
+import nvs88md4Slide2 from './assets/products/nvs8-8md4/slide-2.png';
+import nvs88md4Slide3 from './assets/products/nvs8-8md4/slide-3.png';
+import nvs88md4Slide4 from './assets/products/nvs8-8md4/slide-4.png';
+import nvs88md4Slide5 from './assets/products/nvs8-8md4/slide-5.png';
+import nvs812md6Slide1 from './assets/products/nvs8-12md6/slide-1.png';
+import nvs812md6Slide2 from './assets/products/nvs8-12md6/slide-2.png';
+import nvs812md6Slide3 from './assets/products/nvs8-12md6/slide-3.png';
+import nvs812md6Slide4 from './assets/products/nvs8-12md6/slide-4.png';
+import nvs812md6Slide5 from './assets/products/nvs8-12md6/slide-5.png';
 import PdfViewerModal from './components/PdfViewerModal';
 import { getAccordionData } from './data/accordionData';
 import type { AccordionItem, SpecSection, PackContentItem, InstallationStep } from './data/accordionData';
@@ -78,6 +112,32 @@ interface Slide {
   title: string;
   description: string;
   objectPosition?: string;
+}
+
+const productPdfById: Record<number, string> = {
+  1: argus3ProKitPdf,
+  2: argus4ProPdf,
+  4: argusPtUltraPdf,
+  5: argus3ProStandalonePdf,
+  6: argusMagiCamPdf,
+  8: argusSolarPdf,
+  9: smartVideoDoorbellPdf,
+  10: e1ZoomPdf,
+  11: eSeriesE321Pdf,
+  12: eliteFloodlightPdf,
+  13: goPtPlusPdf,
+  14: nvs88mb4Pdf,
+  15: nvs88md4Pdf,
+  16: nvs812md6Pdf,
+  17: solarFloodlightPdf,
+};
+
+function getPdfForProduct(product: Product): string {
+  const pdf = productPdfById[product.id];
+  if (!pdf) {
+    throw new Error(`Missing specs PDF for product: ${product.name}`);
+  }
+  return pdf;
 }
 
 const argus3ProSlides: Slide[] = [
@@ -163,7 +223,7 @@ const argus4ProSlides: Slide[] = [
     type: 'image',
     media: argus4ProSlide2,
     title: 'ColorX True Color Night Vision',
-    description: 'The F1.0 aperture and 1/1.8 sensor capture vivid, full-color night vision without IR lights. ColorX technology boosts standby time by 30%, improves concealment, and reduces light pollution.',
+    description: "The F1.0 aperture and 1/1.8'' sensor capture vivid, full-color night vision without IR lights. ColorX technology boosts standby time by 30%, improves concealment, and reduces light pollution.",
     objectPosition: 'top center',
   },
   {
@@ -208,21 +268,21 @@ const argusPtUltraSlides: Slide[] = [
     type: 'image',
     media: argusPtUltraSlide3,
     title: 'Accurate Smart Security',
-    description: 'Advanced algorithms accurately detect and alert you to human movement, while minimising false alarms.',
+    description: 'Advanced algorithms accurately detect and alert you to human, vehicle and animal movement, while minimizing false alarms.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: argusPtUltraSlide4,
-    title: 'Real-Time Communication',
-    description: 'Hear and talk with built-in two-way audio to communicate with your kids or pets.',
+    title: '4K Colour Night Vision',
+    description: 'Powerful motion-triggered spotlights to turn night into day, capturing vivid details in 4K Ultra HD at night.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: argusPtUltraSlide5,
-    title: 'Wired Option',
-    description: 'Camera can be connected directly to power for 24/7 recording with included USB-C cable.',
+    title: 'Flexible Solar Power',
+    description: 'Mount the panel directly on the camera or separately using the extension cable to maximize sunlight exposure.',
     objectPosition: 'top center',
   },
 ];
@@ -328,15 +388,15 @@ const smartVideoDoorbellSlides: Slide[] = [
   {
     type: 'image',
     media: smartVideoDoorbellSlide4,
-    title: 'Instant Indoor Chime Included',
-    description: 'Hear your doorbell ring clearly from any room. The included plug-in Reolink Chime provides instant audible alerts inside your home without relying on your phone.',
+    title: 'Instant Doorstep Communication',
+    description: 'Answer your door from anywhere. Receive instant video calls, talk in real time with two-way audio, or send quick preset replies when your hands are full.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: smartVideoDoorbellSlide5,
     title: 'Zero Monthly Storage Fees',
-    description: 'Keep your video footage private and free. Enjoy smart detection and secure local hardware storage right out of the box with no mandatory recurring costs.',
+    description: 'Store footage locally so your videos remain secure even if your network is down. Secure your data your way - Reolink Home Hub, NVR, FTP, or microSD card (up to 512GB), all with no monthly fees.',
     objectPosition: 'top center',
   },
 ];
@@ -384,28 +444,28 @@ const e1ZoomSlides: Slide[] = [
     type: 'image',
     media: e1ZoomSlide1,
     title: 'Auto-Tracking Pan & Tilt',
-    description: 'Eliminate blind spots completely. The camera smoothly tracks movement across the room, keeping active kids or pets perfectly in frame at all times.',
+    description: 'Eliminate blind spots completely. The camera automatically tracks motion around the room, keeping active kids or pets perfectly in frame as they move.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: e1ZoomSlide2,
-    title: 'AI Smart Detection',
-    description: 'Stop chasing false alarms. Advanced on-camera AI instantly distinguishes between people, pets, and background motion to send alerts that actually matter.',
+    title: 'True 3x Optical Zoom',
+    description: 'Magnify details without losing clarity. Bring distant objects up close with a powerful optical zoom that maintains pristine 4K resolution.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: e1ZoomSlide3,
-    title: 'Baby Cry Detection & Two-Way Audio',
-    description: 'Stay connected to your nursery. Smart sensors detect baby cries and alert you instantly, letting you comfort your child using real-time two-way audio.',
+    title: 'Next-Gen Wi-Fi 6 Speed',
+    description: 'Experience lag-free viewing. Wi-Fi 6 connection delivers an ultra-stable, secure, and lightning-fast live feed with maximum indoor range.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: e1ZoomSlide4,
-    title: 'Instant Privacy Mode',
-    description: 'Instantly disable recording and lens activity, giving you control when you need it.',
+    title: 'Smart Family & Pet Detection',
+    description: 'Receive alerts that actually matter. Advanced AI recognises people, pets, and baby cries, filtering out background noise to prevent false notifications.',
     objectPosition: 'top center',
   },
   {
@@ -421,29 +481,29 @@ const goPtPlusSlides: Slide[] = [
   {
     type: 'image',
     media: goPtPlusSlide1,
-    title: 'Pan/Tilt with Spotlights and Audio',
-    description: 'A powerful wire-free security camera with 4K resolution, color night vision, and smart detection - designed for every corner of your home.',
+    title: 'True Off-Grid 4G LTE Freedom',
+    description: 'Protect remote properties without Wi-Fi. Built-in 4G cellular connectivity lets you monitor job sites, cabins, or rural acreage anywhere with cell coverage.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: goPtPlusSlide2,
-    title: 'Smart Detection & Tracking',
-    description: 'Detects events that matter and alert you. Tracks moving objects to keep them in view, minimizing false alarms and notifications.',
+    title: '360° Coverage & Auto-Tracking',
+    description: 'Never lose sight of a target. Smooth pan and tilt motorized control combines with intelligent auto-tracking to automatically follow movement across your land.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: goPtPlusSlide3,
-    title: 'Accurate Smart Security',
-    description: 'Advanced algorithms accurately detect and alert you to human, vehicle and animal movement, while minimizing false alarms.',
+    title: 'Smart AI Detection',
+    description: 'Eliminate annoying false alerts. Advanced intelligence instantly differentiates between people, vehicle, and animal so you only get notifications that matter.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: goPtPlusSlide4,
-    title: '4K Colour Night Vision',
-    description: 'Powerful motion-triggered spotlights to turn night into day, capturing vivid details in 4K Ultra HD at night.',
+    title: 'Never Lose Sight',
+    description: 'Powerful motion-triggered spotlights to turn night into day, capturing vivid details in 3K Super HD at night.',
     objectPosition: 'top center',
   },
   {
@@ -459,36 +519,188 @@ const eliteFloodlightSlides: Slide[] = [
   {
     type: 'image',
     media: eliteFloodlightSlide1,
-    title: 'Pan/Tilt with Spotlights and Audio',
-    description: 'A powerful wire-free security camera with 4K resolution, color night vision, and smart detection - designed for every corner of your home.',
+    title: 'Seamless 180° Panoramic 4K View',
+    description: 'Capture your entire property on one screen. Dual lenses merge into a sweeping 180° view in razor-sharp 4K Ultra HD, completely eliminating traditional blind spots.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: eliteFloodlightSlide2,
-    title: 'Smart Detection & Tracking',
-    description: 'Detects events that matter and alert you. Tracks moving objects to keep them in view, minimizing false alarms and notifications.',
+    title: '3000-Lumen Dimmable Lighting',
+    description: 'Customise your outdoor illumination. Enjoy ultra-bright 3,000-lumen security with smooth dimming and adjustable colour temperatures to switch instantly from ambient lighting to high-intensity deterrence.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: eliteFloodlightSlide3,
-    title: 'Accurate Smart Security',
-    description: 'Advanced algorithms accurately detect and alert you to human, vehicle and animal movement, while minimizing false alarms.',
+    title: 'Smart AI Video Search',
+    description: 'Find key moments in seconds. Intelligent AI video search lets you pinpoint specific people, vehicles, or events instantly without scrubbing through hours of continuous footage.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: eliteFloodlightSlide4,
-    title: '4K Colour Night Vision',
-    description: 'Powerful motion-triggered spotlights to turn night into day, capturing vivid details in 4K Ultra HD at night.',
+    title: 'Proactive Perimeter Protection',
+    description: 'Stop threats before they reach your door. Custom perimeter zones watch critical boundaries, automatically triggering spotlights and sirens the second a line is crossed.',
     objectPosition: 'top center',
   },
   {
     type: 'image',
     media: eliteFloodlightSlide5,
-    title: 'Flexible Solar Power',
-    description: 'Mount the panel directly on the camera or separately using the extension cable to maximize sunlight exposure.',
+    title: 'No Monthly Storage Fees',
+    description: 'Keep your data private and free. All advanced AI features and continuous 24/7 recording run fully on local hardware. Store footage effortlessly with flexible options, all with no monthly fees.',
+    objectPosition: 'top center',
+  },
+];
+
+const eSeriesE321Slides: Slide[] = [
+  {
+    type: 'image',
+    media: eSeriesE321Slide1,
+    title: 'Auto-Tracking Pan & Tilt',
+    description: 'Eliminate blind spots completely. The camera smoothly tracks movement across the room, keeping active kids or pets perfectly in frame at all times.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eSeriesE321Slide2,
+    title: 'AI Smart Detection',
+    description: 'Stop chasing false alarms. Advanced on-camera AI instantly distinguishes between people, pets, and background motion to send alerts that actually matter.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eSeriesE321Slide3,
+    title: 'Baby Cry Detection & Two-Way Audio',
+    description: 'Stay connected to your nursery. Smart sensors detect baby cries and alert you instantly, letting you comfort your child using real-time two-way audio.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eSeriesE321Slide4,
+    title: 'Instant Privacy Mode',
+    description: 'Instantly disable recording and lens activity, giving you control when you need it.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: eSeriesE321Slide5,
+    title: 'No Monthly Storage Fees',
+    description: 'Keep your videos private and free. Secure local storage options deliver premium, intelligent security right out of the box with zero mandatory subscriptions.',
+    objectPosition: 'top center',
+  },
+];
+
+const nvs88mb4Slides: Slide[] = [
+  {
+    type: 'image',
+    media: nvs88mb4Slide1,
+    title: 'Razor-Sharp 4K Ultra HD',
+    description: 'See every critical detail clearly. High-performance 8MP resolution delivers crisp, high-definition video, allowing you to identify license plates or faces with complete confidence.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88mb4Slide2,
+    title: 'Accurate Smart Detection',
+    description: 'Eliminate annoying false alerts. Advanced intelligence instantly differentiates between people, vehicle, and animal so you only get notifications that matter.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88mb4Slide3,
+    title: 'Active Deterrence Spotlights & Siren',
+    description: 'Warn away intruders automatically when motion is detected with booming Siren and bright Spotlight. Or activate manually from your app.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88mb4Slide4,
+    title: 'Real-Time Communication',
+    description: "With two-way audio, you can HEAR what's in view, and TALK to people (or pets) via Reolink app - even when you're away!",
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88mb4Slide5,
+    title: '24/7 Recording, Zero Monthly Fees',
+    description: 'Keep footage private and free. A pre-installed 2TB hard drive delivers round-the-clock local recording right out of the box with no mandatory subscriptions.',
+    objectPosition: 'top center',
+  },
+];
+
+const nvs88md4Slides: Slide[] = [
+  {
+    type: 'image',
+    media: nvs88md4Slide1,
+    title: 'Razor-Sharp 4K Ultra HD',
+    description: 'See every critical detail clearly. High-performance 8MP resolution delivers crisp, high-definition video, allowing you to identify license plates or faces with complete confidence.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88md4Slide2,
+    title: 'Accurate Smart Detection',
+    description: 'Eliminate annoying false alerts. Advanced intelligence instantly differentiates between people, vehicle, and animal so you only get notifications that matter.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88md4Slide3,
+    title: 'Active Deterrence Spotlights & Siren',
+    description: 'Warn away intruders automatically when motion is detected with booming Siren and bright Spotlight. Or activate manually from your app.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88md4Slide4,
+    title: 'Real-Time Communication',
+    description: "With two-way audio, you can HEAR what's in view, and TALK to people (or pets) via Reolink app - even when you're away!",
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs88md4Slide5,
+    title: '24/7 Recording, Zero Monthly Fees',
+    description: 'Keep footage private and free. A pre-installed 2TB hard drive delivers round-the-clock local recording right out of the box with no mandatory subscriptions.',
+    objectPosition: 'top center',
+  },
+];
+
+const nvs812md6Slides: Slide[] = [
+  {
+    type: 'image',
+    media: nvs812md6Slide1,
+    title: 'Next-Level 12MP Precision',
+    description: 'See what standard 4K misses. Unmatched 12MP Ultra HD resolution captures microscopic details, allowing you to zoom in on faces and license plates with complete confidence.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs812md6Slide2,
+    title: 'Accurate Smart Detection',
+    description: 'Eliminate annoying false alerts. Advanced intelligence instantly differentiates between people, vehicle, and animal so you only get notifications that matter.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs812md6Slide3,
+    title: 'Proactive Perimeter Protection',
+    description: 'Stop intruders before they reach your door. Smart perimeter tracking watches critical boundaries, triggering active spotlights and sirens the second a zone is crossed.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs812md6Slide4,
+    title: "Be There When You're Not",
+    description: 'Protect your property day and night with a motion-activated spotlight, two-way audio and siren.',
+    objectPosition: 'top center',
+  },
+  {
+    type: 'image',
+    media: nvs812md6Slide5,
+    title: '24/7 Recording, Zero Monthly Fees',
+    description: 'Keep footage private and free. A pre-installed hard drive delivers round-the-clock local recording right out of the box with no mandatory subscriptions.',
     objectPosition: 'top center',
   },
 ];
@@ -527,12 +739,28 @@ function getSlidesForProduct(product: Product): Slide[] {
     return e1ZoomSlides;
   }
 
+  if (product.id === 11) {
+    return eSeriesE321Slides;
+  }
+
   if (product.id === 12) {
     return eliteFloodlightSlides;
   }
 
   if (product.id === 13) {
     return goPtPlusSlides;
+  }
+
+  if (product.id === 14) {
+    return nvs88mb4Slides;
+  }
+
+  if (product.id === 15) {
+    return nvs88md4Slides;
+  }
+
+  if (product.id === 16) {
+    return nvs812md6Slides;
   }
 
   if (product.id === 17) {
@@ -859,6 +1087,7 @@ export default function ProductDetail({
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = getSlidesForProduct(product);
   const accordionData = getAccordionData(product);
+  const specsPdf = getPdfForProduct(product);
 
   const [showFooter, setShowFooter] = useState(false);
   const [showPdf, setShowPdf] = useState(false);
@@ -984,7 +1213,7 @@ export default function ProductDetail({
 
       {/* PDF Viewer Modal */}
       {showPdf && (
-        <PdfViewerModal pdfUrl={placeholderPdf} onClose={() => setShowPdf(false)} />
+        <PdfViewerModal pdfUrl={specsPdf} onClose={() => setShowPdf(false)} />
       )}
     </div>
   );
